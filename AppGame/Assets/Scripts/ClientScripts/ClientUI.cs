@@ -12,9 +12,16 @@ public class ClientUI : MonoBehaviour
     // static instance that can be referenced from static methods below.
     static ClientUI instance;
 
+    Player player =  new Player();
+
     void Awake()
     {
         instance = this;
+    }
+
+    public void SetNamePlayer()
+    {
+        player.playerNameClient = clientNameInputField.text;
     }
 
 }

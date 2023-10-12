@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using System;
 
 public class PlayerUI : MonoBehaviour
 {
@@ -28,4 +29,10 @@ public class PlayerUI : MonoBehaviour
     {
         playerNameText.color = newPlayerColor;
     }
+
+    public void OnPlayerNameChanged(string namePlayers)
+    {
+        playerNameText.text = namePlayers;
+    }
+
 }

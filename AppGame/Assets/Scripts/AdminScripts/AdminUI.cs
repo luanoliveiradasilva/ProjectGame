@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class AdminUI : MonoBehaviour
 {
@@ -12,7 +11,7 @@ public class AdminUI : MonoBehaviour
     [Tooltip("Assign Players Panel for instantiating PlayerUI as child")]
     public RectTransform playersPanel;
 
-    public InputField ipAddressInputField;
+    public TMP_InputField ipAddressInputField;
 
     // static instance that can be referenced from static methods below.
     static AdminUI instance;

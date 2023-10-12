@@ -1366,7 +1366,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainPanel: {fileID: 2143381066}
   playersPanel: {fileID: 15690031}
-  ipAddressInputField: {fileID: 280376535}
+  ipAddressInputField: {fileID: 0}
 --- !u!1 &1789814827
 GameObject:
   m_ObjectHideFlags: 0

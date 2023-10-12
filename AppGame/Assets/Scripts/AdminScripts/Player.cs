@@ -7,16 +7,19 @@ public class Player : NetworkBehaviour
     public event System.Action<byte> OnPlayerNumberChanged;
     public event System.Action<Color32> OnPlayerColorChanged;
     public event System.Action<ushort> OnPlayerDataChanged;
+    public event System.Action<string> OnPlayerNameChanged;
 
-
-    static readonly List<Player> playersList = new();
+    static readonly List<Player> playersList = new List<Player>();
 
     [Header("Player UI")]
     public GameObject playerUIPrefab;
 
+    public string playerNameClient;
+
     GameObject playerUIObject;
     PlayerUI playerUI = null;
 
+    //https://mirror-networking.gitbook.io/docs/manual/guides/synchronization/syncvars
     #region SyncVars
 
     [Header("SyncVars")]
@@ -29,6 +32,9 @@ public class Player : NetworkBehaviour
 
     [SyncVar(hook = nameof(PlayerDataChanged))]
     public ushort playerData = 0;
+
+    [SyncVar(hook = nameof(PlayerNameChanged))]
+    public string playerName;
 
     void PlayerNumberChanged(byte _, byte newPlayerNumber)
     {
@@ -45,6 +51,11 @@ public class Player : NetworkBehaviour
         OnPlayerDataChanged?.Invoke(newPlayerData);
     }
 
+    void PlayerNameChanged(string _, string newPlayerName)
+    {
+        OnPlayerNameChanged?.Invoke(newPlayerName);
+    }
+
     #endregion
 
     #region Server
@@ -59,11 +70,15 @@ public class Player : NetworkBehaviour
         // set the Player Color SyncVar
         playerColor = Random.ColorHSV(0f, 1f, 0.9f, 0.9f, 1f, 1f);
 
-        // set the initial player data
-        playerData = (ushort)Random.Range(100, 1000);
+        //set the player name
+        //TODO recenber os dados quando digitar o nome pelo inputfield
+        playerName  = playerNameClient;
+
+        /*   // set the initial player data
+          playerData = (ushort)Random.Range(100, 1000); */
 
         // Start generating updates
-        InvokeRepeating(nameof(UpdateData), 1, 1);
+        /* InvokeRepeating(nameof(UpdateData), 1, 1); */
     }
 
     [ServerCallback]
@@ -74,11 +89,11 @@ public class Player : NetworkBehaviour
             player.playerNumber = playerNumber++;
     }
 
-    [ServerCallback]
-    void UpdateData()
-    {
-        playerData = (ushort)Random.Range(100, 1000);
-    }
+    /* [ServerCallback] */
+    /*    void UpdateData()
+       {
+           playerData = (ushort)Random.Range(100, 1000);
+       } */
 
     public override void OnStopServer()
     {
@@ -99,12 +114,15 @@ public class Player : NetworkBehaviour
         // wire up all events to handlers in PlayerUI
         OnPlayerNumberChanged = playerUI.OnPlayerNumberChanged;
         OnPlayerColorChanged = playerUI.OnPlayerColorChanged;
+        OnPlayerNameChanged = playerUI.OnPlayerNameChanged;
+
         //OnPlayerDataChanged = playerUI.OnPlayerDataChanged;
 
         // Invoke all event handlers with the initial data from spawn payload
         OnPlayerNumberChanged.Invoke(playerNumber);
         OnPlayerColorChanged.Invoke(playerColor);
-        //OnPlayerDataChanged.Invoke(playerData);
+        OnPlayerNameChanged.Invoke(playerName);
+        /* OnPlayerDataChanged.Invoke(playerData); */
     }
 
     //TODO Adicionar tela do leadboard
@@ -129,6 +147,7 @@ public class Player : NetworkBehaviour
         OnPlayerNumberChanged = null;
         OnPlayerColorChanged = null;
         OnPlayerDataChanged = null;
+        OnPlayerNameChanged = null;
 
         // Remove this player's UI object
         Destroy(playerUIObject);
