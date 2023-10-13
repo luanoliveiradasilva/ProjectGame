@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2921313704363320496}
   m_Layer: 0
   m_Name: PlayerAdmin
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -71,4 +71,4 @@ MonoBehaviour:
     serializedVersion: 2
     rgba: 4294967295
   playerData: 0
-  playerName: 
+  playerName: namesss

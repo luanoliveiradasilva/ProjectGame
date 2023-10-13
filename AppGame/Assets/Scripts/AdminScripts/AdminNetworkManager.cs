@@ -29,5 +29,4 @@ public class AdminNetworkManager : NetworkManager
     {
         networkAddress = ipAddress;
     }
-
 }

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Mirror;
+using TMPro;
 using UnityEngine;
 
 public class Player : NetworkBehaviour
@@ -9,14 +10,13 @@ public class Player : NetworkBehaviour
     public event System.Action<ushort> OnPlayerDataChanged;
     public event System.Action<string> OnPlayerNameChanged;
 
-    static readonly List<Player> playersList = new List<Player>();
+    static readonly List<Player> playersList = new();
 
     [Header("Player UI")]
     public GameObject playerUIPrefab;
 
-    public string playerNameClient;
-
     GameObject playerUIObject;
+
     PlayerUI playerUI = null;
 
     //https://mirror-networking.gitbook.io/docs/manual/guides/synchronization/syncvars
@@ -72,7 +72,6 @@ public class Player : NetworkBehaviour
 
         //set the player name
         //TODO recenber os dados quando digitar o nome pelo inputfield
-        playerName  = playerNameClient;
 
         /*   // set the initial player data
           playerData = (ushort)Random.Range(100, 1000); */
