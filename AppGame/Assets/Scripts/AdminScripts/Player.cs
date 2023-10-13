@@ -72,7 +72,7 @@ public class Player : NetworkBehaviour
 
         //set the player name
         //TODO recenber os dados quando digitar o nome pelo inputfield
-
+        
         /*   // set the initial player data
           playerData = (ushort)Random.Range(100, 1000); */
 

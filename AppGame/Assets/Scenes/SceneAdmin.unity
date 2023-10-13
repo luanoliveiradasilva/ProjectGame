@@ -752,6 +752,7 @@ MonoBehaviour:
     deliveryTimeEmaDuration: 2
   connectionQualityInterval: 3
   timeInterpolationGui: 0
+  playerName: 
 --- !u!1 &414541168
 GameObject:
   m_ObjectHideFlags: 0
@@ -1106,6 +1107,7 @@ GameObject:
   - component: {fileID: 523222803}
   - component: {fileID: 523222802}
   - component: {fileID: 523222806}
+  - component: {fileID: 523222807}
   m_Layer: 5
   m_Name: BeginUI
   m_TagString: Untagged
@@ -1205,11 +1207,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 523222801}
   m_Enabled: 1
   m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c686a38205491a44e8c1b1e3282d515f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainPanel: {fileID: 2143381066}
+  playersPanel: {fileID: 15690031}
+  namesPlayer: {fileID: 1655993469}
+  buttonsStartClient: {fileID: 1049520453}
+--- !u!114 &523222807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 523222801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c1939986c1494e74582d457e323e7652, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ipAddressInputField: {fileID: 944405459}
-  clientNameInputField: {fileID: 1655993469}
+  playerName: 
 --- !u!1 &545884085
 GameObject:
   m_ObjectHideFlags: 0
@@ -2211,18 +2228,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 523222806}
-        m_TargetAssemblyTypeName: ClientUI, Assembly-CSharp
-        m_MethodName: SetNamePlayer
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
 --- !u!114 &1049520454
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2867,6 +2872,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainPanel: {fileID: 2143381066}
   playersPanel: {fileID: 15690031}
+  namesPlayer: {fileID: 0}
+  buttonsStartClient: {fileID: 0}
 --- !u!1 &1655075050
 GameObject:
   m_ObjectHideFlags: 0
@@ -3119,7 +3126,31 @@ MonoBehaviour:
       m_Calls: []
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 523222807}
+        m_TargetAssemblyTypeName: ClientUI, Assembly-CSharp
+        m_MethodName: SetPlayername
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 523222806}
+        m_TargetAssemblyTypeName: AdminUI, Assembly-CSharp
+        m_MethodName: ToggleButtons
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_OnTouchScreenKeyboardStatusChanged:
     m_PersistentCalls:
       m_Calls: []

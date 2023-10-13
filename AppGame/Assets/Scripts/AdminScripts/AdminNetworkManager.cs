@@ -13,6 +13,7 @@ public class AdminNetworkManager : NetworkManager
         singleton = this;
     }
 
+
     public override void OnServerAddPlayer(NetworkConnectionToClient conn)
     {
         base.OnServerAddPlayer(conn);

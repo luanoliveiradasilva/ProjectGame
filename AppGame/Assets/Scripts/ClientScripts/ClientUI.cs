@@ -5,21 +5,13 @@ using UnityEngine;
 public class ClientUI : MonoBehaviour
 {
 
-    public TMP_InputField ipAddressInputField;
+    [Header("Client Username")]
+    public string playerName;
 
-    public TMP_InputField clientNameInputField;
-
-    Player player;
-
-    private void Start()
+    public void SetPlayername(string username)
     {
-        //player = GameObject.FindWithTag("Player").GetComponent<Player>();
-        //SetNamePlayer();
-    }
-
-    public void SetNamePlayer()
-    {
-       // player.localNamePlayer = clientNameInputField.text;
+        playerName = username;
+        
     }
 
 }

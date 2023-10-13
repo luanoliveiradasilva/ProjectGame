@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AdminUI : MonoBehaviour
 {
@@ -10,6 +11,10 @@ public class AdminUI : MonoBehaviour
 
     [Tooltip("Assign Players Panel for instantiating PlayerUI as child")]
     public RectTransform playersPanel;
+
+    [Header("UI Elements")]
+    [SerializeField] internal TMP_InputField namesPlayer;
+    [SerializeField] internal Button buttonsStartClient;
 
     static AdminUI instance;
 
@@ -24,4 +29,9 @@ public class AdminUI : MonoBehaviour
     }
 
     public static RectTransform GetPlayersPanel() => instance.playersPanel;
+
+    public void ToggleButtons(string name)
+    {
+        buttonsStartClient.interactable = !string.IsNullOrWhiteSpace(name);
+    }
 }
