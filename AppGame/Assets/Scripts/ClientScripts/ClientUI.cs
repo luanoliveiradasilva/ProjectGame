@@ -1,17 +1,28 @@
-using Mirror;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ClientUI : MonoBehaviour
 {
+    public TMP_InputField playerNameInput;
+    public Button setNameButton;
 
-    [Header("Client Username")]
-    public string playerName;
-
-    public void SetPlayername(string username)
+    void Start()
     {
-        playerName = username;
-        
+        if (setNameButton != null)
+        {
+            setNameButton.onClick.AddListener(SetPlayerName);
+        }
+    }
+
+    public void SetPlayerName()
+    {
+        string newName = playerNameInput.text;
+
+        if (!string.IsNullOrEmpty(newName))
+        {
+            PlayerPrefs.SetString("PlayerName", newName);
+        }
     }
 
 }

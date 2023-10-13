@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using Mirror;
-using TMPro;
 using UnityEngine;
 
 public class Player : NetworkBehaviour
@@ -71,13 +70,20 @@ public class Player : NetworkBehaviour
         playerColor = Random.ColorHSV(0f, 1f, 0.9f, 0.9f, 1f, 1f);
 
         //set the player name
-        //TODO recenber os dados quando digitar o nome pelo inputfield
-        
+        playerName = PlayerPrefs.GetString("PlayerName");
+
         /*   // set the initial player data
           playerData = (ushort)Random.Range(100, 1000); */
 
         // Start generating updates
         /* InvokeRepeating(nameof(UpdateData), 1, 1); */
+    }
+
+
+    [Command]
+    public void CmdSetPlayerName(string name)
+    {
+        playerName = name;
     }
 
     [ServerCallback]
@@ -106,6 +112,7 @@ public class Player : NetworkBehaviour
 
     public override void OnStartClient()
     {
+
         // Instantiate the player UI as child of the Players Panel
         playerUIObject = Instantiate(playerUIPrefab, AdminUI.GetPlayersPanel());
         playerUI = playerUIObject.GetComponent<PlayerUI>();
@@ -151,6 +158,7 @@ public class Player : NetworkBehaviour
         // Remove this player's UI object
         Destroy(playerUIObject);
     }
+
 
     #endregion
 }

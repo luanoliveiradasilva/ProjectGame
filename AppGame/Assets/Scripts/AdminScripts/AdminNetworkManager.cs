@@ -30,4 +30,9 @@ public class AdminNetworkManager : NetworkManager
     {
         networkAddress = ipAddress;
     }
+
+    public void SetNamePlayer(string name)
+    {
+        
+    }
 }
