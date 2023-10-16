@@ -70,7 +70,11 @@ public class Player : NetworkBehaviour
         playerColor = Random.ColorHSV(0f, 1f, 0.9f, 0.9f, 1f, 1f);
 
         //set the player name
-        playerName = PlayerPrefs.GetString("PlayerName");
+
+        if (string.IsNullOrEmpty(playerName))
+        {
+            playerName = PlayerPrefs.GetString("PlayerName");
+        }
 
         /*   // set the initial player data
           playerData = (ushort)Random.Range(100, 1000); */

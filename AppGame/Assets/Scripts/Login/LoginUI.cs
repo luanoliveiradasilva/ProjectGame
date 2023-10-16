@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ClientUI : MonoBehaviour
+public class LoginUI : MonoBehaviour
 {
     public TMP_InputField playerNameInput;
     public Button setNameButton;
