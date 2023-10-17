@@ -1,4 +1,5 @@
 using Mirror;
+using Scripts.Game;
 using UnityEngine;
 
 
@@ -17,22 +18,10 @@ public class AdminNetworkManager : NetworkManager
     public override void OnServerAddPlayer(NetworkConnectionToClient conn)
     {
         base.OnServerAddPlayer(conn);
-        Player.ResetPlayerNumbers();
-    }
-
-    public override void OnServerDisconnect(NetworkConnectionToClient conn)
-    {
-        base.OnServerDisconnect(conn);
-        Player.ResetPlayerNumbers();
     }
 
     public void SetIpAddress(string ipAddress)
     {
         networkAddress = ipAddress;
-    }
-
-    public void SetNamePlayer(string name)
-    {
-        
     }
 }

@@ -8,25 +8,13 @@ public class PlayerUI : MonoBehaviour
     public Image image;
 
     [Header("Child Text Objects")]
-    public  TextMeshProUGUI playerNameText;
+    public TextMeshProUGUI playerNameText;
+    public TextMeshProUGUI timeGameText;
 
-    // Sets a highlight color for the local player
     public void SetLocalPlayer()
     {
-        // add a visual background for the local player in the UI
+
         image.color = new Color(1f, 1f, 1f, 0.1f);
-    }
-
-    // This value can change as clients leave and join
-    public void OnPlayerNumberChanged(byte newPlayerNumber)
-    {
-        playerNameText.text = string.Format("Player {0:00}", newPlayerNumber);
-    }
-
-    // Random color set by Player::OnStartServer
-    public void OnPlayerColorChanged(Color32 newPlayerColor)
-    {
-        playerNameText.color = newPlayerColor;
     }
 
     public void OnPlayerNameChanged(string namePlayers)
@@ -34,4 +22,10 @@ public class PlayerUI : MonoBehaviour
         playerNameText.text = namePlayers;
     }
 
+    public void OnTimeGameChanged(float timeGame)
+    {
+        float minutes = Mathf.FloorToInt(timeGame / 60);
+        float seconts = Mathf.FloorToInt(timeGame % 60);
+        timeGameText.text = string.Format("{0:00}:{1:00}", minutes, seconts);
+    }
 }

@@ -227,14 +227,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 0
+    m_Left: 250
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 120, y: 65}
+  m_CellSize: {x: 900, y: 65}
   m_Spacing: {x: 20, y: 20}
   m_Constraint: 0
   m_ConstraintCount: 2
@@ -730,7 +730,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 272332218}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1997922459}
+        m_TargetAssemblyTypeName: Scripts.Game.TimeGame, Assembly-CSharp
+        m_MethodName: ClickedStopTime
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &272332218
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -779,7 +791,7 @@ GameObject:
   m_Component:
   - component: {fileID: 387019830}
   - component: {fileID: 387019832}
-  - component: {fileID: 387019831}
+  - component: {fileID: 387019833}
   m_Layer: 0
   m_Name: AdminNetworkManager
   m_TagString: Untagged
@@ -802,7 +814,49 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &387019831
+--- !u!114 &387019832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 387019828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40691cd1f33f9474a8ff6dcbbb8e91b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dontDestroyOnLoad: 1
+  runInBackground: 1
+  autoStartServerBuild: 1
+  autoConnectClientBuild: 0
+  sendRate: 60
+  offlineScene: 
+  onlineScene: 
+  transport: {fileID: 387019833}
+  networkAddress: localhost
+  maxConnections: 100
+  disconnectInactiveConnections: 0
+  disconnectInactiveTimeout: 60
+  authenticator: {fileID: 0}
+  playerPrefab: {fileID: 8258305949254460076, guid: c0ca1b9dff59fd2489dc4cde73b66de2, type: 3}
+  autoCreatePlayer: 1
+  playerSpawnMethod: 0
+  spawnPrefabs: []
+  snapshotSettings:
+    bufferTimeMultiplier: 2
+    bufferLimit: 32
+    catchupNegativeThreshold: -1
+    catchupPositiveThreshold: 1
+    catchupSpeed: 0.019999999552965164
+    slowdownSpeed: 0.03999999910593033
+    driftEmaDuration: 1
+    dynamicAdjustment: 1
+    dynamicAdjustmentTolerance: 1
+    deliveryTimeEmaDuration: 2
+  connectionQualityInterval: 3
+  timeInterpolationGui: 0
+--- !u!114 &387019833
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -831,48 +885,6 @@ MonoBehaviour:
   debugLog: 0
   statisticsGUI: 0
   statisticsLog: 0
---- !u!114 &387019832
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 387019828}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40691cd1f33f9474a8ff6dcbbb8e91b2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dontDestroyOnLoad: 1
-  runInBackground: 1
-  autoStartServerBuild: 1
-  autoConnectClientBuild: 0
-  sendRate: 60
-  offlineScene: 
-  onlineScene: 
-  transport: {fileID: 387019831}
-  networkAddress: localhost
-  maxConnections: 100
-  disconnectInactiveConnections: 0
-  disconnectInactiveTimeout: 60
-  authenticator: {fileID: 0}
-  playerPrefab: {fileID: 8258305949254460076, guid: c0ca1b9dff59fd2489dc4cde73b66de2, type: 3}
-  autoCreatePlayer: 1
-  playerSpawnMethod: 0
-  spawnPrefabs: []
-  snapshotSettings:
-    bufferTimeMultiplier: 2
-    bufferLimit: 32
-    catchupNegativeThreshold: -1
-    catchupPositiveThreshold: 1
-    catchupSpeed: 0.019999999552965164
-    slowdownSpeed: 0.03999999910593033
-    driftEmaDuration: 1
-    dynamicAdjustment: 1
-    dynamicAdjustmentTolerance: 1
-    deliveryTimeEmaDuration: 2
-  connectionQualityInterval: 3
-  timeInterpolationGui: 0
 --- !u!1 &414541168
 GameObject:
   m_ObjectHideFlags: 0
@@ -1234,7 +1246,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &523222802
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3273,8 +3285,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainPanel: {fileID: 2143381066}
   playersPanel: {fileID: 15690031}
-  namesPlayer: {fileID: 0}
-  buttonsStartClient: {fileID: 0}
+  namesPlayer: {fileID: 1655993469}
+  buttonsStartClient: {fileID: 1049520453}
 --- !u!1 &1655075050
 GameObject:
   m_ObjectHideFlags: 0
@@ -3584,75 +3596,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1655993467}
   m_CullTransparentMesh: 1
---- !u!1001 &1754137196
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 7166376654757761177, guid: c0ca1b9dff59fd2489dc4cde73b66de2, type: 3}
-      propertyPath: sceneId
-      value: 4076848061
-      objectReference: {fileID: 0}
-    - target: {fileID: 7973318495182702136, guid: c0ca1b9dff59fd2489dc4cde73b66de2, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7973318495182702136, guid: c0ca1b9dff59fd2489dc4cde73b66de2, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7973318495182702136, guid: c0ca1b9dff59fd2489dc4cde73b66de2, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7973318495182702136, guid: c0ca1b9dff59fd2489dc4cde73b66de2, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7973318495182702136, guid: c0ca1b9dff59fd2489dc4cde73b66de2, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7973318495182702136, guid: c0ca1b9dff59fd2489dc4cde73b66de2, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7973318495182702136, guid: c0ca1b9dff59fd2489dc4cde73b66de2, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7973318495182702136, guid: c0ca1b9dff59fd2489dc4cde73b66de2, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7973318495182702136, guid: c0ca1b9dff59fd2489dc4cde73b66de2, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7973318495182702136, guid: c0ca1b9dff59fd2489dc4cde73b66de2, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8258305949254460076, guid: c0ca1b9dff59fd2489dc4cde73b66de2, type: 3}
-      propertyPath: m_Name
-      value: PlayerAdmin
-      objectReference: {fileID: 0}
-    - target: {fileID: 8541511776883932185, guid: c0ca1b9dff59fd2489dc4cde73b66de2, type: 3}
-      propertyPath: setNameButton
-      value: 
-      objectReference: {fileID: 1049520453}
-    - target: {fileID: 8541511776883932185, guid: c0ca1b9dff59fd2489dc4cde73b66de2, type: 3}
-      propertyPath: playerNameInput
-      value: 
-      objectReference: {fileID: 1655993469}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: c0ca1b9dff59fd2489dc4cde73b66de2, type: 3}
 --- !u!1 &1789814827
 GameObject:
   m_ObjectHideFlags: 0
@@ -3929,7 +3872,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1997922455
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4029,6 +3972,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeGame: {fileID: 846455542}
+  stopTime: {fileID: 272332217}
 --- !u!1 &2031931173
 GameObject:
   m_ObjectHideFlags: 0
@@ -4311,7 +4255,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2143381066
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4378,7 +4322,6 @@ SceneRoots:
   - {fileID: 215695678}
   - {fileID: 387019830}
   - {fileID: 523222805}
+  - {fileID: 1997922458}
   - {fileID: 1789814831}
   - {fileID: 1618171946}
-  - {fileID: 1997922458}
-  - {fileID: 1754137196}

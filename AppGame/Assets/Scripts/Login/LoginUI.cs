@@ -21,7 +21,7 @@ public class LoginUI : MonoBehaviour
 
         if (!string.IsNullOrEmpty(newName))
         {
-            PlayerPrefs.SetString("PlayerName", newName);
+            PlayerPrefs.SetString("Player", newName);
         }
     }
 
