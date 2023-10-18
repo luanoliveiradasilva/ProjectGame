@@ -1,5 +1,4 @@
 using Mirror;
-using Scripts.Game;
 using UnityEngine;
 
 
@@ -13,7 +12,6 @@ public class AdminNetworkManager : NetworkManager
         base.Awake();
         singleton = this;
     }
-
 
     public override void OnServerAddPlayer(NetworkConnectionToClient conn)
     {

@@ -7,8 +7,16 @@ public class LoginUI : MonoBehaviour
     public TMP_InputField playerNameInput;
     public Button setNameButton;
 
+    public static LoginUI instance;
+
+    void Awake()
+    {
+        instance = this;
+    }
+
     void Start()
     {
+
         if (setNameButton != null)
         {
             setNameButton.onClick.AddListener(SetPlayerName);
@@ -24,5 +32,4 @@ public class LoginUI : MonoBehaviour
             PlayerPrefs.SetString("Player", newName);
         }
     }
-
 }

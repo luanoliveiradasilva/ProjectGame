@@ -40,7 +40,7 @@ Library: D:\Documents\Projetos\ProjectGame\AppGame\Temp\BurstOutput\tempburstlib
 --assembly-defines=UnityEngine;
 --generate-link-xml=Temp\burst.link.xml
 --temp-folder=D:\Documents\Projetos\ProjectGame\AppGame\Temp\Burst
---key-folder=D:/Program Files/2022.3.8f1/Editor/Data/PlaybackEngines/AndroidPlayer
+--key-folder=D:/Program Files/2022.3.11f1/Editor/Data/PlaybackEngines/AndroidPlayer
 --decode-folder=D:\Documents\Projetos\ProjectGame\AppGame\Library\Burst
 --output=D:\Documents\Projetos\ProjectGame\AppGame\Temp\BurstOutput\tempburstlibs\armeabi-v7a\lib_burst_generated
 --pdb-search-paths=Temp/ManagedSymbols/

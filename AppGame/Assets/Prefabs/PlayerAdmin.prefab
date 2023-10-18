@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2921313704363320496}
   m_Layer: 0
   m_Name: PlayerAdmin
-  m_TagString: TimeGame
+  m_TagString: PlayerName
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -66,10 +66,6 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   playerUIPrefab: {fileID: 2640436460816192762, guid: d3293690d8848bb47bfae40cea2e1928, type: 3}
-  playerNumber: 0
-  playerColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  playerData: 0
-  playerName: 
-  timeGame: 0
+  playerName: teste
+  playerScore: 0
+  localPlayerName: aaa

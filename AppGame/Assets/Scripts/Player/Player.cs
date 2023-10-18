@@ -35,6 +35,9 @@ public class Player : NetworkBehaviour
     [SyncVar(hook = nameof(PlayerScoreGameChanged))]
     public float playerScore;
 
+    [SyncVar]
+    public string localPlayerName = "Player";
+
     void PlayerNameChanged(string _, string newPlayerName)
     {
         OnPlayerNameChanged?.Invoke(newPlayerName);
@@ -54,7 +57,7 @@ public class Player : NetworkBehaviour
         base.OnStartServer();
 
         playersList.Add(this);
-        playerName = PlayerPrefs.GetString("Player");
+        playerName = localPlayerName;
         playerScore = 0.0f;
     }
 
@@ -70,6 +73,8 @@ public class Player : NetworkBehaviour
 
     public override void OnStartClient()
     {
+        SetName();
+
         playerUIObject = Instantiate(playerUIPrefab, AdminUI.GetPlayersPanel());
         playerUI = playerUIObject.GetComponent<PlayerUI>();
 
@@ -82,6 +87,7 @@ public class Player : NetworkBehaviour
 
     public override void OnStartLocalPlayer()
     {
+
         playerUI.SetLocalPlayer();
 
         AdminUI.SetActive(true);
@@ -112,4 +118,26 @@ public class Player : NetworkBehaviour
     }
 
     #endregion
+
+
+    void SetName()
+    {
+        localPlayerName = PlayerPrefs.GetString("Player");
+        CmdSetPlayerNames(localPlayerName);
+        Debug.Log("Debug"+localPlayerName);
+    }
+
+    [Command]
+    private void CmdSetPlayerNames(string localPlayerName)
+    {
+       RpcSetPlayerName(localPlayerName);
+       Debug.Log("Debug localPlayerName");
+    }
+
+    [ClientRpc]
+    private void RpcSetPlayerName(string localPlayerName)
+    {
+        playerName = localPlayerName;
+        Debug.Log("Debug playerName"+playerName);
+    }
 }
