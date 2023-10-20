@@ -36,7 +36,6 @@ Library: D:\Documents\Projetos\ProjectGame\AppGame\Temp\BurstOutput\Data\Plugins
 --assembly-defines=Unity.Mathematics;
 --assembly-defines=Unity.VisualScripting.State;
 --assembly-defines=Unity.Collections.LowLevel.ILSupport;
---assembly-defines=Facepunch.Steamworks.Win64;
 --assembly-defines=Unity.VisualScripting.Antlr3.Runtime;
 --assembly-defines=Unity.Burst.Unsafe;
 --assembly-defines=System.Runtime;
@@ -137,7 +136,6 @@ Library: D:\Documents\Projetos\ProjectGame\AppGame\Temp\BurstOutput\Data\Plugins
 --assembly-defines=Unity.Mathematics;
 --assembly-defines=Unity.VisualScripting.State;
 --assembly-defines=Unity.Collections.LowLevel.ILSupport;
---assembly-defines=Facepunch.Steamworks.Win64;
 --assembly-defines=Unity.VisualScripting.Antlr3.Runtime;
 --assembly-defines=Unity.Burst.Unsafe;
 --assembly-defines=System.Runtime;

@@ -445,10 +445,6 @@
       <HintPath>Assets\Mirror\Plugins\Mono.Cecil\Mono.CecilX.Pdb.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Facepunch.Steamworks.Win64">
-      <HintPath>Assets\LeaderboardForSteam\Plugins\Facepunch.Steamworks.Win64.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Unity.Plastic.Antlr3.Runtime">
       <HintPath>Library\PackageCache\com.unity.collab-proxy@2.1.0\Lib\Editor\PlasticSCM\Unity.Plastic.Antlr3.Runtime.dll</HintPath>
       <Private>False</Private>
