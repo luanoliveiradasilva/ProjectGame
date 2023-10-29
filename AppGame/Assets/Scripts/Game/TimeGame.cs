@@ -1,3 +1,4 @@
+using System;
 using Mirror;
 using TMPro;
 using UnityEngine;
@@ -29,7 +30,15 @@ namespace Scripts.Game
             {
                 timeExecute += Time.deltaTime;
                 DisplayTimeGame(timeExecute);
+                DisplayTimeGameUI(timeExecute);
             }
+        }
+
+        private void DisplayTimeGameUI(float timeExecute)
+        {
+            isExecute = false;
+            float newTimeScore = timeExecute;
+            PlayerPrefs.SetFloat("Score", newTimeScore);
         }
 
         private void DisplayTimeGame(float timeToDisplay)
@@ -40,18 +49,18 @@ namespace Scripts.Game
             timeGame.text = string.Format("{0:00}:{1:00}", minutes, seconts);
         }
 
-        public void ClickedStopTime()
+       /*  public void ClickedStopTime()
         {
             isExecute = false;
 
             TimeMessage msg = new TimeMessage { timePlayerGame = timeExecute };
 
             NetworkClient.Send(msg);
-        }
+        } */
     }
 
-    public struct TimeMessage : NetworkMessage
+    /* public struct TimeMessage : NetworkMessage
     {
         public float timePlayerGame;
-    }
+    } */
 }

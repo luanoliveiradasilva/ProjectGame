@@ -8,11 +8,9 @@ public class ExtractFile : MonoBehaviour
 {
     // Lista de dados que você deseja exportar para o CSV
     public List<string[]> data = new();
-
-    // Nome do arquivo CSV
+    
     public string fileName = "exported_data.csv";
 
-    // Método para exportar os dados para o CSV
     public void ExportDataToCSV()
     {
         string[][] output = new string[data.Count][];
@@ -25,10 +23,10 @@ public class ExtractFile : MonoBehaviour
         int length = output.GetLength(0);
         string delimiter = ",";
 
-        StringBuilder sb = new StringBuilder();
+        StringBuilder stringBuilder = new();
 
         for (int index = 0; index < length; index++)
-            sb.AppendLine(string.Join(delimiter, output[index]));
+            stringBuilder.AppendLine(string.Join(delimiter, output[index]));
 
         // save csv in documents in windows.
         string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
@@ -37,8 +35,8 @@ public class ExtractFile : MonoBehaviour
         string filePath = Path.Combine(documentsPath, fileName);
 
         StreamWriter outStream = File.CreateText(filePath);
-        
-        outStream.WriteLine(sb);
+
+        outStream.WriteLine(stringBuilder);
         outStream.Close();
     }
     

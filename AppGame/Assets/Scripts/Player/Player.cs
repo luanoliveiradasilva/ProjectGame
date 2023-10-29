@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Mirror;
 using Scripts.Game;
+using TMPro;
 using UnityEngine;
 
 public class Player : NetworkBehaviour
@@ -9,7 +10,7 @@ public class Player : NetworkBehaviour
 
     public event Action<string> OnPlayerNameChanged;
     public event Action<float> OnPlayerScoreGameChanged;
-
+    public event Action<int> OnIdPlayerChanged;
     static readonly List<Player> playersList = new();
 
     [Header("Player UI")]
@@ -20,10 +21,12 @@ public class Player : NetworkBehaviour
     PlayerUI playerUI = null;
 
 
-    void Start()
-    {
-        NetworkServer.RegisterHandler<TimeMessage>(OnTimeMessageReceived);
-    }
+    /*     void Start()
+        {
+            NetworkServer.RegisterHandler<TimeMessage>(OnTimeMessageReceived);
+        } */
+
+
     //https://mirror-networking.gitbook.io/docs/manual/guides/synchronization/syncvars
     #region SyncVars
 
@@ -34,6 +37,11 @@ public class Player : NetworkBehaviour
 
     [SyncVar(hook = nameof(PlayerScoreGameChanged))]
     public float playerScore;
+    public float newScore;
+
+    [SyncVar(hook = nameof(IdPlayerChanged))]
+    public int idPlayer;
+
 
     [SyncVar]
     public string localPlayerName = "Player";
@@ -48,6 +56,11 @@ public class Player : NetworkBehaviour
         OnPlayerScoreGameChanged?.Invoke(newPlayerScoreGame);
     }
 
+    void IdPlayerChanged(int _, int newIdPlayer)
+    {
+        OnIdPlayerChanged?.Invoke(newIdPlayer);
+    }
+
     #endregion
 
     #region Server
@@ -57,8 +70,10 @@ public class Player : NetworkBehaviour
         base.OnStartServer();
 
         playersList.Add(this);
+
         playerName = localPlayerName;
-        playerScore = 0.0f;
+        playerScore = newScore;
+        idPlayer = (int)GetComponent<NetworkIdentity>().assetId;
     }
 
     public override void OnStopServer()
@@ -78,25 +93,13 @@ public class Player : NetworkBehaviour
         playerUIObject = Instantiate(playerUIPrefab, AdminUI.GetPlayersPanel());
         playerUI = playerUIObject.GetComponent<PlayerUI>();
 
+        OnIdPlayerChanged = playerUI.OnIdPlayerChanged;
         OnPlayerNameChanged = playerUI.OnPlayerNameChanged;
         OnPlayerScoreGameChanged = playerUI.OnTimeGameChanged;
 
+        OnIdPlayerChanged.Invoke(idPlayer);
         OnPlayerNameChanged.Invoke(playerName);
         OnPlayerScoreGameChanged.Invoke(playerScore);
-    }
-
-    public override void OnStartLocalPlayer()
-    {
-
-        playerUI.SetLocalPlayer();
-
-        AdminUI.SetActive(true);
-    }
-
-    public override void OnStopLocalPlayer()
-    {
-
-        AdminUI.SetActive(false);
     }
 
     public override void OnStopClient()
@@ -107,37 +110,48 @@ public class Player : NetworkBehaviour
         Destroy(playerUIObject);
     }
 
-    #endregion
-
-    #region Message
-
-    void OnTimeMessageReceived(NetworkConnection conn, TimeMessage msg)
-    {
-        float receivedTime = msg.timePlayerGame;
-        playerScore = receivedTime;
-    }
-
-    #endregion
-
-
     void SetName()
     {
         localPlayerName = PlayerPrefs.GetString("Player");
+        newScore = PlayerPrefs.GetFloat("Score");
+
         CmdSetPlayerNames(localPlayerName);
-        Debug.Log("Debug"+localPlayerName);
+        CmdSetPlayerScore(newScore);
     }
 
     [Command]
-    private void CmdSetPlayerNames(string localPlayerName)
+    private void CmdSetPlayerScore(float newScore) =>
+       RpcSetPlayerScore(newScore);
+
+    [ClientRpc]
+    private void RpcSetPlayerScore(float newScore)
     {
-       RpcSetPlayerName(localPlayerName);
-       Debug.Log("Debug localPlayerName");
+        playerScore = newScore;
     }
+
+    [Command]
+    private void CmdSetPlayerNames(string localPlayerName) =>
+       RpcSetPlayerName(localPlayerName);
+
 
     [ClientRpc]
     private void RpcSetPlayerName(string localPlayerName)
     {
         playerName = localPlayerName;
-        Debug.Log("Debug playerName"+playerName);
     }
+
+    #endregion
+
+    /*     #region Message
+
+        void OnTimeMessageReceived(NetworkConnection conn, TimeMessage msg)
+        {
+            float receivedTime = msg.timePlayerGame;
+            playerScore = receivedTime;
+            newScore = playerScore;
+        }
+
+        #endregion */
+
+
 }
