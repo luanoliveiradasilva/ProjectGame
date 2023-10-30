@@ -1,12 +1,10 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-using System.Collections.Generic;
-using System.Linq;
-using System;
 
 public class PlayerUI : MonoBehaviour
 {
+
     [Header("Player Components")]
     public Image image;
 
@@ -14,19 +12,20 @@ public class PlayerUI : MonoBehaviour
     public TextMeshProUGUI playerNameText;
     public TextMeshProUGUI timeGameText;
 
-    private string namePlayer;
-    private float timeGame;
-    private int idPlayer;
+    /*     private string namePlayer;
+        private float timeGame;
+        private int idPlayer; */
 
-    private readonly List<Players> players = new();
+    /* private readonly List<Players> players = new(); */
 
+    /* 
+        void Update()
+        {
+            PostPlayer();
+            GetPlayer();
+            UpdateScore();
 
-    void Update()
-    {
-        PostPlayer();
-        GetPlayer();
-        UpdateScore();
-    }
+        } */
 
     /* void SetToUIPlayer()
     {
@@ -38,14 +37,15 @@ public class PlayerUI : MonoBehaviour
         playerNameText.text = texto;
     } */
 
-    public void OnIdPlayerChanged(int idPlayer)
-    {
-        this.idPlayer = idPlayer;
-    }
+    /*     public void OnIdPlayerChanged(int idPlayer)
+        {
+            this.idPlayer = idPlayer;
+        } */
 
     public void OnPlayerNameChanged(string namePlayer)
     {
-        this.namePlayer = namePlayer;
+        playerNameText.text = namePlayer;
+
     }
 
     public void OnTimeGameChanged(float timeGame)
@@ -57,7 +57,7 @@ public class PlayerUI : MonoBehaviour
     }
 
     //POST
-    private void PostPlayer()
+    /* private void PostPlayer()
     {
         Players addPlayers = new()
         {
@@ -67,46 +67,39 @@ public class PlayerUI : MonoBehaviour
         };
 
         players.Add(addPlayers);
-    }
+    } */
 
     //GET player to UI
-    private void GetPlayer()
+    /* private void GetPlayer()
     {
         foreach (Players item in players)
         {
             playerNameText.text = item.NamePlayer;
         }
     }
-
+ */
     //UPDATE
-    private void UpdateScore()
-    {
-        bool idExistPlayer = players.Any(player => player.IdPlayer == idPlayer);
+    /*  private void UpdateScore()
+     {
+         bool idExistPlayer = players.Any(player => player.IdPlayer == idPlayer);
 
-        if (idExistPlayer)
-        {
-            Players playerUpdate = players.Find(updatePlayer => updatePlayer.IdPlayer == idPlayer);
+         if (idExistPlayer)
+         {
+             Players playerUpdate = players.Find(updatePlayer => updatePlayer.IdPlayer == idPlayer);
 
-            playerUpdate.PlayerScore = timeGame;
-        }
-    }
+             playerUpdate.PlayerScore = timeGame;
+         }
+     }
+  */
+    /*    //GET new score to UI
+       private void GetNewScore()
+       {
+           foreach (Players item in players)
+           {
+               float minutes = Mathf.FloorToInt(item.PlayerScore / 60);
+               float seconts = Mathf.FloorToInt(item.PlayerScore % 60);
 
-    //GET new score to UI
-    private void GetNewScore()
-    {
-        foreach (Players item in players)
-        {
-            float minutes = Mathf.FloorToInt(item.PlayerScore / 60);
-            float seconts = Mathf.FloorToInt(item.PlayerScore % 60);
-
-            timeGameText.text = string.Format("{0:00}:{1:00}", minutes, seconts);
-        }
-    }
-}
-
-internal class Players
-{
-    public int IdPlayer { get; set; }
-    public string NamePlayer { get; set; }
-    public float PlayerScore { get; set; }
+               timeGameText.text = string.Format("{0:00}:{1:00}", minutes, seconts);
+           }
+       } */
 }

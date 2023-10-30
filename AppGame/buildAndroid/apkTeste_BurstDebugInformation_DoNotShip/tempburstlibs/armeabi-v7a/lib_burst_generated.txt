@@ -8,6 +8,7 @@ Library: D:\Documents\Projetos\ProjectGame\AppGame\Temp\BurstOutput\tempburstlib
 --float-precision=Standard
 --target-framework=NetFramework
 --assembly-defines=UnityEngine;
+--assembly-defines=Assembly-CSharp-firstpass;
 --assembly-defines=Assembly-CSharp;
 --assembly-defines=Unity.2D.IK.Runtime;
 --assembly-defines=Unity.VisualScripting.Flow;
@@ -37,6 +38,7 @@ Library: D:\Documents\Projetos\ProjectGame\AppGame\Temp\BurstOutput\tempburstlib
 --assembly-defines=Unity.VisualScripting.State;
 --assembly-defines=Unity.Notifications.Android;
 --assembly-defines=Unity.Collections.LowLevel.ILSupport;
+--assembly-defines=DOTween;
 --assembly-defines=Unity.VisualScripting.Antlr3.Runtime;
 --assembly-defines=Unity.Burst.Unsafe;
 --assembly-defines=System.Runtime;

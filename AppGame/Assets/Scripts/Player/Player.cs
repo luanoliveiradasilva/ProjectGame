@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
 using Mirror;
-using Scripts.Game;
-using TMPro;
 using UnityEngine;
 
 public class Player : NetworkBehaviour
@@ -10,7 +8,6 @@ public class Player : NetworkBehaviour
 
     public event Action<string> OnPlayerNameChanged;
     public event Action<float> OnPlayerScoreGameChanged;
-    public event Action<int> OnIdPlayerChanged;
     static readonly List<Player> playersList = new();
 
     [Header("Player UI")]
@@ -39,26 +36,19 @@ public class Player : NetworkBehaviour
     public float playerScore;
     public float newScore;
 
-    [SyncVar(hook = nameof(IdPlayerChanged))]
-    public int idPlayer;
-
 
     [SyncVar]
-    public string localPlayerName = "Player";
+    private string localPlayerName = "Player";
 
     void PlayerNameChanged(string _, string newPlayerName)
     {
+        
         OnPlayerNameChanged?.Invoke(newPlayerName);
     }
 
     void PlayerScoreGameChanged(float _, float newPlayerScoreGame)
     {
         OnPlayerScoreGameChanged?.Invoke(newPlayerScoreGame);
-    }
-
-    void IdPlayerChanged(int _, int newIdPlayer)
-    {
-        OnIdPlayerChanged?.Invoke(newIdPlayer);
     }
 
     #endregion
@@ -73,7 +63,6 @@ public class Player : NetworkBehaviour
 
         playerName = localPlayerName;
         playerScore = newScore;
-        idPlayer = (int)GetComponent<NetworkIdentity>().assetId;
     }
 
     public override void OnStopServer()
@@ -93,11 +82,9 @@ public class Player : NetworkBehaviour
         playerUIObject = Instantiate(playerUIPrefab, AdminUI.GetPlayersPanel());
         playerUI = playerUIObject.GetComponent<PlayerUI>();
 
-        OnIdPlayerChanged = playerUI.OnIdPlayerChanged;
         OnPlayerNameChanged = playerUI.OnPlayerNameChanged;
         OnPlayerScoreGameChanged = playerUI.OnTimeGameChanged;
-
-        OnIdPlayerChanged.Invoke(idPlayer);
+        
         OnPlayerNameChanged.Invoke(playerName);
         OnPlayerScoreGameChanged.Invoke(playerScore);
     }

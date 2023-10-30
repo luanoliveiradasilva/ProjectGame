@@ -33,8 +33,6 @@ namespace Scripts.Game
             }
         }
 
-
-
         private void DisplayTimeGame(float timeToDisplay)
         {
             float minutes = Mathf.FloorToInt(timeToDisplay / 60);
