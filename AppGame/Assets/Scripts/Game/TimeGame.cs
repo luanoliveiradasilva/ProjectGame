@@ -1,23 +1,23 @@
-using System;
-using Mirror;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-
 
 namespace Scripts.Game
 {
     public class TimeGame : MonoBehaviour
     {
-        private float timeExecute;
-
         [Header("Time the game")]
         [Tooltip("Time de game to account")]
         [SerializeField] TextMeshProUGUI timeGame;
+
         [Tooltip("Button to stop time game")]
         [SerializeField] Button stopTime;
 
+        [Tooltip("Keep the games running")]
         private bool isExecute = false;
+
+        [Tooltip("Time Runtime Value")]
+        private float timeExecute;
 
         void Start()
         {
@@ -35,31 +35,20 @@ namespace Scripts.Game
 
         private void DisplayTimeGame(float timeToDisplay)
         {
-            float minutes = Mathf.FloorToInt(timeToDisplay / 60);
-            float seconts = Mathf.FloorToInt(timeToDisplay % 60);
+            if (timeToDisplay > 0.0f)
+            {
+                float minutes = Mathf.FloorToInt(timeToDisplay / 60);
+                float seconts = Mathf.FloorToInt(timeToDisplay % 60);
 
-            timeGame.text = string.Format("{0:00}:{1:00}", minutes, seconts);
+                timeGame.text = string.Format("{0:00}:{1:00}", minutes, seconts);
+            }
         }
 
-        public void DisplayTimeGameUI()
+        public void DisplayTimeGameToLeadboardUI()
         {
             isExecute = false;
             float newTimeScore = timeExecute;
             PlayerPrefs.SetFloat("Score", newTimeScore);
         }
-
-        /*  public void ClickedStopTime()
-         {
-             isExecute = false;
-
-             TimeMessage msg = new TimeMessage { timePlayerGame = timeExecute };
-
-             NetworkClient.Send(msg);
-         } */
     }
-
-    /* public struct TimeMessage : NetworkMessage
-    {
-        public float timePlayerGame;
-    } */
 }

@@ -6,7 +6,6 @@ public class LoginUI : MonoBehaviour
 {
     public TMP_InputField playerNameInput;
     public Button setNameButton;
-
     public static LoginUI instance;
 
     void Awake()
