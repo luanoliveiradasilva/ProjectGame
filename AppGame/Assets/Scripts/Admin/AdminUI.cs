@@ -14,22 +14,13 @@ public class AdminUI : MonoBehaviour
     [SerializeField] internal TMP_InputField namesPlayer;
     [SerializeField] internal Button buttonsStartClient;
 
-    static AdminUI instance;
+    private static AdminUI instance;
 
-    void Awake()
-    {
-        instance = this;
-    }
+    private void Awake() => instance = this;
 
-    public static void SetActive(bool active)
-    {
-        instance.mainPanel.gameObject.SetActive(active);
-    }
+    /*     public static void SetActive(bool active) => instance.mainPanel.gameObject.SetActive(active); */
 
     public static RectTransform GetPlayersPanel() => instance.playersPanel;
 
-    public void ToggleButtons(string name)
-    {
-        buttonsStartClient.interactable = !string.IsNullOrWhiteSpace(name);
-    }
+    /*     public void ToggleButtons(string name) => buttonsStartClient.interactable = !string.IsNullOrWhiteSpace(name); */
 }

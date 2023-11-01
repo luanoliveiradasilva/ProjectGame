@@ -6,22 +6,34 @@ using UnityEngine;
 
 public class ExtractFile : MonoBehaviour
 {
-    // Lista de dados que você deseja exportar para o CSV
-    public List<string[]> data = new();
-    
-    public string fileName = "exported_data.csv";
+    [Header("Name file CSV")]
+    [Tooltip("csv file name")]
+    [SerializeField] private string fileName;
+
+    private readonly List<string[]> dataList = new();
 
     public void ExportDataToCSV()
     {
-        string[][] output = new string[data.Count][];
+        foreach (var item in Player.instancePlayer.playerDataList)
+        {
+            string[] playerDataListArray =
+            {
+                    item.namePlayer,
+                    item.playerScore.ToString()
+            };
+
+            dataList.Add(playerDataListArray);
+        }
+
+        string[][] output = new string[dataList.Count][];
 
         for (int i = 0; i < output.Length; i++)
         {
-            output[i] = data[i];
+            output[i] = dataList[i];
         }
 
         int length = output.GetLength(0);
-        string delimiter = ",";
+        string delimiter = ";";
 
         StringBuilder stringBuilder = new();
 
@@ -31,7 +43,7 @@ public class ExtractFile : MonoBehaviour
         // save csv in documents in windows.
         string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
-
+        //Combines local address plus file name
         string filePath = Path.Combine(documentsPath, fileName);
 
         StreamWriter outStream = File.CreateText(filePath);
@@ -39,6 +51,5 @@ public class ExtractFile : MonoBehaviour
         outStream.WriteLine(stringBuilder);
         outStream.Close();
     }
-    
 }
 
