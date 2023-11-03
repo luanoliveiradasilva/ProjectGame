@@ -5,10 +5,8 @@ using UnityEngine;
 
 public class Player : NetworkBehaviour
 {
-
-    public static Player instancePlayer {get; private set;}
     public event Action<string> OnPlayerNameChanged;
-    public event Action<float> OnPlayerScoreGameChanged;
+    public event Action<string> OnPlayerScoreGameChanged;
 
     [Header("Player UI")]
     [SerializeField] public GameObject playerUIPrefab;
@@ -16,22 +14,8 @@ public class Player : NetworkBehaviour
     private PlayerUI playerUI;
 
     [Header("Variables Local")]
-    private float newScore;
+    private string newScore;
     private string localPlayerName;
-
-    [Serializable]
-    public class PlayerData
-    {
-        public string namePlayer;
-        public float playerScore;
-    }
-
-    public List<PlayerData> playerDataList = new();
-
-    void Awake()
-    {
-        instancePlayer = this;
-    }
 
     #region SyncVars
 
@@ -41,17 +25,18 @@ public class Player : NetworkBehaviour
     public string playerName;
 
     [SyncVar(hook = nameof(PlayerScoreGameChanged))]
-    public float playerScore;
+    public string playerScore;
 
     private void PlayerNameChanged(string oldPlayerName, string newPlayerName) => OnPlayerNameChanged?.Invoke(newPlayerName);
 
-    private void PlayerScoreGameChanged(float oldPlayerScoreGame, float newPlayerScoreGame) => OnPlayerScoreGameChanged?.Invoke(newPlayerScoreGame);
+    private void PlayerScoreGameChanged(string oldPlayerScoreGame, string newPlayerScoreGame) => OnPlayerScoreGameChanged?.Invoke(newPlayerScoreGame);
 
     #endregion
 
     #region Client
     public override void OnStartClient()
     {
+        ConvertDataPlayers();
         SetDataPlayer();
 
         playerUIObject = Instantiate(playerUIPrefab, AdminUI.GetPlayersPanel());
@@ -72,26 +57,20 @@ public class Player : NetworkBehaviour
         Destroy(playerUIObject);
     }
 
-    void SetDataPlayer()
+    private void ConvertDataPlayers()
     {
-        localPlayerName = PlayerPrefs.GetString("Player");
-        newScore = PlayerPrefs.GetFloat("Score");
+        var getScore = PlayerPrefs.GetFloat("Score");
+        float minutes = Mathf.FloorToInt(getScore / 60);
+        float seconts = Mathf.FloorToInt(getScore % 60);
 
+        localPlayerName = PlayerPrefs.GetString("Player");
+        newScore = string.Format("{0:00}:{1:00}", minutes, seconts);
+    }
+    private void SetDataPlayer()
+    {
         CmdSetPlayerNames(localPlayerName);
         CmdSetPlayerScore(newScore);
         CmdSetPlayerData(localPlayerName, newScore);
-    }
-
-    [Command]
-    private void CmdSetPlayerData(string localPlayerName, float newScore)
-    {
-       PlayerData addPlayer = new()
-        {
-            namePlayer = localPlayerName,
-            playerScore = newScore
-        };
-
-        playerDataList.Add(addPlayer);
     }
 
     //Name Player
@@ -103,12 +82,14 @@ public class Player : NetworkBehaviour
 
     //Score Player
     [Command]
-    private void CmdSetPlayerScore(float newScore) => RpcSetPlayerScore(newScore);
+    private void CmdSetPlayerScore(string newScore) => RpcSetPlayerScore(newScore);
 
     [ClientRpc]
-    private void RpcSetPlayerScore(float newScore) => playerScore = newScore;
+    private void RpcSetPlayerScore(string newScore) => playerScore = newScore;
 
-
+    //Set Player data to extract file
+    [Command]
+    private void CmdSetPlayerData(string localPlayerName, string newScore) => AdminNetworkManager.instance.SetPlayerData(localPlayerName, newScore);
 
     #endregion
 }

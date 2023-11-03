@@ -12,7 +12,7 @@ public class AdminNetworkManager : NetworkManager
     public class PlayerData
     {
         public string namePlayer;
-        public float playerScore;
+        public string playerScore;
     }
 
     public List<PlayerData> playerDataList = new();
@@ -23,20 +23,16 @@ public class AdminNetworkManager : NetworkManager
         instance = this;
     }
 
-    public override void OnServerAddPlayer(NetworkConnectionToClient conn)
-    {
-        SetPlayerData();
-        base.OnServerAddPlayer(conn);
-    }
+    public override void OnServerAddPlayer(NetworkConnectionToClient conn) => base.OnServerAddPlayer(conn);
 
     public void SetIpAddress(string ipAddress) => networkAddress = ipAddress;
 
-    private void SetPlayerData()
+    public void SetPlayerData(string playerName, string playerScore)
     {
         PlayerData addPlayer = new()
         {
-            namePlayer = PlayerPrefs.GetString("Player"),
-            playerScore = PlayerPrefs.GetFloat("Score")
+            namePlayer = playerName,
+            playerScore = playerScore
         };
 
         playerDataList.Add(addPlayer);

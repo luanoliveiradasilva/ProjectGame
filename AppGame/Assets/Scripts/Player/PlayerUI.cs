@@ -4,25 +4,13 @@ using TMPro;
 public class PlayerUI : MonoBehaviour
 {
     [Header("Child Text Objects")]
-    public TextMeshProUGUI playerNameText;
-    public TextMeshProUGUI timeGameText;
+    [Tooltip("Set name player text in box text")]
+    [SerializeField] private TextMeshProUGUI playerNameText;
 
-    private readonly float existTime = 0.0f;
-    private readonly int timeGameConverted = 60;
+    [Tooltip("Set score time player text in box text")]
+    [SerializeField] private TextMeshProUGUI timeGameText;
 
-    public void OnPlayerNameChanged(string namePlayer)
-    {
-        playerNameText.text = namePlayer;
-    }
+    public void OnPlayerNameChanged(string namePlayer) => playerNameText.text = namePlayer;
 
-    public void OnTimeGameChanged(float timeGame)
-    {
-        if (timeGame > existTime)
-        {
-            float minutes = Mathf.FloorToInt(timeGame / timeGameConverted);
-            float seconts = Mathf.FloorToInt(timeGame % timeGameConverted);
-
-            timeGameText.text = string.Format("{0:00}:{1:00}", minutes, seconts);
-        }
-    }
+    public void OnTimeGameChanged(string timeGame) => timeGameText.text = timeGame;
 }

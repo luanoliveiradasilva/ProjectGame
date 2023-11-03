@@ -17,10 +17,7 @@ public class AdminUI : MonoBehaviour
     private static AdminUI instance;
 
     private void Awake() => instance = this;
-
-    /*     public static void SetActive(bool active) => instance.mainPanel.gameObject.SetActive(active); */
-
+    
     public static RectTransform GetPlayersPanel() => instance.playersPanel;
 
-    /*     public void ToggleButtons(string name) => buttonsStartClient.interactable = !string.IsNullOrWhiteSpace(name); */
 }

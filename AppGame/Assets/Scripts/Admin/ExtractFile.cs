@@ -14,7 +14,18 @@ public class ExtractFile : MonoBehaviour
 
     public void ExportDataToCSV()
     {
-        foreach (var item in Player.instancePlayer.playerDataList)
+
+        SetDataPlayers();
+
+        StreamWriter outStream = File.CreateText(CombinePathDocumentWithFileNameCSV());
+
+        outStream.WriteLine(SetOutputData());
+        outStream.Close();
+    }
+
+    private void SetDataPlayers()
+    {
+        foreach (var item in AdminNetworkManager.instance.playerDataList)
         {
             string[] playerDataListArray =
             {
@@ -24,7 +35,21 @@ public class ExtractFile : MonoBehaviour
 
             dataList.Add(playerDataListArray);
         }
+    }
 
+    private string CombinePathDocumentWithFileNameCSV()
+    {
+        // Search path name document
+        string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+
+        //Combines local address plus file name
+        string filePath = Path.Combine(documentsPath, fileName);
+
+        return filePath;
+    }
+
+    private StringBuilder SetOutputData()
+    {
         string[][] output = new string[dataList.Count][];
 
         for (int i = 0; i < output.Length; i++)
@@ -40,16 +65,9 @@ public class ExtractFile : MonoBehaviour
         for (int index = 0; index < length; index++)
             stringBuilder.AppendLine(string.Join(delimiter, output[index]));
 
-        // save csv in documents in windows.
-        string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-
-        //Combines local address plus file name
-        string filePath = Path.Combine(documentsPath, fileName);
-
-        StreamWriter outStream = File.CreateText(filePath);
-
-        outStream.WriteLine(stringBuilder);
-        outStream.Close();
+        return stringBuilder;
     }
+
+
 }
 

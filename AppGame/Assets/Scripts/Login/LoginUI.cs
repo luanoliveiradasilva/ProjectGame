@@ -4,19 +4,15 @@ using UnityEngine.UI;
 
 public class LoginUI : MonoBehaviour
 {
-    public TMP_InputField playerNameInput;
-    public Button setNameButton;
-    public static LoginUI instance;
-    
+    [Header("Login Player")]
+    [Tooltip("input Name player")]
+    [SerializeField] private TMP_InputField playerNameInput;
 
-    void Awake()
-    {
-        instance = this;
-    }
+    [Tooltip("Start button and set name player")]
+    [SerializeField] private Button setNameButton;
 
     void Start()
     {
-
         if (setNameButton != null)
         {
             setNameButton.onClick.AddListener(SetPlayerName);
