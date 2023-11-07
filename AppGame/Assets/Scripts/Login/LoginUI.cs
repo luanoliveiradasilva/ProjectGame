@@ -11,6 +11,7 @@ public class LoginUI : MonoBehaviour
     [Tooltip("Start button and set name player")]
     [SerializeField] private Button setNameButton;
 
+
     void Start()
     {
         if (setNameButton != null)
@@ -26,6 +27,8 @@ public class LoginUI : MonoBehaviour
         if (!string.IsNullOrEmpty(newName))
         {
             PlayerPrefs.SetString("Player", newName);
+            AdminNetworkManager.instance.GetStartDiscovery();
         }
     }
+    
 }

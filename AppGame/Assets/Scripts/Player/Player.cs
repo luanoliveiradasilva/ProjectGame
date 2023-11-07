@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using Mirror;
 using UnityEngine;
 
@@ -48,6 +47,7 @@ public class Player : NetworkBehaviour
         OnPlayerNameChanged.Invoke(playerName);
         OnPlayerScoreGameChanged.Invoke(playerScore);
     }
+    
 
     public override void OnStopClient()
     {

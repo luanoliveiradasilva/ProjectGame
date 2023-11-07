@@ -13,11 +13,9 @@ public class AdminUI : MonoBehaviour
     [Header("UI Elements")]
     [SerializeField] internal TMP_InputField namesPlayer;
     [SerializeField] internal Button buttonsStartClient;
-
-    private static AdminUI instance;
-
-    private void Awake() => instance = this;
     
+    private static AdminUI instance;
+    private void Awake() => instance = this;
     public static RectTransform GetPlayersPanel() => instance.playersPanel;
 
 }
