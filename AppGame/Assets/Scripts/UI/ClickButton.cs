@@ -5,8 +5,12 @@ using UnityEngine.UI;
 public class ClickButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
 
+    
+
     [SerializeField] private Image image;
     [SerializeField] private Sprite defaultButton, pressedButton;
+
+
 
     public void OnPointerDown(PointerEventData eventData)
     {
@@ -17,4 +21,5 @@ public class ClickButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     {
         image.sprite = defaultButton;
     }
+
 }
