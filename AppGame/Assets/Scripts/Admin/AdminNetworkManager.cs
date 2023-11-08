@@ -42,6 +42,7 @@ public class AdminNetworkManager : NetworkManager
     {
         discoveredServers[info.serverId] = info;
         SetIpAddress(info.EndPoint.Address.ToString());
+        Debug.Log("Debug "+info.EndPoint.Address.ToString());
     }
 
     #endregion
