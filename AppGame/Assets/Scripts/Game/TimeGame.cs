@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,25 +9,38 @@ namespace Scripts.Game
     {
         [Header("Time the game")]
         [Tooltip("Time de game to account")]
-        [SerializeField] TextMeshProUGUI timeGame;
+        [SerializeField] private TextMeshProUGUI timeGame;
+
+        [Tooltip("Button to start time game")]
+        [SerializeField] private Button startTime;
 
         [Tooltip("Button to stop time game")]
-        [SerializeField] Button stopTime;
+        [SerializeField] private Button stopTime;
 
-        [Tooltip("Keep the games running")]
-        private bool isExecute = false;
-
-        [Tooltip("Time Runtime Value")]
+        private bool isExecute;
         private float timeExecute;
 
-        void Start()
+        private void Update()
         {
+            BeginTimeGame();
+        }
+
+        public void StartTimeGame()
+        {
+            startTime.onClick.AddListener(BeginTimeGame);
             isExecute = true;
         }
 
-        void Update()
+//TODO verificar a possibilidade de concluir o jogo so quando terminar alguma cena, ao invés de ter o botão para, além disso, deve enviar para o servidor antes de mudar de cena ou painel.
+        public void StopTimeGame()
         {
-            if (isExecute)
+            stopTime.onClick.AddListener(DisplayTimeGameToLeadboardUI);
+            isExecute = false;
+        }
+
+        private void BeginTimeGame()
+        {
+            if (isExecute == true)
             {
                 timeExecute += Time.deltaTime;
                 DisplayTimeGame(timeExecute);
@@ -44,7 +58,7 @@ namespace Scripts.Game
             }
         }
 
-        public void DisplayTimeGameToLeadboardUI()
+        private void DisplayTimeGameToLeadboardUI()
         {
             isExecute = false;
             float newTimeScore = timeExecute;

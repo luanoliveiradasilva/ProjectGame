@@ -12,10 +12,7 @@ namespace UI
 
         public string nameGame;
 
-        public static ScenasPanels instance;
-
         //TODO adicionar condição para adicinar todos os botões automaticos.
-        void Awake() => instance = this;
 
         void Update()
         {
@@ -24,16 +21,16 @@ namespace UI
 
         public void OnButtonActiveScene()
         {
-            for (int indice = 0; indice < showGame.Length; indice++)
+            for (int index = 0; index < showGame.Length; index++)
             {
-                int indiceBotao = indice;
-                showGame[indice].onClick.AddListener(() => SelectSceneGame(indiceBotao));
+                int indiceBotao = index;
+                showGame[index].onClick.AddListener(() => GetSceneGame(indiceBotao));
             }
         }
 
-        private void SelectSceneGame(int indice)
+        private void GetSceneGame(int index)
         {
-            var selectedScene = showGame.Select((Value, indice) => new { Value, indice }).FirstOrDefault(item => item.indice == indice);
+            var selectedScene = showGame.Select((Value, Index) => new { Value, indexGame=Index }).FirstOrDefault(item => item.indexGame == index);
 
             nameGame = selectedScene?.Value.ToString();
         }
