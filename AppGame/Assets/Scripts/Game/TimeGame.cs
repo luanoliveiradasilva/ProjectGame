@@ -47,6 +47,7 @@ namespace Scripts.Game
             }
         }
 
+//TODO Tirar o time do UI.
         private void DisplayTimeGame(float timeToDisplay)
         {
             if (timeToDisplay > 0.0f)
