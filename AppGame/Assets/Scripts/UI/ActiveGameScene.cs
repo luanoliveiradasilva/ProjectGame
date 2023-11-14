@@ -23,6 +23,7 @@ public class ActiveGameScene : MonoBehaviour
     {
         RegexName();
         SelectSceneGame();
+        SetSceneGame();
     }
 
     private string RegexName()
@@ -38,13 +39,18 @@ public class ActiveGameScene : MonoBehaviour
         return match.Value;
     }
 
+    private void SetSceneGame()
+    {
+        AdminNetworkManager.instance.SetGameData(RegexName());
+    }
+
     private void SelectSceneGame()
     {
         foreach (var item in sceneGames)
         {
             var nameGame = RegexName() == item.name;
 
-            if(nameGame)
+            if (nameGame)
                 item.SetActive(true);
         }
     }

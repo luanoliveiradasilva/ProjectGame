@@ -6,13 +6,14 @@ public class Player : NetworkBehaviour
 {
     public event Action<string> OnPlayerNameChanged;
     public event Action<string> OnPlayerScoreGameChanged;
+    public event Action<string> OnGameNameChaged;
 
     [Header("Player UI")]
     [SerializeField] public GameObject playerUIPrefab;
     private GameObject playerUIObject;
     private PlayerUI playerUI;
 
-    [Header("Variables Local")]
+    private string nameGame;
     private string newScore;
     private string localPlayerName;
 
@@ -25,6 +26,11 @@ public class Player : NetworkBehaviour
 
     [SyncVar(hook = nameof(PlayerScoreGameChanged))]
     public string playerScore;
+
+    [SyncVar(hook = nameof(GameNameChanged))]
+    public string gameName;
+
+    private void GameNameChanged(string oldNameGame, string newNameGame) => OnGameNameChaged?.Invoke(newNameGame);
 
     private void PlayerNameChanged(string oldPlayerName, string newPlayerName) => OnPlayerNameChanged?.Invoke(newPlayerName);
 
@@ -47,7 +53,7 @@ public class Player : NetworkBehaviour
         OnPlayerNameChanged.Invoke(playerName);
         OnPlayerScoreGameChanged.Invoke(playerScore);
     }
-    
+
 
     public override void OnStopClient()
     {
@@ -70,8 +76,18 @@ public class Player : NetworkBehaviour
     {
         CmdSetPlayerNames(localPlayerName);
         CmdSetPlayerScore(newScore);
+        CmdSetNameGame(nameGame);
         CmdSetPlayerData(localPlayerName, newScore);
     }
+
+    //TODO mudar a chamada RPC em um objeto só, serielizar tudo.
+
+    //Name game
+    [Command]
+    private void CmdSetNameGame(string nameGame) => RpcSetNameGame(nameGame);
+
+    [ClientRpc]
+    private void RpcSetNameGame(string nameGame) => gameName = nameGame;
 
     //Name Player
     [Command]

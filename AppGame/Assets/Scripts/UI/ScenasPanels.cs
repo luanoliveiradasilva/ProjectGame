@@ -4,6 +4,8 @@ using System.Linq;
 
 namespace UI
 {
+
+    //TODO mudar o nome dessa classe
     public class ScenasPanels : MonoBehaviour
     {
 
@@ -30,7 +32,7 @@ namespace UI
 
         private void GetSceneGame(int index)
         {
-            var selectedScene = showGame.Select((Value, Index) => new { Value, indexGame=Index }).FirstOrDefault(item => item.indexGame == index);
+            var selectedScene = showGame.Select((Value, Index) => new { Value, indexGame = Index }).FirstOrDefault(item => item.indexGame == index);
 
             nameGame = selectedScene?.Value.ToString();
         }
