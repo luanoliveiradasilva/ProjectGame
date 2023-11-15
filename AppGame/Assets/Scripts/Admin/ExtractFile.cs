@@ -30,6 +30,7 @@ public class ExtractFile : MonoBehaviour
             string[] playerDataListArray =
             {
                     item.namePlayer,
+                    item.nameGame,
                     item.playerScore.ToString()
             };
 

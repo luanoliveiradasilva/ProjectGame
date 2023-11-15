@@ -64,19 +64,24 @@ public class AdminNetworkManager : NetworkManager
     #endregion
 
     #region Data
-    public void SetPlayerData(string playerName, string playerScore)
-    {
-        this.playerName = playerName;
-        this.playerScore = playerScore;
-        Debug.Log($"{this.playerName}");
-        Debug.Log($"{this.playerScore}");
-    }
 
-    public void SetGameData(string nameGame)
+    public void SetPlayerData(List<Player.PlayerDatas> playerDatas)
     {
-        this.nameGame = nameGame;
-        Debug.Log($"{this.nameGame}");
+        foreach (var item in playerDatas)
+        {
+            playerName = item.namePlayerData;
+            nameGame = item.nameGameData;
+            playerScore = item.playerScoreData;
+        }
+
+        PlayerData playerData = new()
+        {
+            namePlayer = playerName,
+            nameGame = nameGame,
+            playerScore = playerScore,
+        };
+
+        playerDataList.Add(playerData);
     }
-    
     #endregion
 }

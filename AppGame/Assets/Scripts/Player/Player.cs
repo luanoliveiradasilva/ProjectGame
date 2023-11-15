@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Mirror;
 using UnityEngine;
 
@@ -13,9 +14,21 @@ public class Player : NetworkBehaviour
     private GameObject playerUIObject;
     private PlayerUI playerUI;
 
-    private string nameGame;
-    private string newScore;
-    private string localPlayerName;
+    private string nameGameLocal;
+    private string newScoreLocal;
+    private string playerNameLocal;
+
+
+    [Serializable]
+    public class PlayerDatas
+    {
+        public string namePlayerData;
+        public string nameGameData;
+        public string screenData;
+        public string errorData;
+        public string hitData;
+        public string playerScoreData;
+    }
 
     #region SyncVars
 
@@ -42,8 +55,54 @@ public class Player : NetworkBehaviour
     public override void OnStartClient()
     {
         ConvertDataPlayers();
-        SetDataPlayer();
 
+        SetDataPlayerToLeadboard();
+
+        SetDataPlayerToAnalize();
+
+        InstantiatePlayerDataInTheUI();
+    }
+
+    private void ConvertDataPlayers()
+    {
+        float getScore = PlayerPrefs.GetFloat("Score");
+        float minutes = Mathf.FloorToInt(getScore / 60);
+        float seconts = Mathf.FloorToInt(getScore % 60);
+
+        playerNameLocal = PlayerPrefs.GetString("Player");
+        newScoreLocal = string.Format("{0:00}:{1:00}", minutes, seconts);
+        nameGameLocal = PlayerPrefs.GetString("NameGame");
+    }
+
+    private void SetDataPlayerToLeadboard()
+    {
+        CmdSetPlayerNames(playerNameLocal);
+        CmdSetPlayerScore(newScoreLocal);
+        CmdSetNameGame(nameGameLocal);
+    }
+
+    private void SetDataPlayerToAnalize()
+    {
+
+        List<PlayerDatas> playerDatas = new();
+
+        PlayerDatas playerSetData = new()
+        {
+            namePlayerData = playerNameLocal,
+            nameGameData = nameGameLocal,
+            screenData = "null",
+            errorData = "null",
+            hitData = "null",
+            playerScoreData = newScoreLocal
+        };
+
+        playerDatas.Add(playerSetData);
+
+        CmdSetPlayerData(playerDatas);
+    }
+
+    private void InstantiatePlayerDataInTheUI()
+    {
         playerUIObject = Instantiate(playerUIPrefab, AdminUI.GetPlayersPanel());
         playerUI = playerUIObject.GetComponent<PlayerUI>();
 
@@ -54,7 +113,6 @@ public class Player : NetworkBehaviour
         OnPlayerScoreGameChanged.Invoke(playerScore);
     }
 
-
     public override void OnStopClient()
     {
         OnPlayerNameChanged = null;
@@ -63,24 +121,7 @@ public class Player : NetworkBehaviour
         Destroy(playerUIObject);
     }
 
-    private void ConvertDataPlayers()
-    {
-        var getScore = PlayerPrefs.GetFloat("Score");
-        float minutes = Mathf.FloorToInt(getScore / 60);
-        float seconts = Mathf.FloorToInt(getScore % 60);
-
-        localPlayerName = PlayerPrefs.GetString("Player");
-        newScore = string.Format("{0:00}:{1:00}", minutes, seconts);
-    }
-    private void SetDataPlayer()
-    {
-        CmdSetPlayerNames(localPlayerName);
-        CmdSetPlayerScore(newScore);
-        CmdSetNameGame(nameGame);
-        CmdSetPlayerData(localPlayerName, newScore);
-    }
-
-    //TODO mudar a chamada RPC em um objeto só, serielizar tudo.
+    #endregion
 
     //Name game
     [Command]
@@ -103,9 +144,10 @@ public class Player : NetworkBehaviour
     [ClientRpc]
     private void RpcSetPlayerScore(string newScore) => playerScore = newScore;
 
-    //Set Player data to extract file
+    //Set data player 
     [Command]
-    private void CmdSetPlayerData(string localPlayerName, string newScore) => AdminNetworkManager.instance.SetPlayerData(localPlayerName, newScore);
-
-    #endregion
+    private void CmdSetPlayerData(List<PlayerDatas> playerDatas)
+    {
+        AdminNetworkManager.instance.SetPlayerData(playerDatas);
+    }
 }

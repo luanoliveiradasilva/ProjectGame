@@ -34,8 +34,7 @@ namespace Scripts.Game
 //TODO verificar a possibilidade de concluir o jogo so quando terminar alguma cena, ao invés de ter o botão para, além disso, deve enviar para o servidor antes de mudar de cena ou painel.
         public void StopTimeGame()
         {
-            stopTime.onClick.AddListener(DisplayTimeGameToLeadboardUI);
-            isExecute = false;
+            DisplayTimeGameToLeadboardUI();
         }
 
         private void BeginTimeGame()
