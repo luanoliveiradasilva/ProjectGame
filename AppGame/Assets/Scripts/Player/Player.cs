@@ -15,6 +15,8 @@ public class Player : NetworkBehaviour
     private PlayerUI playerUI;
 
     private string nameGameLocal;
+    private int rightLocal;
+    private int wrongLocal;
     private string newScoreLocal;
     private string playerNameLocal;
 
@@ -25,8 +27,8 @@ public class Player : NetworkBehaviour
         public string namePlayerData;
         public string nameGameData;
         public string screenData;
-        public string errorData;
-        public string hitData;
+        public int rightData;
+        public int wrongData;
         public string playerScoreData;
     }
 
@@ -72,6 +74,8 @@ public class Player : NetworkBehaviour
         playerNameLocal = PlayerPrefs.GetString("Player");
         newScoreLocal = string.Format("{0:00}:{1:00}", minutes, seconts);
         nameGameLocal = PlayerPrefs.GetString("NameGame");
+        rightLocal = PlayerPrefs.GetInt("Right");
+        wrongLocal = PlayerPrefs.GetInt("Wrong");
     }
 
     private void SetDataPlayerToLeadboard()
@@ -91,8 +95,8 @@ public class Player : NetworkBehaviour
             namePlayerData = playerNameLocal,
             nameGameData = nameGameLocal,
             screenData = "null",
-            errorData = "null",
-            hitData = "null",
+            rightData = rightLocal,
+            wrongData = wrongLocal,
             playerScoreData = newScoreLocal
         };
 

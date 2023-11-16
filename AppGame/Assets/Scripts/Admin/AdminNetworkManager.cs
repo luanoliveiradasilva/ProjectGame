@@ -9,20 +9,21 @@ public class AdminNetworkManager : NetworkManager
 {
     public static AdminNetworkManager instance { get; private set; }
 
-    //TODO adiconar property talvez.
     private string playerName;
     private string playerScore;
     private string nameGame;
+    private int countRightProduct;
+    private int countWrongProduct;
 
     [Serializable]
     public class PlayerData
     {
-        public string namePlayer;
-        public string nameGame;
+        public string player;
+        public string game;
         public string screen;
-        public string error;
-        public string hit;
-        public string playerScore;
+        public int hit;
+        public int error;
+        public string time;
     }
 
     public List<PlayerData> playerDataList = new();
@@ -71,14 +72,18 @@ public class AdminNetworkManager : NetworkManager
         {
             playerName = item.namePlayerData;
             nameGame = item.nameGameData;
+            countRightProduct = item.rightData;
+            countWrongProduct = item.wrongData;
             playerScore = item.playerScoreData;
         }
 
         PlayerData playerData = new()
         {
-            namePlayer = playerName,
-            nameGame = nameGame,
-            playerScore = playerScore,
+            player = playerName,
+            game = nameGame,
+            hit = countRightProduct,
+            error = countWrongProduct,
+            time = playerScore,
         };
 
         playerDataList.Add(playerData);

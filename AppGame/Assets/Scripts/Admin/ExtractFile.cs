@@ -10,7 +10,7 @@ public class ExtractFile : MonoBehaviour
     [Tooltip("csv file name")]
     [SerializeField] private string fileName;
 
-    private readonly List<string[]> dataList = new();
+    private readonly List<object[]> dataList = new();
 
     public void ExportDataToCSV()
     {
@@ -27,11 +27,13 @@ public class ExtractFile : MonoBehaviour
     {
         foreach (var item in AdminNetworkManager.instance.playerDataList)
         {
-            string[] playerDataListArray =
+            object[] playerDataListArray =
             {
-                    item.namePlayer,
-                    item.nameGame,
-                    item.playerScore.ToString()
+                    item.player,
+                    item.game,
+                    item.hit,
+                    item.error,
+                    item.time.ToString()
             };
 
             dataList.Add(playerDataListArray);
@@ -51,7 +53,7 @@ public class ExtractFile : MonoBehaviour
 
     private StringBuilder SetOutputData()
     {
-        string[][] output = new string[dataList.Count][];
+        object[][] output = new object[dataList.Count][];
 
         for (int i = 0; i < output.Length; i++)
         {
