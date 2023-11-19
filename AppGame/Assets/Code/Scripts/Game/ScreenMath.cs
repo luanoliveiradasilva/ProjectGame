@@ -7,6 +7,14 @@ using UnityEngine.UI;
 public class ScreenMath : MonoBehaviour
 {
 
+    [Header("Range Value")]
+
+    [Tooltip("Minimum range for product values.")]
+    [SerializeField] private int minRange = 0;
+
+    [Tooltip("Maximum range for product values.")]
+    [SerializeField] private int maxRange = 100;
+
     [Header("Text value")]
     [Tooltip("Text value to sum")]
     [SerializeField] private TextMeshProUGUI[] textValue;
@@ -34,14 +42,20 @@ public class ScreenMath : MonoBehaviour
 
     void Start()
     {
-        for (var i = 0; i < textValue.Length; i++)
-        {
-            textValue[i].text = GameManager.instance.screenMemory[i].ToString();
-        }
+
+        SetValueInText();
 
         SetValueInButton();
 
         VerifyButtons();
+    }
+
+    private void SetValueInText()
+    {
+        for (var i = 0; i < textValue.Length; i++)
+        {
+            textValue[i].text = GameManager.instance.screenMemory[i].ToString();
+        }
     }
 
     private void SetTagInbutton()
@@ -68,8 +82,14 @@ public class ScreenMath : MonoBehaviour
             if (isRight)
             {
                 var getText = item.GetComponentInChildren<TextMeshProUGUI>();
-                
+
                 getText.text = GameManager.instance.screenMemory.AsQueryable().Sum().ToString();
+            }
+            else
+            {
+                var getText = item.GetComponentInChildren<TextMeshProUGUI>();
+                
+                getText.text = Random.Range(minRange, maxRange).ToString();
             }
         }
     }
