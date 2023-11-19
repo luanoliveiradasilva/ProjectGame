@@ -10,19 +10,26 @@ public class ScreenMath : MonoBehaviour
     [Header("Text value")]
     [Tooltip("Text value to sum")]
     [SerializeField] private TextMeshProUGUI[] textValue;
-    [SerializeField] private TextMeshProUGUI textValueButton;
 
     [Header("Buttons value")]
     [Tooltip("Text value to sum")]
     [SerializeField] private List<Button> buttonsMath = new();
 
+
+    [SerializeField] private int maxRangeToTag = 0;
+
     private int sumRightButton;
     private int sumWrongButton;
+
+    private readonly string tagRight = "Right";
+
+    private readonly string tagWrong = "Wrong";
+    private readonly string tagUntagged = "Untagged";
 
 
     private void Awake()
     {
-        VerifyButtons();
+        SetTagInbutton();
     }
 
     void Start()
@@ -32,8 +39,41 @@ public class ScreenMath : MonoBehaviour
             textValue[i].text = GameManager.instance.screenMemory[i].ToString();
         }
 
-        textValueButton.text = GameManager.instance.screenMemory.AsQueryable().Sum().ToString();
+        SetValueInButton();
+
+        VerifyButtons();
     }
+
+    private void SetTagInbutton()
+    {
+        int indexRandom = Random.Range(0, buttonsMath.Count);
+
+        buttonsMath[indexRandom].tag = tagRight;
+
+        foreach (var item in buttonsMath)
+        {
+            if (item.CompareTag(tagUntagged))
+            {
+                item.tag = tagWrong;
+            }
+        }
+    }
+
+    private void SetValueInButton()
+    {
+        foreach (var item in buttonsMath)
+        {
+            bool isRight = item.CompareTag(tagRight);
+
+            if (isRight)
+            {
+                var getText = item.GetComponentInChildren<TextMeshProUGUI>();
+                
+                getText.text = GameManager.instance.screenMemory.AsQueryable().Sum().ToString();
+            }
+        }
+    }
+
 
     private void VerifyButtons()
     {
