@@ -1,18 +1,32 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class ThridScreenManager : MonoBehaviour
+public class ThirdScreenManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+
+    [SerializeField] private int correctObject;
+    [SerializeField] private int incorrectObject;
+
+    private readonly int quantityProducts = 4;
+
+    public void ValuesCorrect(bool correct)
     {
-        
+        if (correct)
+        {
+            correctObject++;
+            SetPlayerPrefs(correctObject);
+        }
+        else
+        {
+            incorrectObject++;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void SetPlayerPrefs(int correctObject)
     {
-        
+        if (correctObject.Equals(quantityProducts))
+        {
+            PlayerPrefs.SetInt("Right", correctObject);
+            PlayerPrefs.SetInt("Wrong", incorrectObject);
+        }
     }
 }
