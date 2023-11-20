@@ -36,9 +36,9 @@ public class FirstScreenManager : MonoBehaviour
     private void Awake()
     {
         GetAllProducts();
+
         SetTagInProduct();
     }
-
 
 
     private void Start()
@@ -51,6 +51,7 @@ public class FirstScreenManager : MonoBehaviour
         AddValuesToProductTexts();
 
         OnSetValues();
+
 
     }
 
@@ -65,7 +66,7 @@ public class FirstScreenManager : MonoBehaviour
             product.Add(prod);
         }
     }
-
+    //TODO adicionar ao nível 1 o right a produtos fixos.
     private void SetTagInProduct()
     {
         ShuffleList(product);
@@ -108,11 +109,11 @@ public class FirstScreenManager : MonoBehaviour
                 for (int i = 0; i < child; i++)
                 {
 
-                   var nameProdList = listProducts.transform.GetChild(i).gameObject;  
+                    var nameProdList = listProducts.transform.GetChild(i).gameObject;
 
-                   var getText = nameProdList.GetComponent<TextMeshProUGUI>();
+                    var getText = nameProdList.GetComponent<TextMeshProUGUI>();
 
-                   getText.text = product[i].name;                    
+                    getText.text = product[i].name;
                 }
             }
         }
@@ -138,6 +139,7 @@ public class FirstScreenManager : MonoBehaviour
         }
     }
 
+
     private void OnSetValues()
     {
         foreach (var item in product)
@@ -154,6 +156,4 @@ public class FirstScreenManager : MonoBehaviour
             }
         }
     }
-
-
 }

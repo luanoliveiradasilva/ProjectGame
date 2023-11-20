@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 
 public class DragAndDropObject : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
-    [SerializeField] private Canvas canvas;
+    [SerializeField] private Canvas LevelCanvas;
 
     private RectTransform rectTransform;
     private CanvasGroup canvasGroup;
@@ -23,7 +23,7 @@ public class DragAndDropObject : MonoBehaviour, IBeginDragHandler, IEndDragHandl
 
     public void OnDrag(PointerEventData eventData)
     {
-        rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
+        rectTransform.anchoredPosition += eventData.delta / LevelCanvas.scaleFactor;
     }
 
     public void OnEndDrag(PointerEventData eventData)
