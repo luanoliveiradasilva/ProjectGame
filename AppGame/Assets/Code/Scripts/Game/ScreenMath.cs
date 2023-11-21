@@ -23,8 +23,9 @@ public class ScreenMath : MonoBehaviour
     [Tooltip("Text value to sum")]
     [SerializeField] private List<Button> buttonsMath = new();
 
-
     [SerializeField] private int maxRangeToTag = 0;
+
+    private SaveMemory saveMemory;
 
     private int sumRightButton;
     private int sumWrongButton;
@@ -37,6 +38,8 @@ public class ScreenMath : MonoBehaviour
 
     private void Awake()
     {
+        saveMemory = FindObjectOfType<SaveMemory>();
+        
         SetTagInbutton();
     }
 
@@ -54,7 +57,7 @@ public class ScreenMath : MonoBehaviour
     {
         for (var i = 0; i < textValue.Length; i++)
         {
-            textValue[i].text = GameManager.instance.screenMemory[i].ToString();
+            textValue[i].text = saveMemory.screenMemory[i].ToString();
         }
     }
 
@@ -83,7 +86,7 @@ public class ScreenMath : MonoBehaviour
             {
                 var getText = item.GetComponentInChildren<TextMeshProUGUI>();
 
-                getText.text = GameManager.instance.screenMemory.AsQueryable().Sum().ToString();
+                getText.text = saveMemory.screenMemory.AsQueryable().Sum().ToString();
             }
             else
             {
@@ -93,7 +96,6 @@ public class ScreenMath : MonoBehaviour
             }
         }
     }
-
 
     private void VerifyButtons()
     {
@@ -109,7 +111,7 @@ public class ScreenMath : MonoBehaviour
                 item.onClick.AddListener(WrongFunction);
         }
     }
-    //TODO verificar a possibilidade de não somar, mas sim só adicionar o valor 1 e adicionar ao playerprefs. Verificar também se o player prefs é afetado pela somando valores constamente mesmo depois de enviar na tela anterior.
+
     private void RightFunction()
     {
         sumRightButton++;

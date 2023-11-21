@@ -24,6 +24,8 @@ public class FirstScreenManager : MonoBehaviour
     [Tooltip("Object to manage list of products to remember.")]
     [SerializeField] private GameObject listProducts;
 
+    private SaveMemory saveMemory;
+
     private readonly List<GameObject> product = new();
     private readonly List<TextMeshProUGUI> valueProducts = new();
 
@@ -35,6 +37,8 @@ public class FirstScreenManager : MonoBehaviour
 
     private void Awake()
     {
+        saveMemory = FindObjectOfType<SaveMemory>();
+        
         GetAllProducts();
 
         SetTagInProduct();
@@ -152,7 +156,7 @@ public class FirstScreenManager : MonoBehaviour
 
                 var getText = valueProductRight.GetComponent<TextMeshProUGUI>();
 
-                GameManager.instance.SetValueMemory(int.Parse(getText.text));
+                saveMemory.SetValueMemory(int.Parse(getText.text));
             }
         }
     }

@@ -31,7 +31,6 @@ namespace Scripts.Game
             isExecute = true;
         }
 
-//TODO verificar a possibilidade de concluir o jogo so quando terminar alguma cena, ao invés de ter o botão para, além disso, deve enviar para o servidor antes de mudar de cena ou painel.
         public void StopTimeGame()
         {
             DisplayTimeGameToLeadboardUI();
@@ -46,7 +45,7 @@ namespace Scripts.Game
             }
         }
 
-//TODO Tirar o time do UI.
+        //TODO Tirar o time do UI.
         private void DisplayTimeGame(float timeToDisplay)
         {
             if (timeToDisplay > 0.0f)
