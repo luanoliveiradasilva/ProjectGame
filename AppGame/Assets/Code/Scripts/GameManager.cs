@@ -22,8 +22,8 @@ public class GameManager : MonoBehaviour
     {
         for (int index = 0; index < showGame.Length; index++)
         {
-            int indiceBotao = index;
-            showGame[index].onClick.AddListener(() => GetLevelName(indiceBotao));
+            int indexButton = index;
+            showGame[index].onClick.AddListener(() => GetLevelName(indexButton));
         }
     }
 

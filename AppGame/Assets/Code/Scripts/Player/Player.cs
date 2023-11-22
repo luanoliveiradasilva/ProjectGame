@@ -67,7 +67,7 @@ public class Player : NetworkBehaviour
 
     private void ConvertDataPlayers()
     {
-        float getScore = PlayerPrefs.GetFloat("Score");
+        float getScore = PlayerPrefs.GetFloat("Time");
         float minutes = Mathf.FloorToInt(getScore / 60);
         float seconts = Mathf.FloorToInt(getScore % 60);
 
@@ -76,6 +76,9 @@ public class Player : NetworkBehaviour
         nameGameLocal = PlayerPrefs.GetString("NameGame");
         rightLocal = PlayerPrefs.GetInt("Right");
         wrongLocal = PlayerPrefs.GetInt("Wrong");
+
+
+        Debug.Log($"Debug : {playerNameLocal}\n{newScoreLocal}\n{nameGameLocal}\n{rightLocal}\n{wrongLocal}");
     }
 
     private void SetDataPlayerToLeadboard()

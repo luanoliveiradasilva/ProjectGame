@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Scripts.Game;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -25,11 +26,16 @@ public class ScreenMath : MonoBehaviour
 
     [SerializeField] private int maxRangeToTag = 0;
 
+    [SerializeField] private GameObject screenVictory;
+    [SerializeField] private GameObject screenLevel;
+
     private SaveMemory saveMemory;
+
+    private TimeGame timeGame;
 
     private int sumRightButton;
     private int sumWrongButton;
-
+    private bool isVictory;
     private readonly string tagRight = "Right";
 
     private readonly string tagWrong = "Wrong";
@@ -39,7 +45,8 @@ public class ScreenMath : MonoBehaviour
     private void Awake()
     {
         saveMemory = FindObjectOfType<SaveMemory>();
-        
+        timeGame = FindObjectOfType<TimeGame>();
+
         SetTagInbutton();
     }
 
@@ -91,7 +98,7 @@ public class ScreenMath : MonoBehaviour
             else
             {
                 var getText = item.GetComponentInChildren<TextMeshProUGUI>();
-                
+
                 getText.text = Random.Range(minRange, maxRange).ToString();
             }
         }
@@ -115,12 +122,28 @@ public class ScreenMath : MonoBehaviour
     private void RightFunction()
     {
         sumRightButton++;
+
         PlayerPrefs.SetInt("Right", sumRightButton);
         PlayerPrefs.SetInt("Wrong", sumWrongButton);
+
+        timeGame.StopTimeGame(false);
+
+        isVictory = true;
+
+        ActiveVictory(isVictory);
     }
 
     private void WrongFunction()
     {
         sumWrongButton++;
+    }
+
+    private void ActiveVictory(bool isVictory)
+    {
+        if (isVictory)
+        {
+            screenLevel.SetActive(false);
+            screenVictory.SetActive(true);
+        }
     }
 }

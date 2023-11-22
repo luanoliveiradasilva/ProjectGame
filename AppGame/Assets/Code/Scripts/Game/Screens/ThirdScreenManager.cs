@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Scripts.Game;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -10,10 +11,17 @@ public class ThirdScreenManager : MonoBehaviour
     [SerializeField] private int correctObject;
     [SerializeField] private int incorrectObject;
 
+    private TimeGame timeGame;
+
     private readonly int quantityProducts = 4;
 
     private readonly string tagRight = "Right";
 
+
+    private void Awake()
+    {
+        timeGame = FindObjectOfType<TimeGame>();
+    }
 
     private void Start()
     {
@@ -102,6 +110,8 @@ public class ThirdScreenManager : MonoBehaviour
         {
             PlayerPrefs.SetInt("Right", correctObject);
             PlayerPrefs.SetInt("Wrong", incorrectObject);
+            
+            timeGame.StopTimeGame(false);
         }
     }
 }

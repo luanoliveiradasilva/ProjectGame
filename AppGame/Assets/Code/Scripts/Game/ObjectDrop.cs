@@ -1,3 +1,4 @@
+using Scripts.Game;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -11,9 +12,19 @@ public class ObjectDrop : MonoBehaviour, IDropHandler
     [Tooltip("Sum of incorrect products")]
     [SerializeField] private int incorrectProduct;
 
+    [SerializeField] private GameObject screenVictory;
+    [SerializeField] private GameObject screenLevel;
+
+    private TimeGame timeGame;
+    private bool isVictory;
+    private readonly int quantityProducts = 4;
     private bool isRight;
 
-    private readonly int quantityProducts = 4;
+
+    private void Start()
+    {
+        timeGame = FindObjectOfType<TimeGame>();
+    }
 
     public void OnDrop(PointerEventData eventData)
     {
@@ -47,6 +58,21 @@ public class ObjectDrop : MonoBehaviour, IDropHandler
         {
             PlayerPrefs.SetInt("Right", correctProduct);
             PlayerPrefs.SetInt("Wrong", incorrectProduct);
+
+            timeGame.StopTimeGame(false);
+
+            isVictory = true;
+            
+            ActiveVictory(isVictory);
+        }
+    }
+
+    private void ActiveVictory(bool isVictory)
+    {
+        if (isVictory)
+        {
+            screenLevel.SetActive(false);
+            screenVictory.SetActive(true);
         }
     }
 }
