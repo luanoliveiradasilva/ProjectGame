@@ -1,6 +1,5 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class LoginUI : MonoBehaviour
 {
@@ -8,18 +7,12 @@ public class LoginUI : MonoBehaviour
     [Tooltip("input Name player")]
     [SerializeField] private TMP_InputField playerNameInput;
 
-    [Tooltip("Start button and set name player")]
-    [SerializeField] private Button setNameButton;
-
-
-    void Start()
+    private void Start()
     {
-        if (setNameButton != null)
-        {
-            setNameButton.onClick.AddListener(SetPlayerName);
-        }
+        AdminNetworkManager.instance.GetStartDiscovery();
     }
 
+    //Adicionar o discovery antes, para chamar o ip antes.
     public void SetPlayerName()
     {
         string newName = playerNameInput.text;
@@ -27,8 +20,6 @@ public class LoginUI : MonoBehaviour
         if (!string.IsNullOrEmpty(newName))
         {
             PlayerPrefs.SetString("Player", newName);
-            AdminNetworkManager.instance.GetStartDiscovery();
         }
     }
-    
 }

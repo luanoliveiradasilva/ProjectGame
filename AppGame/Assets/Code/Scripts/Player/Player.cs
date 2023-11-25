@@ -20,6 +20,10 @@ public class Player : NetworkBehaviour
     private string newScoreLocal;
     private string playerNameLocal;
 
+    private float getTimeGame;
+    private float newTimeGame;
+    private string newTime;
+
 
     [Serializable]
     public class PlayerDatas
@@ -56,41 +60,86 @@ public class Player : NetworkBehaviour
     #region Client
     public override void OnStartClient()
     {
-        ConvertDataPlayers();
 
         SetDataPlayerToLeadboard();
 
-        SetDataPlayerToAnalize();
-
         InstantiatePlayerDataInTheUI();
-    }
-
-    private void ConvertDataPlayers()
-    {
-        float getScore = PlayerPrefs.GetFloat("Time");
-        float minutes = Mathf.FloorToInt(getScore / 60);
-        float seconts = Mathf.FloorToInt(getScore % 60);
-
-        playerNameLocal = PlayerPrefs.GetString("Player");
-        newScoreLocal = string.Format("{0:00}:{1:00}", minutes, seconts);
-        nameGameLocal = PlayerPrefs.GetString("NameGame");
-        rightLocal = PlayerPrefs.GetInt("Right");
-        wrongLocal = PlayerPrefs.GetInt("Wrong");
-
-
-        Debug.Log($"Debug : {playerNameLocal}\n{newScoreLocal}\n{nameGameLocal}\n{rightLocal}\n{wrongLocal}");
     }
 
     private void SetDataPlayerToLeadboard()
     {
         CmdSetPlayerNames(playerNameLocal);
-        CmdSetPlayerScore(newScoreLocal);
-        CmdSetNameGame(nameGameLocal);
+        CmdSetPlayerTime(newScoreLocal);
     }
 
-    private void SetDataPlayerToAnalize()
+
+    private void InstantiatePlayerDataInTheUI()
+    {
+        playerUIObject = Instantiate(playerUIPrefab, AdminUI.GetPlayersPanel());
+        playerUI = playerUIObject.GetComponent<PlayerUI>();
+
+        /* OnPlayerNameChanged = playerUI.OnPlayerNameChanged; */
+        /* OnPlayerScoreGameChanged = playerUI.OnTimeGameChanged; */
+
+        /* OnPlayerNameChanged.Invoke(playerName); */
+        /*  OnPlayerScoreGameChanged.Invoke(playerScore); */
+    }
+
+    public override void OnStopClient()
+    {
+        OnPlayerNameChanged = null;
+        OnPlayerScoreGameChanged = null;
+
+        Destroy(playerUIObject);
+    }
+
+    public void ExecutartComando()
     {
 
+        playerNameLocal = PlayerPrefs.GetString("Player");
+        nameGameLocal = PlayerPrefs.GetString("NameGame");
+        rightLocal = PlayerPrefs.GetInt("Right");
+        wrongLocal = PlayerPrefs.GetInt("Wrong");
+
+        getTimeGame = PlayerPrefs.GetFloat("Time");
+
+        newTimeGame += getTimeGame;
+
+        float minutes = Mathf.FloorToInt(newTimeGame / 60);
+        float seconts = Mathf.FloorToInt(newTimeGame % 60);
+
+        newScoreLocal = string.Format("{0:00}:{1:00}", minutes, seconts);
+
+        SetPlayerData();
+
+        newTime = string.Format("{0:00}:{1:00}", minutes, seconts);
+
+        CmdBotaoClicado(newTime, playerNameLocal);
+    }
+
+    [Command(requiresAuthority = false)]
+    private void CmdBotaoClicado(string newTime, string playerNameLocal)
+    {
+        RpcReceive(newTime, playerNameLocal);
+    }
+
+    [ClientRpc]
+    void RpcReceive(string newTimeGame, string playerNameLocal)
+    {
+        if (playerUIObject.TryGetComponent<PlayerUI>(out playerUI))
+        {
+            playerUI.OnPlayerNameChanged(playerNameLocal);
+            playerUI.OnTimeGameChanged(newTimeGame);
+        }
+        else
+        {
+            Debug.Log("Objeto PlayerUI UI não encontrado.");
+        }
+    }
+
+
+    private void SetPlayerData()
+    {
         List<PlayerDatas> playerDatas = new();
 
         PlayerDatas playerSetData = new()
@@ -105,37 +154,16 @@ public class Player : NetworkBehaviour
 
         playerDatas.Add(playerSetData);
 
-        CmdSetPlayerData(playerDatas);
+        RpcCommandSet(playerDatas);
     }
 
-    private void InstantiatePlayerDataInTheUI()
+    [Command]
+    private void RpcCommandSet(List<PlayerDatas> playerDatas)
     {
-        playerUIObject = Instantiate(playerUIPrefab, AdminUI.GetPlayersPanel());
-        playerUI = playerUIObject.GetComponent<PlayerUI>();
-
-        OnPlayerNameChanged = playerUI.OnPlayerNameChanged;
-        OnPlayerScoreGameChanged = playerUI.OnTimeGameChanged;
-
-        OnPlayerNameChanged.Invoke(playerName);
-        OnPlayerScoreGameChanged.Invoke(playerScore);
-    }
-
-    public override void OnStopClient()
-    {
-        OnPlayerNameChanged = null;
-        OnPlayerScoreGameChanged = null;
-
-        Destroy(playerUIObject);
+        AdminNetworkManager.instance.SetPlayerData(playerDatas);
     }
 
     #endregion
-
-    //Name game
-    [Command]
-    private void CmdSetNameGame(string nameGame) => RpcSetNameGame(nameGame);
-
-    [ClientRpc]
-    private void RpcSetNameGame(string nameGame) => gameName = nameGame;
 
     //Name Player
     [Command]
@@ -146,15 +174,17 @@ public class Player : NetworkBehaviour
 
     //Score Player
     [Command]
-    private void CmdSetPlayerScore(string newScore) => RpcSetPlayerScore(newScore);
+    private void CmdSetPlayerTime(string newScore) => RpcSetPlayerScore(newScore);
 
     [ClientRpc]
     private void RpcSetPlayerScore(string newScore) => playerScore = newScore;
 
-    //Set data player 
+    //Name game
     [Command]
-    private void CmdSetPlayerData(List<PlayerDatas> playerDatas)
-    {
-        AdminNetworkManager.instance.SetPlayerData(playerDatas);
-    }
+    private void CmdSetNameGame(string nameGame) => RpcSetNameGame(nameGame);
+
+    [ClientRpc]
+    private void RpcSetNameGame(string nameGame) => gameName = nameGame;
+
 }
+

@@ -8,7 +8,6 @@ Library: D:\Documents\Projetos\ProjectGame\AppGame\Temp\BurstOutput\tempburstlib
 --float-precision=Standard
 --target-framework=NetFramework
 --assembly-defines=UnityEngine;
---assembly-defines=Assembly-CSharp-firstpass;
 --assembly-defines=Assembly-CSharp;
 --assembly-defines=Unity.2D.IK.Runtime;
 --assembly-defines=Unity.RenderPipelines.Core.Runtime;
@@ -124,7 +123,6 @@ Library: D:\Documents\Projetos\ProjectGame\AppGame\Temp\BurstOutput\tempburstlib
 --target-framework=NetFramework
 --float-mode=Fast
 --assembly-defines=UnityEngine;
---assembly-defines=Assembly-CSharp-firstpass;
 --assembly-defines=Assembly-CSharp;
 --assembly-defines=Unity.2D.IK.Runtime;
 --assembly-defines=Unity.RenderPipelines.Core.Runtime;
