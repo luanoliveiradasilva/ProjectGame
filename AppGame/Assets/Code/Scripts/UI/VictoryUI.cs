@@ -1,4 +1,3 @@
-using Mirror;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,10 +7,23 @@ public class VictoryUI : MonoBehaviour
 
     private Player playerTeste;
 
-    private void Start()
+    private void Awake()
     {
-        playerTeste = FindObjectOfType<Player>();
-        button.onClick.AddListener(ExecutartComando);
+        try
+        {
+            bool isExistPlayer = AdminNetworkManager.instance.SetServerPlayer();
+
+            if (isExistPlayer)
+            {
+                playerTeste = FindObjectOfType<Player>();
+                button.onClick.AddListener(ExecutartComando);
+                Debug.Log($"Victory!");
+            }
+        }
+        catch (System.Exception ex)
+        {
+            Debug.Log($"Defeat! {ex.Message}");
+        }
     }
 
     private void ExecutartComando()

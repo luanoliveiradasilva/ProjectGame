@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 
@@ -6,13 +8,15 @@ public class LoginUI : MonoBehaviour
     [Header("Login Player")]
     [Tooltip("input Name player")]
     [SerializeField] private TMP_InputField playerNameInput;
+    private bool isSetPlayerName;
+    [SerializeField] private GameObject loginPanel;
+    [SerializeField] private GameObject MainMenu;
 
     private void Start()
     {
         AdminNetworkManager.instance.GetStartDiscovery();
     }
 
-    //Adicionar o discovery antes, para chamar o ip antes.
     public void SetPlayerName()
     {
         string newName = playerNameInput.text;
@@ -20,6 +24,42 @@ public class LoginUI : MonoBehaviour
         if (!string.IsNullOrEmpty(newName))
         {
             PlayerPrefs.SetString("Player", newName);
+
+            isSetPlayerName = true;
+
+            Debug.Log($"Debug player online: {isSetPlayerName}");
+
+            if (isSetPlayerName)
+            {
+                SetServe();
+            }
         }
+    }
+
+    private async void SetServe()
+    {
+        try
+        {
+            bool isActivatedUser = AdminNetworkManager.instance.SetServerPlayer();
+
+            await Task.Delay(System.TimeSpan.FromSeconds(1f));
+            
+
+            if (isActivatedUser)
+            {
+                ReturnScenesGame();
+                Debug.Log($"Player successfully logged in!");
+            }
+        }
+        catch (System.Exception ex)
+        {
+            Debug.Log($"Player not logged in!" + ex.Message);
+        }
+    }
+
+    void ReturnScenesGame()
+    {
+        loginPanel.SetActive(false);
+        MainMenu.SetActive(true);
     }
 }

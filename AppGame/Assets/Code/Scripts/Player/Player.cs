@@ -95,7 +95,6 @@ public class Player : NetworkBehaviour
 
     public void ExecutartComando()
     {
-
         playerNameLocal = PlayerPrefs.GetString("Player");
         nameGameLocal = PlayerPrefs.GetString("NameGame");
         rightLocal = PlayerPrefs.GetInt("Right");

@@ -62,6 +62,16 @@ public class AdminNetworkManager : NetworkManager
         StartHost();
         networkDiscovery.AdvertiseServer();
     }
+
+    public bool SetServerPlayer()
+    {
+        StartClient();
+
+        bool isActivePlayerInServer = true;
+
+        return isActivePlayerInServer;
+    }
+
     #endregion
 
     #region Data

@@ -16,19 +16,23 @@ public class ObjectDrop : MonoBehaviour, IDropHandler
     [SerializeField] private GameObject screenLevel;
 
     private TimeGame timeGame;
+    private TutorialScreen tutorialScreen;
+
     private bool isVictory;
     private readonly int quantityProducts = 4;
     private bool isRight;
-
+    private int onTriggerEnterProduct;
+    private string nameObject;
 
     private void Start()
     {
         timeGame = FindObjectOfType<TimeGame>();
+        tutorialScreen = FindObjectOfType<TutorialScreen>();
     }
 
     public void OnDrop(PointerEventData eventData)
     {
-        if (eventData.pointerDrag != null && isRight)
+        if (eventData.pointerDrag != null && isRight || tutorialScreen.IsTutorialEnabled())
         {
             eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition = GetComponent<RectTransform>().anchoredPosition;
         }
@@ -36,6 +40,15 @@ public class ObjectDrop : MonoBehaviour, IDropHandler
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if (other.CompareTag("Untagged") && nameObject != other.name)
+        {
+            onTriggerEnterProduct++;
+
+            tutorialScreen.OnTriggerEnterProduct(onTriggerEnterProduct);
+
+            nameObject = other.name;
+        }
+
         if (other.CompareTag("Right"))
         {
             correctProduct++;
@@ -62,7 +75,7 @@ public class ObjectDrop : MonoBehaviour, IDropHandler
             timeGame.StopTimeGame(false);
 
             isVictory = true;
-            
+
             ActiveVictory(isVictory);
         }
     }
