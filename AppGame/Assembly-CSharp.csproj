@@ -88,6 +88,7 @@
     <Compile Include="Assets\Src\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextInfoDebugTool.cs" />
     <Compile Include="Assets\Src\TextMesh Pro\Examples &amp; Extras\Scripts\CameraController.cs" />
     <Compile Include="Assets\Code\Scripts\Admin\ExtractFile.cs" />
+    <Compile Include="Assets\Code\Scripts\Game\AnimationTutorial.cs" />
     <Compile Include="Assets\Code\Scripts\Game\Screens\FirstScreenManager.cs" />
     <Compile Include="Assets\Code\Scripts\Game\Screens\GameObjectDrop.cs" />
     <Compile Include="Assets\Src\Plugins\Demigiant\DOTween\Modules\DOTweenModuleAudio.cs" />
@@ -120,6 +121,8 @@
     <Compile Include="Assets\Src\TextMesh Pro\Examples &amp; Extras\Scripts\VertexColorCycler.cs" />
     <Compile Include="Assets\Code\Scripts\UI\Leadboard.cs" />
     <Compile Include="Assets\Code\Scripts\Player\PlayerUI.cs" />
+    <Compile Include="Assets\Code\Scripts\Game\Screens\FirstScreen\AnimationProduct.cs" />
+    <Compile Include="Assets\Code\Scripts\Game\UIScreenManager.cs" />
     <Compile Include="Assets\Code\Scripts\Game\Screens\ThirdScreenManager.cs" />
     <Compile Include="Assets\Code\Scripts\Player\PlayerTeste.cs" />
     <Compile Include="Assets\Src\TextMesh Pro\Examples &amp; Extras\Scripts\DropdownSample.cs" />

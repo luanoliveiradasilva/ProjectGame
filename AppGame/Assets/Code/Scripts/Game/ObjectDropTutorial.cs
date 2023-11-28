@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 public class ObjectDropTutorial : MonoBehaviour, IDropHandler
 {
 
-    private int onTriggerEnterProduct;
+    public int onTriggerEnterProduct;
 
     private string nameObject;
 
@@ -25,7 +25,7 @@ public class ObjectDropTutorial : MonoBehaviour, IDropHandler
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Untagged"))
+        if (other.CompareTag("Tutorial"))
         {
             onTriggerEnterProduct++;
 

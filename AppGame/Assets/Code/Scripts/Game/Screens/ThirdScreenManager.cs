@@ -1,7 +1,5 @@
-using System.Collections.Generic;
 using Scripts.Game;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class ThirdScreenManager : MonoBehaviour
 {

@@ -25,7 +25,7 @@ public class TutorialScreen : MonoBehaviour
 
     void Start()
     {
-        isTutotial = tutorial.CompareTag("Tutorial");
+        isTutotial = tutorial.CompareTag("Basket Tutorial");
 
         startTime.onClick.AddListener(StartTimeGame);
     }
