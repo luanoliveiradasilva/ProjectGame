@@ -14,25 +14,21 @@ public class ObjectDrop : MonoBehaviour, IDropHandler
 
     [SerializeField] private GameObject screenVictory;
     [SerializeField] private GameObject screenLevel;
-
     private TimeGame timeGame;
-    private TutorialScreen tutorialScreen;
-
     private bool isVictory;
     private readonly int quantityProducts = 4;
     private bool isRight;
-    private int onTriggerEnterProduct;
-    private string nameObject;
+    private string isName;
+
 
     private void Start()
     {
         timeGame = FindObjectOfType<TimeGame>();
-        tutorialScreen = FindObjectOfType<TutorialScreen>();
     }
 
     public void OnDrop(PointerEventData eventData)
     {
-        if (eventData.pointerDrag != null && isRight || tutorialScreen.IsTutorialEnabled())
+        if (eventData.pointerDrag != null && isRight)
         {
             eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition = GetComponent<RectTransform>().anchoredPosition;
         }
@@ -40,16 +36,8 @@ public class ObjectDrop : MonoBehaviour, IDropHandler
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Untagged") && nameObject != other.name)
-        {
-            onTriggerEnterProduct++;
 
-            tutorialScreen.OnTriggerEnterProduct(onTriggerEnterProduct);
-
-            nameObject = other.name;
-        }
-
-        if (other.CompareTag("Right"))
+        if (other.CompareTag("Right") && isName != other.name)
         {
             correctProduct++;
 
@@ -58,11 +46,13 @@ public class ObjectDrop : MonoBehaviour, IDropHandler
             isRight = true;
         }
 
-        if (other.CompareTag("Wrong"))
+        if (other.CompareTag("Wrong") && isName != other.name)
         {
             incorrectProduct++;
             isRight = false;
         }
+
+        isName = other.name;
     }
 
     private void SetPlayerPrefs()

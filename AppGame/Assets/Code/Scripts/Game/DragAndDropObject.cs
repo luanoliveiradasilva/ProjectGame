@@ -1,4 +1,5 @@
 
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -8,11 +9,18 @@ public class DragAndDropObject : MonoBehaviour, IBeginDragHandler, IEndDragHandl
 
     private RectTransform rectTransform;
     private CanvasGroup canvasGroup;
+    [SerializeField] private float fadeTime = 1f;
 
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
+    }
+
+    private void Start()
+    {
+        transform.localScale = Vector3.zero;
+        transform.DOScale(1f, fadeTime).SetEase(Ease.OutBounce);
     }
 
     public void OnBeginDrag(PointerEventData eventData)

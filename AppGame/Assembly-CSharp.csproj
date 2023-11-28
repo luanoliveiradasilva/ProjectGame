@@ -112,6 +112,7 @@
     <Compile Include="Assets\Src\TextMesh Pro\Examples &amp; Extras\Scripts\SkewTextExample.cs" />
     <Compile Include="Assets\Src\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_A.cs" />
     <Compile Include="Assets\Src\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshSpawner.cs" />
+    <Compile Include="Assets\Code\Scripts\UI\TutorialUI.cs" />
     <Compile Include="Assets\Src\Plugins\Demigiant\DOTween\Modules\DOTweenModuleEPOOutline.cs" />
     <Compile Include="Assets\Src\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_B.cs" />
     <Compile Include="Assets\Src\Plugins\Demigiant\DOTween\Modules\DOTweenModulePhysics.cs" />
@@ -130,6 +131,7 @@
     <Compile Include="Assets\Src\TextMesh Pro\Examples &amp; Extras\Scripts\EnvMapAnimator.cs" />
     <Compile Include="Assets\Src\TextMesh Pro\Examples &amp; Extras\Scripts\TMPro_InstructionOverlay.cs" />
     <Compile Include="Assets\Code\Scripts\Game\TimeGame.cs" />
+    <Compile Include="Assets\Code\Scripts\Game\ObjectDropTutorial.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Mirror\Plugins\Mono.Cecil\Mono.CecilX.dll" />

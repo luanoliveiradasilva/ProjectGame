@@ -139,7 +139,7 @@ public class FirstScreenManager : MonoBehaviour
     {
         for (int i = 0; i < valueProducts.Count; i++)
         {
-            valueProducts[i].text = "€ "+Random.Range(minRange, maxRange).ToString();
+            valueProducts[i].text = Random.Range(minRange, maxRange).ToString();
         }
     }
 
