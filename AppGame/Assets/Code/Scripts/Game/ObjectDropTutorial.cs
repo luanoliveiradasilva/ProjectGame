@@ -25,7 +25,7 @@ public class ObjectDropTutorial : MonoBehaviour, IDropHandler
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Tutorial"))
+        if (other.CompareTag("Tutorial") && nameObject != other.name)
         {
             onTriggerEnterProduct++;
 

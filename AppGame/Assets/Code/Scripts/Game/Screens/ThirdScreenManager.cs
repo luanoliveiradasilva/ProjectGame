@@ -89,9 +89,9 @@ public class ThirdScreenManager : MonoBehaviour
         }
     }
 
-    public void ValuesCorrect(bool correct)
+    public void ValuesCorrect(bool isNameIqualsToGameobject)
     {
-        if (correct)
+        if (isNameIqualsToGameobject)
         {
             correctObject++;
             SetPlayerPrefs(correctObject);

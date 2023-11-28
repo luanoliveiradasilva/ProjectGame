@@ -12,9 +12,9 @@ public class GameObjectDrop : MonoBehaviour, IDropHandler
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        bool correct = other.gameObject.name == gameObject.name;
+        bool isNameIqualsToGameobject = other.gameObject.name == gameObject.name;
 
-        correctObject.ValuesCorrect(correct);
+        correctObject.ValuesCorrect(isNameIqualsToGameobject);
     }
 
     public void OnDrop(PointerEventData eventData)
