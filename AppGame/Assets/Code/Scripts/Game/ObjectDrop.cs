@@ -36,6 +36,9 @@ public class ObjectDrop : MonoBehaviour, IDropHandler
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        var teste = other.transform.position;
+
+        Debug.Log("teste "+teste);
 
         if (other.CompareTag("Right") && isName != other.name)
         {
@@ -44,15 +47,15 @@ public class ObjectDrop : MonoBehaviour, IDropHandler
             SetPlayerPrefs();
 
             isRight = true;
+
+            isName = other.name;
         }
 
-        if (other.CompareTag("Wrong") && isName != other.name)
+        if (other.CompareTag("Wrong"))
         {
             incorrectProduct++;
             isRight = false;
-        }
-
-        isName = other.name;
+        }        
     }
 
     private void SetPlayerPrefs()

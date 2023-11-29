@@ -55,8 +55,6 @@ public class FirstScreenManager : MonoBehaviour
         AddValuesToProductTexts();
 
         OnSetValues();
-
-
     }
 
     private void GetAllProducts()
