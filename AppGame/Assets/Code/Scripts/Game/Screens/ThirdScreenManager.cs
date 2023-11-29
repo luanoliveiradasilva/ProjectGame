@@ -8,9 +8,11 @@ public class ThirdScreenManager : MonoBehaviour
     [SerializeField] private Transform[] placeHoldersGameObject;
     [SerializeField] private int correctObject;
     [SerializeField] private int incorrectObject;
+    [SerializeField] private GameObject screenVictory;
+    [SerializeField] private GameObject screenLevel;
 
     private TimeGame timeGame;
-
+    private bool isVictory;
     private readonly int quantityProducts = 4;
 
     private readonly string tagRight = "Right";
@@ -108,8 +110,21 @@ public class ThirdScreenManager : MonoBehaviour
         {
             PlayerPrefs.SetInt("Right", correctObject);
             PlayerPrefs.SetInt("Wrong", incorrectObject);
-            
+
             timeGame.StopTimeGame(false);
+
+            isVictory = true;
+
+            ActiveVictory(isVictory);
+        }
+    }
+
+    private void ActiveVictory(bool isVictory)
+    {
+        if (isVictory)
+        {
+            screenLevel.SetActive(false);
+            screenVictory.SetActive(true);
         }
     }
 }

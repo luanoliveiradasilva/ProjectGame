@@ -15,7 +15,7 @@ public class ObjectDropTutorial : MonoBehaviour, IDropHandler
         tutorialScreen = FindObjectOfType<TutorialScreen>();
     }
 
-     public void OnDrop(PointerEventData eventData)
+    public void OnDrop(PointerEventData eventData)
     {
         if (eventData.pointerDrag != null && tutorialScreen.IsTutorialEnabled())
         {
@@ -32,6 +32,12 @@ public class ObjectDropTutorial : MonoBehaviour, IDropHandler
             tutorialScreen.OnTriggerEnterProduct(onTriggerEnterProduct);
 
             nameObject = other.name;
+        }
+
+        if (other.name.Equals(gameObject.name) && other.CompareTag("Tutorial Screen 3"))
+        {
+            onTriggerEnterProduct++;
+            tutorialScreen.OnTriggerEnterEquals(onTriggerEnterProduct);
         }
     }
 }

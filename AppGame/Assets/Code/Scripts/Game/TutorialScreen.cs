@@ -1,3 +1,4 @@
+using System;
 using Scripts.Game;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,7 +17,7 @@ public class TutorialScreen : MonoBehaviour
     [SerializeField] private bool isTutotial;
 
     [SerializeField] private Button enableButton;
-
+    public  int valueOnTrigger;
 
     private void Awake()
     {
@@ -25,7 +26,10 @@ public class TutorialScreen : MonoBehaviour
 
     void Start()
     {
-        isTutotial = tutorial.CompareTag("Basket Tutorial");
+        if (tutorial.CompareTag("Basket Tutorial") || tutorial.name.Equals("Tutorial Screen 3"))
+        {
+            isTutotial = true;
+        }
 
         startTime.onClick.AddListener(StartTimeGame);
     }
@@ -39,12 +43,32 @@ public class TutorialScreen : MonoBehaviour
     {
         if (onTriggerEnterProduct >= 3)
         {
-            enableButton.interactable = true;
+            InteractableButton();
         }
+    }
+
+    public void OnTriggerEnterEquals(int onTriggerEnterProduct)
+    {
+        valueOnTrigger += onTriggerEnterProduct;
+
+        if (valueOnTrigger >= 3)
+        {
+            InteractableButton();
+        }
+    }
+
+    public void OnClickedButtonIsRight()
+    {
+        InteractableButton();
     }
 
     public bool IsTutorialEnabled()
     {
         return isTutotial;
+    }
+
+    private void InteractableButton()
+    {
+        enableButton.interactable = true;
     }
 }

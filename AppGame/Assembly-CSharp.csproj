@@ -74,6 +74,7 @@
     <Compile Include="Assets\Code\Scripts\Game\ObjectDrop.cs" />
     <Compile Include="Assets\Src\Plugins\Demigiant\DOTween\Modules\DOTweenModuleUnityVersion.cs" />
     <Compile Include="Assets\Src\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_DigitValidator.cs" />
+    <Compile Include="Assets\Code\Scripts\Game\Screens\SecondScreen\AnimationScreenMath.cs" />
     <Compile Include="Assets\Code\Scripts\Game\SaveMemory.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\Src\TextMesh Pro\Examples &amp; Extras\Scripts\ShaderPropAnimator.cs" />
