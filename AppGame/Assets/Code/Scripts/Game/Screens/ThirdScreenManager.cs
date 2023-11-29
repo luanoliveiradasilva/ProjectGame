@@ -1,5 +1,7 @@
 using Scripts.Game;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ThirdScreenManager : MonoBehaviour
 {
@@ -25,83 +27,73 @@ public class ThirdScreenManager : MonoBehaviour
 
     private void Start()
     {
-        InstanceGameObject();
-        InstanceObject();
-    }
-
-    private void InstanceGameObject()
-    {
         int child = products.transform.childCount;
 
         int j = 0;
 
-        for (int i = 0; i < child; i++)
+        for (int index = 0; index < child; index++)
         {
-            var prod = products.transform.GetChild(i).gameObject;
+            var prod = products.transform.GetChild(index).gameObject;
 
             if (prod.CompareTag(tagRight))
             {
 
-                var getProd = Instantiate(prod);
+                InstantiateGameObject(j, prod);
 
-                var removeComponentDragAndDrop = getProd.GetComponent<DragAndDropObject>();
-                var removeComponentRigid = getProd.GetComponent<Rigidbody2D>();
-                var removeComponentCollider = getProd.GetComponent<BoxCollider2D>();
-
-                Destroy(removeComponentDragAndDrop);
-                Destroy(removeComponentRigid);
-                Destroy(removeComponentCollider);
-
-                getProd.transform.position = placeHoldersGameObject[j].position;
-                getProd.transform.SetParent(placeHoldersGameObject[j]);
+                InstatiateObject(j, prod);
 
                 j++;
             }
         }
     }
 
-    private void InstanceObject()
+    private void InstatiateObject(int j, GameObject prod)
     {
-        int child = products.transform.childCount;
+        var getProd = Instantiate(prod);
 
-        int j = 0;
+        RemoveComponent(getProd);
 
-        for (int i = 0; i < child; i++)
-        {
-            var prod = products.transform.GetChild(i).gameObject;
-
-            if (prod.CompareTag(tagRight))
-            {
-
-                var getProd = Instantiate(prod);
-
-                var removeComponentDragAndDrop = getProd.GetComponent<DragAndDropObject>();
-                var removeComponentRigid = getProd.GetComponent<Rigidbody2D>();
-                var removeComponentCollider = getProd.GetComponent<BoxCollider2D>();
-
-                Destroy(removeComponentDragAndDrop);
-                Destroy(removeComponentRigid);
-                Destroy(removeComponentCollider);
-
-                getProd.transform.position = placeHolderObjects[j].position;
-                getProd.transform.SetParent(placeHolderObjects[j]);
-
-                j++;
-            }
-        }
+        SetParent(getProd, placeHolderObjects[j]);
     }
 
-    public void ValuesCorrect(bool isNameIqualsToGameobject)
+    private void InstantiateGameObject(int j, GameObject prod)
     {
-        if (isNameIqualsToGameobject)
-        {
-            correctObject++;
-            SetPlayerPrefs(correctObject);
-        }
-        else
-        {
-            incorrectObject++;
-        }
+        var getProd = Instantiate(prod);
+
+        RemoveComponent(getProd);
+
+        var getImage = getProd.GetComponent<Image>();
+        getImage.color = new Color32(0, 0, 0, 255);
+
+        SetParent(getProd, placeHoldersGameObject[j]);
+    }
+
+    private void SetParent(GameObject setProd, Transform transform)
+    {
+        setProd.transform.position = transform.position;
+        setProd.transform.SetParent(transform);
+    }
+
+    private void RemoveComponent(GameObject getObject)
+    {
+        var removeComponentDragAndDrop = getObject.GetComponent<DragAndDropObject>();
+        var removeComponentRigid = getObject.GetComponent<Rigidbody2D>();
+        var removeComponentCollider = getObject.GetComponent<BoxCollider2D>();
+
+        Destroy(removeComponentDragAndDrop);
+        Destroy(removeComponentRigid);
+        Destroy(removeComponentCollider);
+    }
+
+    public void SetRight()
+    {
+        correctObject++;
+        SetPlayerPrefs(correctObject);
+    }
+
+    public void SetWrong()
+    {
+        incorrectObject++;
     }
 
     private void SetPlayerPrefs(int correctObject)

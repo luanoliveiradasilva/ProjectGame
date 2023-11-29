@@ -3,18 +3,30 @@ using UnityEngine.EventSystems;
 
 public class GameObjectDrop : MonoBehaviour, IDropHandler
 {
-    private ThirdScreenManager correctObject;
+    private ThirdScreenManager thirdScreenManager;
+    private string isNameRight;
+    private string isNameWrong;
 
     private void Start()
     {
-        correctObject = FindObjectOfType<ThirdScreenManager>();
+        thirdScreenManager = FindObjectOfType<ThirdScreenManager>();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        bool isNameIqualsToGameobject = other.gameObject.name == gameObject.name;
+        isNameWrong = "";
 
-        correctObject.ValuesCorrect(isNameIqualsToGameobject);
+        if (other.gameObject.name.Equals(gameObject.name) && isNameRight != other.gameObject.name)
+        {
+            thirdScreenManager.SetRight();
+
+            isNameRight = other.gameObject.name;
+        }
+
+        if (other.gameObject.name != gameObject.name && isNameWrong != other.gameObject.name)
+        {
+            thirdScreenManager.SetWrong();
+        }
     }
 
     public void OnDrop(PointerEventData eventData)
