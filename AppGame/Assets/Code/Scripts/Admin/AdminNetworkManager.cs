@@ -12,6 +12,7 @@ public class AdminNetworkManager : NetworkManager
     private string playerName;
     private string playerScore;
     private string nameGame;
+    private string screenOfLevel = "Screen";
     private int countRightProduct;
     private int countWrongProduct;
 
@@ -82,6 +83,7 @@ public class AdminNetworkManager : NetworkManager
         {
             playerName = item.namePlayerData;
             nameGame = item.nameGameData;
+            screenOfLevel = item.screenData;
             countRightProduct = item.rightData;
             countWrongProduct = item.wrongData;
             playerScore = item.playerScoreData;
@@ -91,6 +93,7 @@ public class AdminNetworkManager : NetworkManager
         {
             player = playerName,
             game = nameGame,
+            screen = screenOfLevel,
             hit = countRightProduct,
             error = countWrongProduct,
             time = playerScore,

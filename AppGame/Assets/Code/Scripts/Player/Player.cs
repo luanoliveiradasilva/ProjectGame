@@ -147,7 +147,7 @@ public class Player : NetworkBehaviour
         PlayerDatas playerSetData = new()
         {
             namePlayerData = playerNameLocal,
-            nameGameData = nameGameLocal,
+            nameGameData = "null",
             screenData = "null",
             rightData = rightLocal,
             wrongData = wrongLocal,

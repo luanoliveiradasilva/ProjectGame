@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using UnityEngine;
 
@@ -9,8 +10,8 @@ public class ExtractFile : MonoBehaviour
     [Header("Name file CSV")]
     [Tooltip("csv file name")]
     [SerializeField] private string fileName;
-
-    private readonly List<object[]> dataList = new();
+    private string filePath;
+    private List<object[]> dataList = new();
 
     public void ExportDataToCSV()
     {
@@ -19,24 +20,38 @@ public class ExtractFile : MonoBehaviour
 
         StreamWriter outStream = File.CreateText(CombinePathDocumentWithFileNameCSV());
 
+        string header = "Nome;Level;Tela;Acertos;Erros;Tempo";
+
+        outStream.WriteLine(header);
+
         outStream.WriteLine(SetOutputData());
+
         outStream.Close();
     }
 
     private void SetDataPlayers()
     {
+
+        HashSet<string> hashSet = new(dataList.Select(item => $"{item[0]}_{item[1]}_{item[2]}_{item[3]}_{item[4]}_{item[5]}"));
+
         foreach (var item in AdminNetworkManager.instance.playerDataList)
         {
-            object[] playerDataListArray =
+            string chave = $"{item.player}_{item.game}_{item.screen}_{item.hit}_{item.error}_{item.time}";
+
+            if (hashSet.Add(chave))
             {
+                object[] playerDataListArray =
+                {
                     item.player,
                     item.game,
+                    item.screen,
                     item.hit,
                     item.error,
                     item.time.ToString()
-            };
+                };
 
-            dataList.Add(playerDataListArray);
+                dataList.Add(playerDataListArray);
+            }
         }
     }
 
@@ -46,7 +61,10 @@ public class ExtractFile : MonoBehaviour
         string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
         //Combines local address plus file name
-        string filePath = Path.Combine(documentsPath, fileName);
+        filePath = Path.Combine(documentsPath, fileName);
+
+        if (File.Exists(filePath))
+            File.Delete(filePath);
 
         return filePath;
     }
@@ -67,6 +85,7 @@ public class ExtractFile : MonoBehaviour
 
         for (int index = 0; index < length; index++)
             stringBuilder.AppendLine(string.Join(delimiter, output[index]));
+
 
         return stringBuilder;
     }
