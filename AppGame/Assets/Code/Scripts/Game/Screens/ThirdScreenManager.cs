@@ -1,3 +1,4 @@
+using System.Collections;
 using Scripts.Game;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -88,7 +89,11 @@ public class ThirdScreenManager : MonoBehaviour
     public void SetRight()
     {
         correctObject++;
-        SetPlayerPrefs(correctObject);
+
+        if (correctObject.Equals(quantityProducts))
+        {
+            SetPlayerPrefs(correctObject);
+        }
     }
 
     public void SetWrong()
@@ -98,21 +103,22 @@ public class ThirdScreenManager : MonoBehaviour
 
     private void SetPlayerPrefs(int correctObject)
     {
-        if (correctObject.Equals(quantityProducts))
-        {
-            PlayerPrefs.SetInt("Right", correctObject);
-            PlayerPrefs.SetInt("Wrong", incorrectObject);
+        PlayerPrefs.SetInt("Right", correctObject);
+        PlayerPrefs.SetInt("Wrong", incorrectObject);
 
-            timeGame.StopTimeGame(false);
+        timeGame.StopTimeGame(false);
 
-            isVictory = true;
+        isVictory = true;
 
-            ActiveVictory(isVictory);
-        }
+        StartCoroutine(WaitActiveScene(isVictory));
+
+        Debug.Log("Debug: ");
     }
 
-    private void ActiveVictory(bool isVictory)
+    IEnumerator WaitActiveScene(bool isVictory)
     {
+        yield return new WaitForSeconds(3f);
+
         if (isVictory)
         {
             screenLevel.SetActive(false);

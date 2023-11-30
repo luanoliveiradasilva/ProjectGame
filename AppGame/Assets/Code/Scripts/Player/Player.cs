@@ -102,14 +102,17 @@ public class Player : NetworkBehaviour
 
         getTimeGame = PlayerPrefs.GetFloat("Time");
 
+        float minutesLocal = Mathf.FloorToInt(getTimeGame / 60);
+        float secontsLocal = Mathf.FloorToInt(getTimeGame % 60);
+
+        newScoreLocal = string.Format("{0:00}:{1:00}", minutesLocal, secontsLocal);
+
+        SetPlayerData();
+
         newTimeGame += getTimeGame;
 
         float minutes = Mathf.FloorToInt(newTimeGame / 60);
         float seconts = Mathf.FloorToInt(newTimeGame % 60);
-
-        newScoreLocal = string.Format("{0:00}:{1:00}", minutes, seconts);
-
-        SetPlayerData();
 
         newTime = string.Format("{0:00}:{1:00}", minutes, seconts);
 
