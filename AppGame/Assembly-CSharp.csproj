@@ -124,7 +124,6 @@
     <Compile Include="Assets\Code\Scripts\Game\Screens\FirstScreen\AnimationProduct.cs" />
     <Compile Include="Assets\Code\Scripts\Game\UIScreenManager.cs" />
     <Compile Include="Assets\Code\Scripts\Game\Screens\ThirdScreenManager.cs" />
-    <Compile Include="Assets\Code\Scripts\Player\PlayerTeste.cs" />
     <Compile Include="Assets\Src\TextMesh Pro\Examples &amp; Extras\Scripts\DropdownSample.cs" />
     <Compile Include="Assets\Src\TextMesh Pro\Examples &amp; Extras\Scripts\VertexJitter.cs" />
     <Compile Include="Assets\Src\ParrelSync\Examples\CustomArgumentExample.cs" />

@@ -51,13 +51,14 @@ public class ObjectDrop : MonoBehaviour, IDropHandler
         {
             incorrectProduct++;
             isRight = false;
-        }        
+        }
     }
 
     private void SetPlayerPrefs()
     {
         if (correctProduct.Equals(quantityProducts))
         {
+            PlayerPrefs.SetString("Screen", "Tela 1");
             PlayerPrefs.SetInt("Right", correctProduct);
             PlayerPrefs.SetInt("Wrong", incorrectProduct);
 

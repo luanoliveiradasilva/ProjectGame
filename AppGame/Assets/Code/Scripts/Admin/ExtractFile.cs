@@ -11,7 +11,7 @@ public class ExtractFile : MonoBehaviour
     [Tooltip("csv file name")]
     [SerializeField] private string fileName;
     private string filePath;
-    private List<object[]> dataList = new();
+    private readonly List<object[]> dataList = new();
 
     public void ExportDataToCSV()
     {
@@ -36,9 +36,9 @@ public class ExtractFile : MonoBehaviour
 
         foreach (var item in AdminNetworkManager.instance.playerDataList)
         {
-            string chave = $"{item.player}_{item.game}_{item.screen}_{item.hit}_{item.error}_{item.time}";
+            string keyHash = $"{item.player}_{item.game}_{item.screen}_{item.hit}_{item.error}_{item.time}";
 
-            if (hashSet.Add(chave))
+            if (hashSet.Add(keyHash))
             {
                 object[] playerDataListArray =
                 {

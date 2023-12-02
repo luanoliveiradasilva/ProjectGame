@@ -122,7 +122,8 @@ public class ScreenMath : MonoBehaviour
     private void RightFunction()
     {
         sumRightButton++;
-
+        
+        PlayerPrefs.SetString("Screen", "Tela 2");
         PlayerPrefs.SetInt("Right", sumRightButton);
         PlayerPrefs.SetInt("Wrong", sumWrongButton);
 

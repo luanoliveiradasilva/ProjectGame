@@ -103,6 +103,7 @@ public class ThirdScreenManager : MonoBehaviour
 
     private void SetPlayerPrefs(int correctObject)
     {
+        PlayerPrefs.SetString("Screen", "Tela 3");
         PlayerPrefs.SetInt("Right", correctObject);
         PlayerPrefs.SetInt("Wrong", incorrectObject);
 
@@ -111,13 +112,11 @@ public class ThirdScreenManager : MonoBehaviour
         isVictory = true;
 
         StartCoroutine(WaitActiveScene(isVictory));
-
-        Debug.Log("Debug: ");
     }
 
     IEnumerator WaitActiveScene(bool isVictory)
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1f);
 
         if (isVictory)
         {

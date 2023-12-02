@@ -7,33 +7,33 @@ public class Player : NetworkBehaviour
 {
     public event Action<string> OnPlayerNameChanged;
     public event Action<string> OnPlayerScoreGameChanged;
-    public event Action<string> OnGameNameChaged;
+
 
     [Header("Player UI")]
     [SerializeField] public GameObject playerUIPrefab;
     private GameObject playerUIObject;
     private PlayerUI playerUI;
 
-    private string nameGameLocal;
+    private string playerNameLocal;
+    private string nameLevelLocal;
+    private string screenLevelLocal;
     private int rightLocal;
     private int wrongLocal;
-    private string newScoreLocal;
-    private string playerNameLocal;
+    private string newTimeLocal;
 
     private float getTimeGame;
     private float newTimeGame;
     private string newTime;
 
-
     [Serializable]
     public class PlayerDatas
     {
-        public string namePlayerData;
-        public string nameGameData;
-        public string screenData;
-        public int rightData;
-        public int wrongData;
-        public string playerScoreData;
+        public string player;
+        public string level;
+        public string screen;
+        public int right;
+        public int wrong;
+        public string time;
     }
 
     #region SyncVars
@@ -46,10 +46,6 @@ public class Player : NetworkBehaviour
     [SyncVar(hook = nameof(PlayerScoreGameChanged))]
     public string playerScore;
 
-    [SyncVar(hook = nameof(GameNameChanged))]
-    public string gameName;
-
-    private void GameNameChanged(string oldNameGame, string newNameGame) => OnGameNameChaged?.Invoke(newNameGame);
 
     private void PlayerNameChanged(string oldPlayerName, string newPlayerName) => OnPlayerNameChanged?.Invoke(newPlayerName);
 
@@ -69,7 +65,7 @@ public class Player : NetworkBehaviour
     private void SetDataPlayerToLeadboard()
     {
         CmdSetPlayerNames(playerNameLocal);
-        CmdSetPlayerTime(newScoreLocal);
+        CmdSetPlayerTime(newTimeLocal);
     }
 
 
@@ -77,12 +73,6 @@ public class Player : NetworkBehaviour
     {
         playerUIObject = Instantiate(playerUIPrefab, AdminUI.GetPlayersPanel());
         playerUI = playerUIObject.GetComponent<PlayerUI>();
-
-        /* OnPlayerNameChanged = playerUI.OnPlayerNameChanged; */
-        /* OnPlayerScoreGameChanged = playerUI.OnTimeGameChanged; */
-
-        /* OnPlayerNameChanged.Invoke(playerName); */
-        /*  OnPlayerScoreGameChanged.Invoke(playerScore); */
     }
 
     public override void OnStopClient()
@@ -96,7 +86,8 @@ public class Player : NetworkBehaviour
     public void ExecutartComando()
     {
         playerNameLocal = PlayerPrefs.GetString("Player");
-        nameGameLocal = PlayerPrefs.GetString("NameGame");
+        nameLevelLocal = PlayerPrefs.GetString("Level");
+        screenLevelLocal = PlayerPrefs.GetString("Screen");
         rightLocal = PlayerPrefs.GetInt("Right");
         wrongLocal = PlayerPrefs.GetInt("Wrong");
 
@@ -105,7 +96,7 @@ public class Player : NetworkBehaviour
         float minutesLocal = Mathf.FloorToInt(getTimeGame / 60);
         float secontsLocal = Mathf.FloorToInt(getTimeGame % 60);
 
-        newScoreLocal = string.Format("{0:00}:{1:00}", minutesLocal, secontsLocal);
+        newTimeLocal = string.Format("{0:00}:{1:00}", minutesLocal, secontsLocal);
 
         SetPlayerData();
 
@@ -120,10 +111,7 @@ public class Player : NetworkBehaviour
     }
 
     [Command(requiresAuthority = false)]
-    private void CmdBotaoClicado(string newTime, string playerNameLocal)
-    {
-        RpcReceive(newTime, playerNameLocal);
-    }
+    private void CmdBotaoClicado(string newTime, string playerNameLocal) => RpcReceive(newTime, playerNameLocal);
 
     [ClientRpc]
     void RpcReceive(string newTimeGame, string playerNameLocal)
@@ -146,12 +134,12 @@ public class Player : NetworkBehaviour
 
         PlayerDatas playerSetData = new()
         {
-            namePlayerData = playerNameLocal,
-            nameGameData = "null",
-            screenData = "null",
-            rightData = rightLocal,
-            wrongData = wrongLocal,
-            playerScoreData = newScoreLocal
+            player = playerNameLocal,
+            level = nameLevelLocal,
+            screen = screenLevelLocal,
+            right = rightLocal,
+            wrong = wrongLocal,
+            time = newTimeLocal
         };
 
         playerDatas.Add(playerSetData);
@@ -160,10 +148,8 @@ public class Player : NetworkBehaviour
     }
 
     [Command]
-    private void RpcCommandSet(List<PlayerDatas> playerDatas)
-    {
+    private void RpcCommandSet(List<PlayerDatas> playerDatas) =>
         AdminNetworkManager.instance.SetPlayerData(playerDatas);
-    }
 
     #endregion
 
@@ -174,19 +160,12 @@ public class Player : NetworkBehaviour
     [ClientRpc]
     private void RpcSetPlayerName(string localPlayerName) => playerName = localPlayerName;
 
-    //Score Player
+    //Time Player
     [Command]
     private void CmdSetPlayerTime(string newScore) => RpcSetPlayerScore(newScore);
 
     [ClientRpc]
     private void RpcSetPlayerScore(string newScore) => playerScore = newScore;
-
-    //Name game
-    [Command]
-    private void CmdSetNameGame(string nameGame) => RpcSetNameGame(nameGame);
-
-    [ClientRpc]
-    private void RpcSetNameGame(string nameGame) => gameName = nameGame;
 
 }
 

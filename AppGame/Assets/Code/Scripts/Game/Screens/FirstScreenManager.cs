@@ -25,6 +25,7 @@ public class FirstScreenManager : MonoBehaviour
     [SerializeField] private GameObject listProducts;
 
     private SaveMemory saveMemory;
+    private GameManager gameManager;
 
     private readonly List<GameObject> product = new();
     private readonly List<TextMeshProUGUI> valueProducts = new();
@@ -33,20 +34,22 @@ public class FirstScreenManager : MonoBehaviour
     private readonly string tagRight = "Right";
     private readonly string tagWrong = "Wrong";
     private readonly string tagUntagged = "Untagged";
+    private readonly string nameLevel = "Level 3";
 
 
     private void Awake()
     {
         saveMemory = FindObjectOfType<SaveMemory>();
-        
-        GetAllProducts();
 
-        SetTagInProduct();
+        gameManager = FindObjectOfType<GameManager>();
     }
 
 
     private void Start()
     {
+        GetAllProducts();
+
+        SetTagInProduct();
 
         GetListProduct();
 
@@ -68,14 +71,17 @@ public class FirstScreenManager : MonoBehaviour
             product.Add(prod);
         }
     }
-    //TODO adicionar ao nível 1 o right a produtos fixos.
+
     private void SetTagInProduct()
     {
-        ShuffleList(product);
-
-        for (int i = 0; i < Mathf.Min(maxRangeToTag, product.Count); i++)
+        if (gameManager.NameGame.Equals(nameLevel))
         {
-            product[i].tag = tagRight;
+            ShuffleList(product);
+
+            for (int i = 0; i < Mathf.Min(maxRangeToTag, product.Count); i++)
+            {
+                product[i].tag = tagRight;
+            }
         }
 
         foreach (var item in product)
@@ -97,10 +103,9 @@ public class FirstScreenManager : MonoBehaviour
         }
     }
 
-    //TO IMPROVE: Melhorar essa condição, adicionar text mesmo conforme as tag, exemplo, se tiver duas tag right, tem que adicionar dois itens.
     private void GetListProduct()
     {
-        int child = listProducts.transform.childCount;
+        int index = 0;
 
         foreach (var item in product)
         {
@@ -108,15 +113,13 @@ public class FirstScreenManager : MonoBehaviour
 
             if (isRight)
             {
-                for (int i = 0; i < child; i++)
-                {
+                var nameProdList = listProducts.transform.GetChild(index).gameObject;
 
-                    var nameProdList = listProducts.transform.GetChild(i).gameObject;
+                var getText = nameProdList.GetComponent<TextMeshProUGUI>();
 
-                    var getText = nameProdList.GetComponent<TextMeshProUGUI>();
+                getText.text = item.name;
 
-                    getText.text = product[i].name;
-                }
+                index++;
             }
         }
     }
@@ -140,7 +143,6 @@ public class FirstScreenManager : MonoBehaviour
             valueProducts[i].text = Random.Range(minRange, maxRange).ToString();
         }
     }
-
 
     private void OnSetValues()
     {

@@ -81,12 +81,12 @@ public class AdminNetworkManager : NetworkManager
     {
         foreach (var item in playerDatas)
         {
-            playerName = item.namePlayerData;
-            nameGame = item.nameGameData;
-            screenOfLevel = item.screenData;
-            countRightProduct = item.rightData;
-            countWrongProduct = item.wrongData;
-            playerScore = item.playerScoreData;
+            playerName = item.player;
+            nameGame = item.level;
+            screenOfLevel = item.screen;
+            countRightProduct = item.right;
+            countWrongProduct = item.wrong;
+            playerScore = item.time;
         }
 
         PlayerData playerData = new()
