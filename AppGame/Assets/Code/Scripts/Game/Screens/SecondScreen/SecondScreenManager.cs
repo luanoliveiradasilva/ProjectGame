@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ScreenMath : MonoBehaviour
+public class SecondScreenManager : MonoBehaviour
 {
 
     [Header("Range Value")]
