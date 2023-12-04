@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
+using Scripts.Game;
 
 namespace Screens.FirstScreen
 {
@@ -26,7 +27,7 @@ namespace Screens.FirstScreen
         [Tooltip("Object to manage list of products to remember.")]
         [SerializeField] private GameObject listProducts;
 
-        private SaveMemory saveMemory;
+        private LevelManager levelManager;
         private GameManager gameManager;
 
         private readonly List<GameObject> product = new();
@@ -41,7 +42,7 @@ namespace Screens.FirstScreen
 
         private void Awake()
         {
-            saveMemory = FindObjectOfType<SaveMemory>();
+            levelManager = FindObjectOfType<LevelManager>();
 
             gameManager = FindObjectOfType<GameManager>();
         }
@@ -158,7 +159,7 @@ namespace Screens.FirstScreen
 
                     var getText = valueProductRight.GetComponent<TextMeshProUGUI>();
 
-                    saveMemory.SetValueMemory(int.Parse(getText.text));
+                    levelManager.SetValueMemory(int.Parse(getText.text));
                 }
             }
         }

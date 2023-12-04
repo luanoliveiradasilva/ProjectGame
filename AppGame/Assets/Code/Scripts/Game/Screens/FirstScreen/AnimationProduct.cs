@@ -2,47 +2,50 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 
-public class AnimationProduct : MonoBehaviour
+namespace Screens.FirstScreen
 {
-
-    [SerializeField] private float fadeTime = 1f;
-
-    [SerializeField] private List<GameObject> listProductGame = new();
-
-    [SerializeField] private GameObject products;
-
-    private void Awake()
+    public class AnimationProduct : MonoBehaviour
     {
-        int child = products.transform.childCount;
 
-        for (int i = 0; i < child; i++)
+        [SerializeField] private float fadeTime = 1f;
+
+        [SerializeField] private List<GameObject> listProductGame = new();
+
+        [SerializeField] private GameObject products;
+
+        private void Awake()
         {
-            var prod = products.transform.GetChild(i).gameObject;
+            int child = products.transform.childCount;
 
-            if (prod != null)
+            for (int i = 0; i < child; i++)
             {
-                listProductGame.Add(prod);
-            }
-            else
-            {
-                Debug.LogWarning("Child transform at index " + i + " is null.");
+                var prod = products.transform.GetChild(i).gameObject;
+
+                if (prod != null)
+                {
+                    listProductGame.Add(prod);
+                }
+                else
+                {
+                    Debug.LogWarning("Child transform at index " + i + " is null.");
+                }
             }
         }
-    }
 
-    private void Start()
-    {
-        foreach (var item in listProductGame)
+        private void Start()
         {
-            item.transform.localScale = Vector3.zero;
+            foreach (var item in listProductGame)
+            {
+                item.transform.localScale = Vector3.zero;
+            }
         }
-    }
 
-    public void ActiveAnimation()
-    {
-        foreach (var item in listProductGame)
+        public void ActiveAnimation()
         {
-            item.transform.DOScale(1f, fadeTime).SetEase(Ease.OutBounce);
+            foreach (var item in listProductGame)
+            {
+                item.transform.DOScale(1f, fadeTime).SetEase(Ease.OutBounce);
+            }
         }
     }
 }

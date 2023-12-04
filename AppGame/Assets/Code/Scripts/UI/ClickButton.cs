@@ -2,24 +2,22 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ClickButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
+namespace Scripts.UI
 {
-
-    
-
-    [SerializeField] private Image image;
-    [SerializeField] private Sprite defaultButton, pressedButton;
-
-
-
-    public void OnPointerDown(PointerEventData eventData)
+    public class ClickButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     {
-        image.sprite = pressedButton;
-    }
+        [SerializeField] private Image image;
+        [SerializeField] private Sprite defaultButton, pressedButton;
 
-    public void OnPointerUp(PointerEventData eventData)
-    {
-        image.sprite = defaultButton;
-    }
+        public void OnPointerDown(PointerEventData eventData)
+        {
+            image.sprite = pressedButton;
+        }
 
+        public void OnPointerUp(PointerEventData eventData)
+        {
+            image.sprite = defaultButton;
+        }
+
+    }
 }

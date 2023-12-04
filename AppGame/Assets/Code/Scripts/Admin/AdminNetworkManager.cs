@@ -4,102 +4,105 @@ using Mirror;
 using Mirror.Discovery;
 using UnityEngine;
 
-[AddComponentMenu("")]
-public class AdminNetworkManager : NetworkManager
+namespace Scripts.Admin
 {
-    public static AdminNetworkManager instance { get; private set; }
-
-    private string playerName;
-    private string playerScore;
-    private string nameGame;
-    private string screenOfLevel = "Screen";
-    private int countRightProduct;
-    private int countWrongProduct;
-
-    [Serializable]
-    public class PlayerData
+    [AddComponentMenu("")]
+    public class AdminNetworkManager : NetworkManager
     {
-        public string player;
-        public string game;
-        public string screen;
-        public int hit;
-        public int error;
-        public string time;
-    }
+        public static AdminNetworkManager instance { get; private set; }
 
-    public List<PlayerData> playerDataList = new();
+        private string playerName;
+        private string playerScore;
+        private string nameGame;
+        private string screenOfLevel = "Screen";
+        private int countRightProduct;
+        private int countWrongProduct;
 
-    readonly Dictionary<long, ServerResponse> discoveredServers = new();
-
-    public NetworkDiscovery networkDiscovery;
-
-
-    public override void Awake()
-    {
-        base.Awake();
-        instance = this;
-    }
-
-    public override void OnServerAddPlayer(NetworkConnectionToClient conn) => base.OnServerAddPlayer(conn);
-
-    #region Server
-    public void SetIpAddress(string ipAddress) => networkAddress = ipAddress;
-    public void GetStartDiscovery()
-    {
-        discoveredServers.Clear();
-        networkDiscovery.OnServerFound.AddListener(OnDiscoveredServer);
-        networkDiscovery.StartDiscovery();
-    }
-    private void OnDiscoveredServer(ServerResponse info)
-    {
-        discoveredServers[info.serverId] = info;
-        SetIpAddress(info.EndPoint.Address.ToString());
-        Debug.Log("Debug " + info.EndPoint.Address.ToString());
-    }
-
-    public void NetAdvertiseServer()
-    {
-        discoveredServers.Clear();
-        StartHost();
-        networkDiscovery.AdvertiseServer();
-    }
-
-    public bool SetServerPlayer()
-    {
-        StartClient();
-
-        bool isActivePlayerInServer = true;
-
-        return isActivePlayerInServer;
-    }
-
-    #endregion
-
-    #region Data
-
-    public void SetPlayerData(List<Player.PlayerDatas> playerDatas)
-    {
-        foreach (var item in playerDatas)
+        [Serializable]
+        public class PlayerData
         {
-            playerName = item.player;
-            nameGame = item.level;
-            screenOfLevel = item.screen;
-            countRightProduct = item.right;
-            countWrongProduct = item.wrong;
-            playerScore = item.time;
+            public string player;
+            public string game;
+            public string screen;
+            public int hit;
+            public int error;
+            public string time;
         }
 
-        PlayerData playerData = new()
-        {
-            player = playerName,
-            game = nameGame,
-            screen = screenOfLevel,
-            hit = countRightProduct,
-            error = countWrongProduct,
-            time = playerScore,
-        };
+        public List<PlayerData> playerDataList = new();
 
-        playerDataList.Add(playerData);
+        readonly Dictionary<long, ServerResponse> discoveredServers = new();
+
+        public NetworkDiscovery networkDiscovery;
+
+
+        public override void Awake()
+        {
+            base.Awake();
+            instance = this;
+        }
+
+        public override void OnServerAddPlayer(NetworkConnectionToClient conn) => base.OnServerAddPlayer(conn);
+
+        #region Server
+        public void SetIpAddress(string ipAddress) => networkAddress = ipAddress;
+        public void GetStartDiscovery()
+        {
+            discoveredServers.Clear();
+            networkDiscovery.OnServerFound.AddListener(OnDiscoveredServer);
+            networkDiscovery.StartDiscovery();
+        }
+        private void OnDiscoveredServer(ServerResponse info)
+        {
+            discoveredServers[info.serverId] = info;
+            SetIpAddress(info.EndPoint.Address.ToString());
+            Debug.Log("Debug " + info.EndPoint.Address.ToString());
+        }
+
+        public void NetAdvertiseServer()
+        {
+            discoveredServers.Clear();
+            StartHost();
+            networkDiscovery.AdvertiseServer();
+        }
+
+        public bool SetServerPlayer()
+        {
+            StartClient();
+
+            bool isActivePlayerInServer = true;
+
+            return isActivePlayerInServer;
+        }
+
+        #endregion
+
+        #region Data
+
+        public void SetPlayerData(List<Player.PlayerDatas> playerDatas)
+        {
+            foreach (var item in playerDatas)
+            {
+                playerName = item.player;
+                nameGame = item.level;
+                screenOfLevel = item.screen;
+                countRightProduct = item.right;
+                countWrongProduct = item.wrong;
+                playerScore = item.time;
+            }
+
+            PlayerData playerData = new()
+            {
+                player = playerName,
+                game = nameGame,
+                screen = screenOfLevel,
+                hit = countRightProduct,
+                error = countWrongProduct,
+                time = playerScore,
+            };
+
+            playerDataList.Add(playerData);
+        }
+        #endregion
     }
-    #endregion
 }

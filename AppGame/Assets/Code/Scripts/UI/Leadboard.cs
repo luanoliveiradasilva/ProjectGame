@@ -2,16 +2,19 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class Leadboard : MonoBehaviour
+namespace Scripts.UI
 {
-    [SerializeField] TextMeshProUGUI textMeshPro;
-
-    [SerializeField] List<string> teste;
-
-    public void AlterarNome(string playerName)
+    public class Leadboard : MonoBehaviour
     {
-        textMeshPro.text += " \n" + playerName;
+        [SerializeField] TextMeshProUGUI textMeshPro;
 
-        teste.Add(playerName);
+        [SerializeField] List<string> teste;
+
+        public void AlterarNome(string playerName)
+        {
+            textMeshPro.text += " \n" + playerName;
+
+            teste.Add(playerName);
+        }
     }
 }

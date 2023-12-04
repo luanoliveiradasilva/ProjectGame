@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Mirror;
+using Scripts.Admin;
 using UnityEngine;
 
 public class Player : NetworkBehaviour

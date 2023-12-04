@@ -1,33 +1,37 @@
+using Scripts.Admin;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class VictoryUI : MonoBehaviour
+namespace Scripts.UI
 {
-    [SerializeField] private Button button;
-
-    private Player playerTeste;
-
-    private void Awake()
+    public class VictoryUI : MonoBehaviour
     {
-        try
-        {
-            bool isExistPlayer = AdminNetworkManager.instance.SetServerPlayer();
+        [SerializeField] private Button button;
 
-            if (isExistPlayer)
+        private Player playerTeste;
+
+        private void Awake()
+        {
+            try
             {
-                playerTeste = FindObjectOfType<Player>();
-                button.onClick.AddListener(ExecutartComando);
-                Debug.Log($"Victory!");
+                bool isExistPlayer = AdminNetworkManager.instance.SetServerPlayer();
+
+                if (isExistPlayer)
+                {
+                    playerTeste = FindObjectOfType<Player>();
+                    button.onClick.AddListener(ExecutartComando);
+                    Debug.Log($"Victory!");
+                }
+            }
+            catch (System.Exception ex)
+            {
+                Debug.Log($"Defeat! {ex.Message}");
             }
         }
-        catch (System.Exception ex)
-        {
-            Debug.Log($"Defeat! {ex.Message}");
-        }
-    }
 
-    private void ExecutartComando()
-    {
-        playerTeste.ExecutartComando();
+        private void ExecutartComando()
+        {
+            playerTeste.ExecutartComando();
+        }
     }
 }
