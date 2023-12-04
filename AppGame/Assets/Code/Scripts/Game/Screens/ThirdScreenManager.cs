@@ -1,5 +1,6 @@
 using System.Collections;
 using Scripts.Game;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -54,6 +55,10 @@ public class ThirdScreenManager : MonoBehaviour
 
         RemoveComponent(getProd);
 
+        int child = getProd.transform.childCount;
+
+        DestroyObject(child, getProd);
+
         SetParent(getProd, placeHolderObjects[j]);
     }
 
@@ -62,6 +67,10 @@ public class ThirdScreenManager : MonoBehaviour
         var getProd = Instantiate(prod);
 
         RemoveComponent(getProd);
+
+        int child = getProd.transform.childCount;
+
+        DestroyObject(child, getProd);
 
         var getImage = getProd.GetComponent<Image>();
         getImage.color = new Color32(0, 0, 0, 255);
@@ -73,6 +82,19 @@ public class ThirdScreenManager : MonoBehaviour
     {
         setProd.transform.position = transform.position;
         setProd.transform.SetParent(transform);
+    }
+
+    private void DestroyObject(int child, GameObject getProd)
+    {
+        for (int i = 0; i < child; i++)
+        {
+            var getValueToRemove = getProd.transform.GetChild(i).gameObject;
+
+            if (getValueToRemove.name.Equals("Value Text (TMP)"))
+            {
+                Destroy(getValueToRemove);
+            }
+        }
     }
 
     private void RemoveComponent(GameObject getObject)

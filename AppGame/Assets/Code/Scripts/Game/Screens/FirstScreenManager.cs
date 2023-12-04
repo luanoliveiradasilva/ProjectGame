@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
+
 public class FirstScreenManager : MonoBehaviour
 {
 
@@ -14,7 +15,6 @@ public class FirstScreenManager : MonoBehaviour
 
     [Tooltip("This range is used to add the tag randomly to products.")]
     [SerializeField] private int maxRangeToTag = 5;
-
 
     [Header("Manager Products")]
     [Tooltip("Object to manage products")]
@@ -30,7 +30,7 @@ public class FirstScreenManager : MonoBehaviour
     private readonly List<GameObject> product = new();
     private readonly List<TextMeshProUGUI> valueProducts = new();
 
-    private readonly string valueProdutName = "Value Text (TMP)";
+    private readonly string valueProductName = "Value Text (TMP)";
     private readonly string tagRight = "Right";
     private readonly string tagWrong = "Wrong";
     private readonly string tagUntagged = "Untagged";
@@ -128,7 +128,7 @@ public class FirstScreenManager : MonoBehaviour
     {
         foreach (var item in product)
         {
-            var valueProduct = item.transform.Find(valueProdutName).gameObject;
+            var valueProduct = item.transform.Find(valueProductName).gameObject;
 
             var getText = valueProduct.GetComponent<TextMeshProUGUI>();
 
@@ -152,7 +152,7 @@ public class FirstScreenManager : MonoBehaviour
 
             if (isRight)
             {
-                var valueProductRight = item.transform.Find(valueProdutName).gameObject;
+                var valueProductRight = item.transform.Find(valueProductName).gameObject;
 
                 var getText = valueProductRight.GetComponent<TextMeshProUGUI>();
 
