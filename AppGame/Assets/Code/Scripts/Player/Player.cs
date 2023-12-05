@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using Mirror;
 using Scripts.Admin;
+using Scripts.Player;
 using UnityEngine;
+
 
 public class Player : NetworkBehaviour
 {
@@ -15,6 +17,9 @@ public class Player : NetworkBehaviour
     private GameObject playerUIObject;
     private PlayerUI playerUI;
 
+    private HashSet<string> hasSetId = new();
+
+    private string idPlayer;
     private string playerNameLocal;
     private string nameLevelLocal;
     private string screenLevelLocal;
@@ -69,11 +74,14 @@ public class Player : NetworkBehaviour
         CmdSetPlayerTime(newTimeLocal);
     }
 
-
     private void InstantiatePlayerDataInTheUI()
     {
         playerUIObject = Instantiate(playerUIPrefab, AdminUI.GetPlayersPanel());
         playerUI = playerUIObject.GetComponent<PlayerUI>();
+
+        playerUI.name = connectionToClient.identity.netId.ToString();
+
+        idPlayer = playerUI.name;
     }
 
     public override void OnStopClient()
@@ -117,14 +125,20 @@ public class Player : NetworkBehaviour
     [ClientRpc]
     void RpcReceive(string newTimeGame, string playerNameLocal)
     {
-        if (playerUIObject.TryGetComponent<PlayerUI>(out playerUI))
+        try
         {
-            playerUI.OnPlayerNameChanged(playerNameLocal);
-            playerUI.OnTimeGameChanged(newTimeGame);
+            if (playerUIObject.TryGetComponent<PlayerUI>(out playerUI))
+            {
+                if (playerUI.name.Equals(idPlayer))
+                {
+                    playerUI.OnPlayerNameChanged(playerNameLocal);
+                    playerUI.OnTimeGameChanged(newTimeGame);
+                }
+            }
         }
-        else
+        catch (Exception ex)
         {
-            Debug.Log("Objeto PlayerUI UI não encontrado.");
+            throw new ArgumentException("Player UI not found: " + ex.Message);
         }
     }
 
@@ -169,4 +183,5 @@ public class Player : NetworkBehaviour
     private void RpcSetPlayerScore(string newScore) => playerScore = newScore;
 
 }
+
 

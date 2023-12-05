@@ -1,7 +1,5 @@
 using System.Collections;
 using Scripts.Game;
-using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
