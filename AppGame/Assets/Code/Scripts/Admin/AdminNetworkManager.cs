@@ -4,7 +4,6 @@ using Mirror;
 using Mirror.Discovery;
 using UnityEngine;
 
-
 [AddComponentMenu("")]
 public class AdminNetworkManager : NetworkManager
 {
