@@ -1,19 +1,41 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using DG.Tweening;
 using Scripts.Costumize;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CostumizeManager : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> objectsArray;
+    [SerializeField] private List<GameObject> listOfPanels;
     [SerializeField] private GameObject getPanel;
+
+    [SerializeField] private Button nextButton;
+    [SerializeField] private Button returnButton;
+
+    private readonly List<GameObject> listOfInPanels = new();
+
     private GameObject getObjectInPanel;
-    private readonly List<GameObject> listOfObject = new();
+    private int indexPanels;
+    private Button nextBtn;
+    private Button returnBtn;
+
+    private void Awake()
+    {
+        nextBtn = nextButton.GetComponent<Button>();
+        nextBtn.onClick.AddListener(OnNextButton);
+
+        returnBtn = returnButton.GetComponent<Button>();
+        returnBtn.onClick.AddListener(OnReturnButton);
+
+        returnButton.interactable = false;
+    }
 
     private void Start()
     {
         GetObjectPanel();
-        GetObjectsChild(objectsArray);
+        GetObjectsChild(listOfPanels);
     }
 
     private void GetObjectPanel()
@@ -32,7 +54,7 @@ public class CostumizeManager : MonoBehaviour
 
                 if (isTagName)
                 {
-                    objectsArray.Add(getObjectInPanel);
+                    listOfPanels.Add(getObjectInPanel);
                 }
             }
         }
@@ -53,9 +75,29 @@ public class CostumizeManager : MonoBehaviour
 
                 if (getObject != null)
                 {
-                    listOfObject.Add(getObject);
+                    listOfInPanels.Add(getObject);
                 }
             }
         }
+    }
+
+    private void OnNextButton()
+    {
+        listOfPanels[indexPanels].transform.DOMoveX(480, 1).SetEase(Ease.OutCirc);
+        indexPanels++;
+    }
+
+    private void OnReturnButton()
+    {
+        indexPanels--;
+
+        var getFirstElement = listOfPanels.IndexOf(listOfPanels.First());
+
+        if (indexPanels < getFirstElement)
+        {
+            indexPanels = getFirstElement;
+        }
+
+        listOfPanels[indexPanels].transform.DOMoveX(-480, 1).SetEase(Ease.OutCirc);
     }
 }
