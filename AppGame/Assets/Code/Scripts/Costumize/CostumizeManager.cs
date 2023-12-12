@@ -84,19 +84,32 @@ public class CostumizeManager : MonoBehaviour
     private void OnNextButton()
     {
         listOfPanels[indexPanels].transform.DOMoveX(480, 1).SetEase(Ease.OutCirc);
+
+        var getLastElement = listOfPanels.IndexOf(listOfPanels.Last());
+
+        if (nextBtn.interactable == true)
+            returnBtn.interactable = true;
+
+        if (indexPanels == getLastElement)
+            nextBtn.interactable = false;
+
         indexPanels++;
     }
 
     private void OnReturnButton()
     {
-        indexPanels--;
-
         var getFirstElement = listOfPanels.IndexOf(listOfPanels.First());
 
-        if (indexPanels < getFirstElement)
+        indexPanels--;
+
+        if (indexPanels == getFirstElement)
         {
             indexPanels = getFirstElement;
+            returnBtn.interactable = false;
         }
+
+        if (returnBtn.interactable == true)
+            nextBtn.interactable = true;
 
         listOfPanels[indexPanels].transform.DOMoveX(-480, 1).SetEase(Ease.OutCirc);
     }
