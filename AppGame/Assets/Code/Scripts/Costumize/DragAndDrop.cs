@@ -5,6 +5,7 @@ namespace Scripts.Costumize
 {
     [RequireComponent(typeof(CanvasGroup))]
     [RequireComponent(typeof(Rigidbody2D))]
+    [RequireComponent(typeof(BoxCollider2D))]
     public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
     {
         [SerializeField] private Canvas canvas;
@@ -24,7 +25,9 @@ namespace Scripts.Costumize
         private void Start()
         {
            var getRigidbody = GetComponent<Rigidbody2D>();
+           var getCollider = GetComponent<BoxCollider2D>();
            getRigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
+           getCollider.isTrigger = true;
         }
 
         public void OnBeginDrag(PointerEventData eventData)
