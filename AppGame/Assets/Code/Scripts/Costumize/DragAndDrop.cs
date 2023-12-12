@@ -3,7 +3,8 @@ using UnityEngine.EventSystems;
 
 namespace Scripts.Costumize
 {
-    [RequireComponent (typeof (CanvasGroup))]
+    [RequireComponent(typeof(CanvasGroup))]
+    [RequireComponent(typeof(Rigidbody2D))]
     public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
     {
         [SerializeField] private Canvas canvas;
@@ -18,6 +19,12 @@ namespace Scripts.Costumize
             canvasGroup = GetComponent<CanvasGroup>();
 
             canvas = GameObject.Find(nameUI).GetComponent<Canvas>();
+        }
+
+        private void Start()
+        {
+           var getRigidbody = GetComponent<Rigidbody2D>();
+           getRigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
         }
 
         public void OnBeginDrag(PointerEventData eventData)
