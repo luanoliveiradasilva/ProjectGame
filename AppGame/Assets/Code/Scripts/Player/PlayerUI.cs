@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using System;
 
 namespace Scripts.Player
 {
@@ -15,5 +16,10 @@ namespace Scripts.Player
         public void OnPlayerNameChanged(string namePlayer) => playerNameText.text = namePlayer;
 
         public void OnTimeGameChanged(string timeGame) => timeGameText.text = timeGame;
+
+        public void OnPlayerIdChanged(string idPlayer)
+        {
+            gameObject.name = idPlayer;
+        }
     }
 }

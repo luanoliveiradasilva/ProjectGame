@@ -8,6 +8,7 @@ using UnityEngine;
 
 public class Player : NetworkBehaviour
 {
+    public event Action<string> OnPlayerIdChanged;
     public event Action<string> OnPlayerNameChanged;
     public event Action<string> OnPlayerScoreGameChanged;
 
@@ -16,10 +17,7 @@ public class Player : NetworkBehaviour
     [SerializeField] public GameObject playerUIPrefab;
     private GameObject playerUIObject;
     private PlayerUI playerUI;
-
-    private HashSet<string> hasSetId = new();
-
-    private string idPlayer;
+    
     private string playerNameLocal;
     private string nameLevelLocal;
     private string screenLevelLocal;
@@ -46,6 +44,9 @@ public class Player : NetworkBehaviour
 
     [Header("SyncVars")]
 
+    [SyncVar(hook = nameof(PlayerIdChanged))]
+    public string playerId;
+
     [SyncVar(hook = nameof(PlayerNameChanged))]
     public string playerName;
 
@@ -53,16 +54,16 @@ public class Player : NetworkBehaviour
     public string playerScore;
 
 
-    private void PlayerNameChanged(string oldPlayerName, string newPlayerName) => OnPlayerNameChanged?.Invoke(newPlayerName);
+    private void PlayerIdChanged(string _, string newPlayerId) => OnPlayerIdChanged?.Invoke(newPlayerId);
+    private void PlayerNameChanged(string _, string newPlayerName) => OnPlayerNameChanged?.Invoke(newPlayerName);
+    private void PlayerScoreGameChanged(string _, string newPlayerScoreGame) => OnPlayerScoreGameChanged?.Invoke(newPlayerScoreGame);
 
-    private void PlayerScoreGameChanged(string oldPlayerScoreGame, string newPlayerScoreGame) => OnPlayerScoreGameChanged?.Invoke(newPlayerScoreGame);
 
     #endregion
 
     #region Client
     public override void OnStartClient()
     {
-
         SetDataPlayerToLeadboard();
 
         InstantiatePlayerDataInTheUI();
@@ -70,6 +71,7 @@ public class Player : NetworkBehaviour
 
     private void SetDataPlayerToLeadboard()
     {
+        CmdSetPlayerId();
         CmdSetPlayerNames(playerNameLocal);
         CmdSetPlayerTime(newTimeLocal);
     }
@@ -78,10 +80,6 @@ public class Player : NetworkBehaviour
     {
         playerUIObject = Instantiate(playerUIPrefab, AdminUI.GetPlayersPanel());
         playerUI = playerUIObject.GetComponent<PlayerUI>();
-
-        playerUI.name = connectionToClient.identity.netId.ToString();
-
-        idPlayer = playerUI.name;
     }
 
     public override void OnStopClient()
@@ -94,6 +92,7 @@ public class Player : NetworkBehaviour
 
     public void ExecutartComando()
     {
+
         playerNameLocal = PlayerPrefs.GetString("Player");
         nameLevelLocal = PlayerPrefs.GetString("Level");
         screenLevelLocal = PlayerPrefs.GetString("Screen");
@@ -120,7 +119,13 @@ public class Player : NetworkBehaviour
     }
 
     [Command(requiresAuthority = false)]
-    private void CmdBotaoClicado(string newTime, string playerNameLocal) => RpcReceive(newTime, playerNameLocal);
+    private void CmdBotaoClicado(string newTime, string playerNameLocal)
+    {
+        if (playerUI.name.Equals(connectionToClient.connectionId.ToString()))
+        {
+            RpcReceive(newTime, playerNameLocal);
+        }
+    }
 
     [ClientRpc]
     void RpcReceive(string newTimeGame, string playerNameLocal)
@@ -129,11 +134,8 @@ public class Player : NetworkBehaviour
         {
             if (playerUIObject.TryGetComponent<PlayerUI>(out playerUI))
             {
-                if (playerUI.name.Equals(idPlayer))
-                {
-                    playerUI.OnPlayerNameChanged(playerNameLocal);
-                    playerUI.OnTimeGameChanged(newTimeGame);
-                }
+                playerUI.OnPlayerNameChanged(playerNameLocal);
+                playerUI.OnTimeGameChanged(newTimeGame);
             }
         }
         catch (Exception ex)
@@ -141,7 +143,6 @@ public class Player : NetworkBehaviour
             throw new ArgumentException("Player UI not found: " + ex.Message);
         }
     }
-
 
     private void SetPlayerData()
     {
@@ -167,6 +168,13 @@ public class Player : NetworkBehaviour
         AdminNetworkManager.instance.SetPlayerData(playerDatas);
 
     #endregion
+
+    //Id Player
+    [Command]
+    private void CmdSetPlayerId() => RpcSetPlayerId(connectionToClient.connectionId.ToString());
+
+    [ClientRpc]
+    private void RpcSetPlayerId(string localPlayerId) => playerUI.OnPlayerIdChanged(localPlayerId);
 
     //Name Player
     [Command]

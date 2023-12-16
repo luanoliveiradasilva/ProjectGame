@@ -1,13 +1,17 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Mirror;
 using Mirror.Discovery;
 using UnityEngine;
+using UnityEngine.UI;
 
 [AddComponentMenu("")]
 public class AdminNetworkManager : NetworkManager
 {
     public static AdminNetworkManager instance { get; private set; }
+
+    [SerializeField] private GameObject getComponentInButtonServer;
 
     private string playerName;
     private string playerScore;
@@ -28,11 +32,10 @@ public class AdminNetworkManager : NetworkManager
     }
 
     public List<PlayerData> playerDataList = new();
-
     readonly Dictionary<long, ServerResponse> discoveredServers = new();
-
     public NetworkDiscovery networkDiscovery;
-
+    private bool isServerEnabled;
+    private Image getImage;
 
     public override void Awake()
     {
@@ -62,6 +65,29 @@ public class AdminNetworkManager : NetworkManager
         discoveredServers.Clear();
         StartHost();
         networkDiscovery.AdvertiseServer();
+
+        StartCoroutine(StartServerUi());
+    }
+
+    IEnumerator StartServerUi()
+    {
+        int child = getComponentInButtonServer.transform.childCount;
+
+        isServerEnabled = NetworkServer.active;
+
+        for (int i = 0; i < child; i++)
+        {
+            if (isServerEnabled)
+            {
+                var getButtonServer = getComponentInButtonServer.transform.GetChild(i).gameObject;
+
+                getImage = getButtonServer.GetComponent<Image>();
+
+                yield return new WaitForSeconds(0.5f);
+
+                getImage.color = Color.green;
+            }
+        }
     }
 
     public bool SetServerPlayer()

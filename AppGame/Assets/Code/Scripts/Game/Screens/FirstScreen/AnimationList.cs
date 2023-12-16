@@ -36,8 +36,6 @@ namespace Screens.FirstScreen
             StartCoroutine(PanelFadeOut());
         }
 
-
-
         IEnumerator PanelFadeOut()
         {
             yield return new WaitForSeconds(waitTimeList);

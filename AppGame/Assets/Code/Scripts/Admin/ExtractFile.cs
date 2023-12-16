@@ -1,9 +1,12 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using DG.Tweening;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Scripts.Admin
 {
@@ -15,6 +18,10 @@ namespace Scripts.Admin
         private string filePath;
         private readonly List<object[]> dataList = new();
 
+        [Header("Button Extract File")]
+        [Tooltip("Button Extract File")]
+        [SerializeField] private GameObject getComponentInButtonExtractFile;
+
         public void ExportDataToCSV()
         {
 
@@ -22,6 +29,7 @@ namespace Scripts.Admin
 
             StreamWriter outStream = File.CreateText(CombinePathDocumentWithFileNameCSV());
 
+            //TODO Alterar o header para enum
             string header = "Nome;Level;Tela;Acertos;Erros;Tempo";
 
             outStream.WriteLine(header);
@@ -29,11 +37,35 @@ namespace Scripts.Admin
             outStream.WriteLine(SetOutputData());
 
             outStream.Close();
+
+            StartCoroutine(ExtractFileSuccess());
+        }
+
+        IEnumerator ExtractFileSuccess()
+        {
+            int child = getComponentInButtonExtractFile.transform.childCount;
+
+            for (int i = 0; i < child; i++)
+            {
+                var getArrow = getComponentInButtonExtractFile.transform.GetChild(i).gameObject;
+
+                yield return new WaitForSeconds(0.5f);
+
+                getArrow.transform.DOMoveY(-50, 1).SetEase(Ease.OutCubic);
+
+                yield return new WaitForSeconds(0.5f);
+
+                getArrow.transform.localScale = Vector3.zero;
+                getArrow.transform.DOMoveY(150, 1);
+
+                yield return new WaitForSeconds(1f);
+
+                getArrow.transform.DOScale(1f, 1f).SetEase(Ease.OutBounce);
+            }
         }
 
         private void SetDataPlayers()
         {
-
             HashSet<string> hashSet = new(dataList.Select(item => $"{item[0]}_{item[1]}_{item[2]}_{item[3]}_{item[4]}_{item[5]}"));
 
             foreach (var item in AdminNetworkManager.instance.playerDataList)
