@@ -96,7 +96,6 @@
     <Compile Include="Assets\Src\Plugins\Demigiant\DOTween\Modules\DOTweenModuleAudio.cs" />
     <Compile Include="Assets\Code\Scripts\UI\AnimationPanel.cs" />
     <Compile Include="Assets\Code\Scripts\UI\ClickButton.cs" />
-    <Compile Include="Assets\Code\Scripts\UI\StartHost.cs" />
     <Compile Include="Assets\Code\Scripts\Game\Screens\ThirdScreen\ThirdScreenManager.cs" />
     <Compile Include="Assets\Code\Scripts\Player\Player.cs" />
     <Compile Include="Assets\Src\TextMesh Pro\Examples &amp; Extras\Scripts\ChatController.cs" />
@@ -131,6 +130,7 @@
     <Compile Include="Assets\Code\Scripts\Game\Tutorial\ObjectDropTutorial.cs" />
     <Compile Include="Assets\Src\TextMesh Pro\Examples &amp; Extras\Scripts\DropdownSample.cs" />
     <Compile Include="Assets\Src\TextMesh Pro\Examples &amp; Extras\Scripts\VertexJitter.cs" />
+    <Compile Include="Assets\Code\Scripts\Costumize\CostumizeEyes.cs" />
     <Compile Include="Assets\Src\ParrelSync\Examples\CustomArgumentExample.cs" />
     <Compile Include="Assets\Src\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_PhoneNumberValidator.cs" />
     <Compile Include="Assets\Code\Scripts\Game\Screens\FirstScreen\FirstScreenManager.cs" />

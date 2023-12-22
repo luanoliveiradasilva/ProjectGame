@@ -8,6 +8,8 @@ public class DropCostumize : MonoBehaviour, IDropHandler
         if (eventData.pointerDrag != null)
         {
             eventData.pointerDrag.GetComponent<RectTransform>().position = GetComponent<RectTransform>().position;
+
+            eventData.pointerDrag.GetComponent<RectTransform>().transform.SetParent(GetComponent<RectTransform>().transform);
         }
     }
 
@@ -16,7 +18,7 @@ public class DropCostumize : MonoBehaviour, IDropHandler
 
         bool isTagWith = gameObject.tag == other.tag;
 
-        Debug.Log("Debug "+isTagWith);
+        Debug.Log("Debug " + isTagWith);
 
         if (isTagWith)
         {
