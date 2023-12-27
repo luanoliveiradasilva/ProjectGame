@@ -30,7 +30,7 @@ public class VictoryUI : MonoBehaviour
 
     private void ExecutartComando()
     {
-        player.ExecutartComando();
+        player.ExecutarComando();
     }
 }
 

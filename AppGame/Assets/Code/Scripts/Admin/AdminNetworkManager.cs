@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using Mirror;
 using Mirror.Discovery;
+using Scripts.Admin;
+using Scripts.Player;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,6 +15,12 @@ public class AdminNetworkManager : NetworkManager
 
     [SerializeField] private GameObject getComponentInButtonServer;
 
+    [Header("Player UI")]
+    [SerializeField] public GameObject playerUIPrefab;
+    private GameObject playerUIObject;
+    private PlayerUI playerUI;
+
+    private string playerId;
     private string playerName;
     private string playerScore;
     private string nameGame;
@@ -43,7 +51,11 @@ public class AdminNetworkManager : NetworkManager
         instance = this;
     }
 
-    public override void OnServerAddPlayer(NetworkConnectionToClient conn) => base.OnServerAddPlayer(conn);
+    public override void OnServerAddPlayer(NetworkConnectionToClient conn )
+    {
+        base.OnServerAddPlayer(conn);
+    }
+
 
     #region Server
     public void SetIpAddress(string ipAddress) => networkAddress = ipAddress;
@@ -98,6 +110,7 @@ public class AdminNetworkManager : NetworkManager
 
         return isActivePlayerInServer;
     }
+
 
     #endregion
 
