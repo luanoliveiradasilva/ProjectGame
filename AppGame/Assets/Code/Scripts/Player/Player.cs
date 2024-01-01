@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using Mirror;
 using Scripts.Admin;
@@ -85,26 +84,20 @@ public class Player : NetworkBehaviour
 
     private void SetPlayer()
     {
+
         playerUIObject = Instantiate(playerUIPrefab, AdminUI.GetPlayersPanel());
         playerUI = playerUIObject.GetComponent<PlayerUI>();
         playerId = netIdentity.netId.ToString();
         playerUI.name = playerId;
+
+        if (netIdentity.netId.Equals(1))
+            playerUIObject.SetActive(false);
     }
 
     private void SetDataPlayerToLeadboard()
     {
-        /* CmdSetPlayerId(); */
         CmdSetPlayerNames(playerNameLocal);
-        /*  CmdSetPlayerTime(newTimeLocal); */
     }
-
-    /*     public override void OnStopClient()
-        {
-            OnPlayerNameChanged = null;
-            OnPlayerScoreGameChanged = null;
-
-            Destroy(playerUIObject);
-        } */
 
     public void ExecutarComando()
     {
@@ -185,16 +178,16 @@ public class Player : NetworkBehaviour
     {
         try
         {
-            var teste = AdminUI.GetPlayersPanel().childCount;
+            var getChildCount = AdminUI.GetPlayersPanel().childCount;
 
-            for (int i = 0; i < teste; i++)
+            for (int i = 0; i < getChildCount; i++)
             {
-                var teste2 = AdminUI.GetPlayersPanel().GetChild(i).gameObject;
+                var getChildPanel = AdminUI.GetPlayersPanel().GetChild(i).gameObject;
 
-                 if (teste2.name.Equals(playerId))
-                 {
-                     playerUI.OnTimeGameChanged(newTime);
-                 }
+                if (getChildPanel.name.Equals(playerId))
+                {
+                    playerUI.OnTimeGameChanged(newTime);
+                }
             }
         }
         catch (Exception ex)
@@ -209,23 +202,9 @@ public class Player : NetworkBehaviour
 
     #endregion
 
-    //Id Player
-    /* [Command(requiresAuthority = false)]
-    private void CmdSetPlayerId(NetworkConnectionToClient sender = null) => playerUI.OnPlayerIdChanged(sender.identity.netId.ToString()); */
-
     //Name Player
     [Command]
     private void CmdSetPlayerNames(string localPlayerName) => playerUI.OnPlayerNameChanged(localPlayerName);
-
-    /*   [ClientRpc]
-      private void RpcSetPlayerName(string localPlayerName) => playerUI.OnPlayerNameChanged(localPlayerName); */
-
-    /*     //Time Player
-        [Command]
-        private void CmdSetPlayerTime(string newScore) => RpcSetPlayerScore(newScore);
-
-        [ClientRpc]
-        private void RpcSetPlayerScore(string newScore) => playerScore = newScore; */
 
 }
 
