@@ -5,6 +5,7 @@ namespace Scripts.Costumize
     {
         Hair,
         Eyes,
-        Clothings
+        Pants,
+        Shirt
     }
 }

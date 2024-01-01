@@ -11,7 +11,7 @@ namespace Scripts.Costumize
         [SerializeField] private Canvas canvas;
         private RectTransform rectTransform;
         private CanvasGroup canvasGroup;
-
+        public Vector3 beginPositionInPanel;
         private readonly string nameUI = "Customize UI";
 
         private void Awake()
@@ -25,15 +25,15 @@ namespace Scripts.Costumize
         private void Start()
         {
            var getRigidbody = GetComponent<Rigidbody2D>();
-           var getCollider = GetComponent<BoxCollider2D>();
            getRigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
-           getCollider.isTrigger = true;
         }
 
         public void OnBeginDrag(PointerEventData eventData)
         {
             canvasGroup.alpha = 0.6f;
             canvasGroup.blocksRaycasts = false;
+
+            beginPositionInPanel = gameObject.transform.position;
         }
 
         public void OnDrag(PointerEventData eventData)

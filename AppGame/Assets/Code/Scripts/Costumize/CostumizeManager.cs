@@ -14,12 +14,14 @@ public class CostumizeManager : MonoBehaviour
     [SerializeField] private Button nextButton;
     [SerializeField] private Button returnButton;
 
-    private readonly List<GameObject> listOfInPanels = new();
+    /*  private readonly List<GameObject> listOfInPanels = new(); */
 
     private GameObject getObjectInPanel;
     private int indexPanels;
     private Button nextBtn;
     private Button returnBtn;
+    [SerializeField] private float DOMoveXPanel = 500;
+
 
     private void Awake()
     {
@@ -71,11 +73,14 @@ public class CostumizeManager : MonoBehaviour
             {
                 var getObject = getTransformObject.GetChild(j).gameObject;
 
-                getObject.AddComponent<DragAndDrop>();
+                if (!getObject.name.Equals("Colors"))
+                    getObject.AddComponent<DragAndDrop>();
 
-                if (getObject != null)
+                if (getObject.name.Equals("Colors"))
                 {
-                    listOfInPanels.Add(getObject);
+                    var getLayoutElement = getObject.GetComponent<LayoutElement>();
+
+                    getLayoutElement.ignoreLayout = true;
                 }
             }
         }
@@ -83,7 +88,7 @@ public class CostumizeManager : MonoBehaviour
 
     private void OnNextButton()
     {
-        listOfPanels[indexPanels].transform.DOMoveX(480, 1).SetEase(Ease.OutCirc);
+        listOfPanels[indexPanels].transform.DOMoveX(DOMoveXPanel, 1).SetEase(Ease.OutCirc);
 
         var getLastElement = listOfPanels.IndexOf(listOfPanels.Last());
 
@@ -111,6 +116,6 @@ public class CostumizeManager : MonoBehaviour
         if (returnBtn.interactable == true)
             nextBtn.interactable = true;
 
-        listOfPanels[indexPanels].transform.DOMoveX(-480, 1).SetEase(Ease.OutCirc);
+        listOfPanels[indexPanels].transform.DOMoveX(-DOMoveXPanel, 1).SetEase(Ease.OutCirc);
     }
 }

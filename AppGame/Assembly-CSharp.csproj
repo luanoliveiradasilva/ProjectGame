@@ -117,6 +117,7 @@
     <Compile Include="Assets\Src\Plugins\Demigiant\DOTween\Modules\DOTweenModuleUtils.cs" />
     <Compile Include="Assets\Code\Scripts\GameManager.cs" />
     <Compile Include="Assets\Src\TextMesh Pro\Examples &amp; Extras\Scripts\SkewTextExample.cs" />
+    <Compile Include="Assets\Code\Scripts\Costumize\CostumizeHair.cs" />
     <Compile Include="Assets\Src\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_A.cs" />
     <Compile Include="Assets\Code\Scripts\Game\Screens\FirstScreen\AnimationList.cs" />
     <Compile Include="Assets\Src\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshSpawner.cs" />
