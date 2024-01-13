@@ -107,7 +107,6 @@
     <Compile Include="Assets\Code\Scripts\Game\Screens\ThirdScreen\AnimationTutorial.cs" />
     <Compile Include="Assets\Code\Scripts\Player\Player.cs" />
     <Compile Include="Assets\Src\TextMesh Pro\Examples &amp; Extras\Scripts\ChatController.cs" />
-    <Compile Include="Assets\Code\Scripts\Game\Tutorial\AnimationTutorial.cs" />
     <Compile Include="Assets\Code\Scripts\Game\Screens\SecondScreen\SecondScreenManager.cs" />
     <Compile Include="Assets\Code\Scripts\UI\AnimationLeadboard.cs" />
     <Compile Include="Assets\Code\Scripts\Costumize\EnumTags.cs" />
