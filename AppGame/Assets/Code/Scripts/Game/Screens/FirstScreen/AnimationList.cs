@@ -30,13 +30,11 @@ namespace Screens.FirstScreen
         {
             canvasGroup.alpha = 0f;
             rectTransform.transform.localPosition = new Vector3(localPosX, localPosY, 0f);
-            rectTransform.DOAnchorPos(new Vector2(43f, 0f), fadeTime, false).SetEase(Ease.OutElastic);
+            rectTransform.DOAnchorPosY(0, fadeTime, false).SetEase(Ease.OutElastic);
             canvasGroup.DOFade(1, fadeTimeColor);
 
             StartCoroutine(PanelFadeOut());
         }
-
-
 
         IEnumerator PanelFadeOut()
         {
@@ -44,7 +42,7 @@ namespace Screens.FirstScreen
 
             canvasGroup.alpha = 1f;
             rectTransform.transform.localPosition = new Vector3(localPosX, 0f, 0f);
-            rectTransform.DOAnchorPos(new Vector2(43f, localPosY), fadeTime, false).SetEase(Ease.InOutQuint);
+            rectTransform.DOAnchorPosY(localPosY, fadeTime, false).SetEase(Ease.InOutQuint);
             canvasGroup.DOFade(0, fadeTime);
 
             yield return new WaitForSeconds(waitTimeProduct);

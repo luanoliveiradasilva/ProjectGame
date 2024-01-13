@@ -5,9 +5,9 @@ using Scripts.Admin;
 using Scripts.Player;
 using UnityEngine;
 
-
 public class Player : NetworkBehaviour
 {
+    public event Action<string> OnPlayerIdChanged;
     public event Action<string> OnPlayerNameChanged;
     public event Action<string> OnPlayerScoreGameChanged;
 
@@ -17,9 +17,7 @@ public class Player : NetworkBehaviour
     private GameObject playerUIObject;
     private PlayerUI playerUI;
 
-    private HashSet<string> hasSetId = new();
-
-    private string idPlayer;
+    private int playerIdLocal;
     private string playerNameLocal;
     private string nameLevelLocal;
     private string screenLevelLocal;
@@ -46,6 +44,9 @@ public class Player : NetworkBehaviour
 
     [Header("SyncVars")]
 
+    [SyncVar(hook = nameof(PlayerIdChanged))]
+    public string playerId;
+
     [SyncVar(hook = nameof(PlayerNameChanged))]
     public string playerName;
 
@@ -53,36 +54,51 @@ public class Player : NetworkBehaviour
     public string playerScore;
 
 
-    private void PlayerNameChanged(string oldPlayerName, string newPlayerName) => OnPlayerNameChanged?.Invoke(newPlayerName);
-
-    private void PlayerScoreGameChanged(string oldPlayerScoreGame, string newPlayerScoreGame) => OnPlayerScoreGameChanged?.Invoke(newPlayerScoreGame);
+    private void PlayerIdChanged(string _, string newPlayerId) => OnPlayerIdChanged?.Invoke(newPlayerId);
+    private void PlayerNameChanged(string _, string newPlayerName) => OnPlayerNameChanged?.Invoke(newPlayerName);
+    private void PlayerScoreGameChanged(string _, string newPlayerScoreGame) => OnPlayerScoreGameChanged?.Invoke(newPlayerScoreGame);
 
     #endregion
+
+
+    private void Start()
+    {
+        if (netIdentity.netId.Equals(1))
+            gameObject.SetActive(false);
+
+        if (!isLocalPlayer && isClientOnly)
+        {
+            gameObject.SetActive(false);
+        }
+    }
 
     #region Client
     public override void OnStartClient()
     {
+        playerNameLocal = PlayerPrefs.GetString("Player");
+
+        SetPlayer();
 
         SetDataPlayerToLeadboard();
+    }
 
-        InstantiatePlayerDataInTheUI();
+    private void SetPlayer()
+    {
+
+        playerUIObject = Instantiate(playerUIPrefab, AdminUI.GetPlayersPanel());
+        playerUI = playerUIObject.GetComponent<PlayerUI>();
+        playerId = netIdentity.netId.ToString();
+        playerUI.name = playerId;
+
+        if (netIdentity.netId.Equals(1))
+            playerUIObject.SetActive(false);
     }
 
     private void SetDataPlayerToLeadboard()
     {
         CmdSetPlayerNames(playerNameLocal);
-        CmdSetPlayerTime(newTimeLocal);
     }
 
-    private void InstantiatePlayerDataInTheUI()
-    {
-        playerUIObject = Instantiate(playerUIPrefab, AdminUI.GetPlayersPanel());
-        playerUI = playerUIObject.GetComponent<PlayerUI>();
-
-        playerUI.name = connectionToClient.identity.netId.ToString();
-
-        idPlayer = playerUI.name;
-    }
 
     public override void OnStopClient()
     {
@@ -92,95 +108,112 @@ public class Player : NetworkBehaviour
         Destroy(playerUIObject);
     }
 
-    public void ExecutartComando()
-    {
-        playerNameLocal = PlayerPrefs.GetString("Player");
-        nameLevelLocal = PlayerPrefs.GetString("Level");
-        screenLevelLocal = PlayerPrefs.GetString("Screen");
-        rightLocal = PlayerPrefs.GetInt("Right");
-        wrongLocal = PlayerPrefs.GetInt("Wrong");
-
-        getTimeGame = PlayerPrefs.GetFloat("Time");
-
-        float minutesLocal = Mathf.FloorToInt(getTimeGame / 60);
-        float secontsLocal = Mathf.FloorToInt(getTimeGame % 60);
-
-        newTimeLocal = string.Format("{0:00}:{1:00}", minutesLocal, secontsLocal);
-
-        SetPlayerData();
-
-        newTimeGame += getTimeGame;
-
-        float minutes = Mathf.FloorToInt(newTimeGame / 60);
-        float seconts = Mathf.FloorToInt(newTimeGame % 60);
-
-        newTime = string.Format("{0:00}:{1:00}", minutes, seconts);
-
-        CmdBotaoClicado(newTime, playerNameLocal);
-    }
-
-    [Command(requiresAuthority = false)]
-    private void CmdBotaoClicado(string newTime, string playerNameLocal) => RpcReceive(newTime, playerNameLocal);
-
-    [ClientRpc]
-    void RpcReceive(string newTimeGame, string playerNameLocal)
+    public void ExecutarComando()
     {
         try
         {
-            if (playerUIObject.TryGetComponent<PlayerUI>(out playerUI))
+            playerNameLocal = PlayerPrefs.GetString("Player");
+            nameLevelLocal = PlayerPrefs.GetString("Level");
+            screenLevelLocal = PlayerPrefs.GetString("Screen");
+            rightLocal = PlayerPrefs.GetInt("Right");
+            wrongLocal = PlayerPrefs.GetInt("Wrong");
+
+            getTimeGame = PlayerPrefs.GetFloat("Time");
+
+            float minutesLocal = Mathf.FloorToInt(getTimeGame / 60);
+            float secontsLocal = Mathf.FloorToInt(getTimeGame % 60);
+
+            newTimeLocal = string.Format("{0:00}:{1:00}", minutesLocal, secontsLocal);
+
+            SetPlayerData();
+
+            SetNewTimeGame();
+
+        }
+        catch (Exception)
+        {
+            Debug.Log($"Debug Erro ao pegar os dados");
+        }
+    }
+
+    private void SetPlayerData()
+    {
+        try
+        {
+            List<PlayerDatas> playerDatas = new();
+
+            PlayerDatas playerSetData = new()
             {
-                if (playerUI.name.Equals(idPlayer))
+                player = playerNameLocal,
+                level = nameLevelLocal,
+                screen = screenLevelLocal,
+                right = rightLocal,
+                wrong = wrongLocal,
+                time = newTimeLocal
+            };
+
+            playerDatas.Add(playerSetData);
+
+            CmdCommandSet(playerDatas);
+        }
+        catch (Exception)
+        {
+            Debug.Log($"Debug Erro ao adicionar os dados");
+        }
+
+    }
+
+    private void SetNewTimeGame()
+    {
+        try
+        {
+            newTimeGame += getTimeGame;
+
+            float minutes = Mathf.FloorToInt(newTimeGame / 60);
+            float seconts = Mathf.FloorToInt(newTimeGame % 60);
+
+            newTime = string.Format("{0:00}:{1:00}", minutes, seconts);
+
+            CmdBotaoClicado(newTime);
+        }
+        catch (Exception)
+        {
+            Debug.Log($"Debug Erro ao atualizar o tempo do jogador");
+        }
+    }
+
+    [Command]
+    private void CmdBotaoClicado(string newTime)
+    {
+        try
+        {
+            var getChildCount = AdminUI.GetPlayersPanel().childCount;
+
+            for (int i = 0; i < getChildCount; i++)
+            {
+                var getChildPanel = AdminUI.GetPlayersPanel().GetChild(i).gameObject;
+
+                if (getChildPanel.name.Equals(playerId))
                 {
-                    playerUI.OnPlayerNameChanged(playerNameLocal);
-                    playerUI.OnTimeGameChanged(newTimeGame);
+                    playerUI.OnTimeGameChanged(newTime);
                 }
             }
         }
         catch (Exception ex)
         {
-            throw new ArgumentException("Player UI not found: " + ex.Message);
+            Debug.Log($"Erro ao executar o command em {ex.Message}");
         }
     }
 
-
-    private void SetPlayerData()
-    {
-        List<PlayerDatas> playerDatas = new();
-
-        PlayerDatas playerSetData = new()
-        {
-            player = playerNameLocal,
-            level = nameLevelLocal,
-            screen = screenLevelLocal,
-            right = rightLocal,
-            wrong = wrongLocal,
-            time = newTimeLocal
-        };
-
-        playerDatas.Add(playerSetData);
-
-        RpcCommandSet(playerDatas);
-    }
-
     [Command]
-    private void RpcCommandSet(List<PlayerDatas> playerDatas) =>
+    private void CmdCommandSet(List<PlayerDatas> playerDatas) =>
         AdminNetworkManager.instance.SetPlayerData(playerDatas);
 
     #endregion
 
     //Name Player
     [Command]
-    private void CmdSetPlayerNames(string localPlayerName) => RpcSetPlayerName(localPlayerName);
-
-    [ClientRpc]
-    private void RpcSetPlayerName(string localPlayerName) => playerName = localPlayerName;
-
-    //Time Player
-    [Command]
-    private void CmdSetPlayerTime(string newScore) => RpcSetPlayerScore(newScore);
-
-    [ClientRpc]
-    private void RpcSetPlayerScore(string newScore) => playerScore = newScore;
+    private void CmdSetPlayerNames(string localPlayerName) => playerUI.OnPlayerNameChanged(localPlayerName);
 
 }
 

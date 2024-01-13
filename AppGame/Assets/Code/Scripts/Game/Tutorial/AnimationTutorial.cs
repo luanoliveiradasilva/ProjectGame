@@ -1,16 +1,17 @@
+using System;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 
+
+
 namespace Tutorial
 {
+    [Obsolete("Not used any more", true)]
     public class AnimationTutorial : MonoBehaviour
     {
         [SerializeField] private float fadeTime = 1f;
-
         [SerializeField] private List<GameObject> listTutorial = new();
-
-        [HideInInspector] public bool isTutorial;
 
         private void Start()
         {
@@ -18,12 +19,7 @@ namespace Tutorial
             {
                 item.transform.localScale = Vector3.zero;
 
-                isTutorial = item.CompareTag("Tutorial");
-
-                if (isTutorial)
-                {
-                    ActiveAnimation();
-                }
+                ActiveAnimation();
             }
         }
 

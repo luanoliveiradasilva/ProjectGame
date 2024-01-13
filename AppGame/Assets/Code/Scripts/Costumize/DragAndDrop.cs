@@ -3,13 +3,15 @@ using UnityEngine.EventSystems;
 
 namespace Scripts.Costumize
 {
-    [RequireComponent (typeof (CanvasGroup))]
+    [RequireComponent(typeof(CanvasGroup))]
+    [RequireComponent(typeof(Rigidbody2D))]
+    [RequireComponent(typeof(BoxCollider2D))]
     public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
     {
         [SerializeField] private Canvas canvas;
         private RectTransform rectTransform;
         private CanvasGroup canvasGroup;
-
+        public Vector3 beginPositionInPanel;
         private readonly string nameUI = "Customize UI";
 
         private void Awake()
@@ -20,10 +22,21 @@ namespace Scripts.Costumize
             canvas = GameObject.Find(nameUI).GetComponent<Canvas>();
         }
 
+        private void Start()
+        {
+           var getRigidbody = GetComponent<Rigidbody2D>();
+           getRigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
+
+           var getCollider = GetComponent<BoxCollider2D>();
+           getCollider.size = new Vector3(150.0f, 150.0f, 0f);
+        }
+
         public void OnBeginDrag(PointerEventData eventData)
         {
             canvasGroup.alpha = 0.6f;
             canvasGroup.blocksRaycasts = false;
+
+            beginPositionInPanel = gameObject.transform.position;
         }
 
         public void OnDrag(PointerEventData eventData)

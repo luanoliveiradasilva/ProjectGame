@@ -14,6 +14,7 @@ namespace Screens.ThirdScreen
         [SerializeField] private int incorrectObject;
         [SerializeField] private GameObject screenVictory;
         [SerializeField] private GameObject screenLevel;
+        private GameManager gameManager;
 
         private TimeGame timeGame;
         private bool isVictory;
@@ -25,6 +26,7 @@ namespace Screens.ThirdScreen
         private void Awake()
         {
             timeGame = FindObjectOfType<TimeGame>();
+            gameManager = FindObjectOfType<GameManager>();
         }
 
         private void Start()
@@ -39,7 +41,6 @@ namespace Screens.ThirdScreen
 
                 if (prod.CompareTag(tagRight))
                 {
-
                     InstantiateGameObject(j, prod);
 
                     InstatiateObject(j, prod);
@@ -90,7 +91,7 @@ namespace Screens.ThirdScreen
             {
                 var getValueToRemove = getProd.transform.GetChild(i).gameObject;
 
-                if (getValueToRemove.name.Equals("Value Text (TMP)"))
+                if (getValueToRemove.name.Equals("Value Text (TMP)") || getValueToRemove.name.Equals("Euro Text (TMP)"))
                 {
                     Destroy(getValueToRemove);
                 }
@@ -102,17 +103,24 @@ namespace Screens.ThirdScreen
             var removeComponentDragAndDrop = getObject.GetComponent<DragAndDropObject>();
             var removeComponentRigid = getObject.GetComponent<Rigidbody2D>();
             var removeComponentCollider = getObject.GetComponent<BoxCollider2D>();
+            var removeGroupCanvas = getObject.GetComponent<CanvasGroup>();
 
             Destroy(removeComponentDragAndDrop);
             Destroy(removeComponentRigid);
             Destroy(removeComponentCollider);
+            Destroy(removeGroupCanvas);
         }
 
         public void SetRight()
         {
             correctObject++;
 
-            if (correctObject.Equals(quantityProducts))
+            if (correctObject.Equals(quantityProducts) && gameManager.NameGame != "Level 2")
+            {
+                SetPlayerPrefs(correctObject);
+            }
+
+            if (gameManager.NameGame.Equals("Level 2") && correctObject.Equals(6))
             {
                 SetPlayerPrefs(correctObject);
             }

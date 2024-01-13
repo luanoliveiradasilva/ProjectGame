@@ -10,12 +10,17 @@ namespace Screens.SecondScreen
         [SerializeField] private List<GameObject> listComponents = new();
         [SerializeField] private GameObject componentButtons;
         [SerializeField] private GameObject componentTexts;
+        [SerializeField] private GameObject title;
 
         private readonly float timeScale = 1f;
         private readonly float WaitTime = 0.25f;
 
         private void Start()
         {
+            title.transform.localScale = Vector3.zero;
+            
+            title.transform.DOScale(timeScale, timeScale).SetEase(Ease.OutBounce);
+
             int chilButton = componentButtons.transform.childCount;
 
             for (var i = 0; i < chilButton; i++)

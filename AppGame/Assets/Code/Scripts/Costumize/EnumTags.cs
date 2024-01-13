@@ -4,6 +4,8 @@ namespace Scripts.Costumize
     public enum EnumTags
     {
         Hair,
-        Eyes
+        Eyes,
+        Pants,
+        Shirt
     }
 }

@@ -21,7 +21,7 @@ namespace Tutorial
         {
             if (eventData.pointerDrag != null && tutorialScreen.IsTutorialEnabled())
             {
-                eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition = GetComponent<RectTransform>().anchoredPosition;
+                eventData.pointerDrag.GetComponent<RectTransform>().position = GetComponent<RectTransform>().position;
             }
         }
 
