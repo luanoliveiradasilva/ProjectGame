@@ -17,11 +17,16 @@ namespace Screens.FirstScreen
         [SerializeField] private GameObject screenVictory;
         [SerializeField] private GameObject screenLevel;
         private TimeGame timeGame;
+        private GameManager gameManager;
         private bool isVictory;
         private readonly int quantityProducts = 4;
         private bool isRight;
         private string isName;
 
+        private void Awake()
+        {
+            gameManager = FindObjectOfType<GameManager>();
+        }
 
         private void Start()
         {
@@ -58,18 +63,28 @@ namespace Screens.FirstScreen
 
         private void SetPlayerPrefs()
         {
-            if (correctProduct.Equals(quantityProducts))
+            if (correctProduct.Equals(quantityProducts) && gameManager.NameGame != "Level 2")
             {
-                PlayerPrefs.SetString("Screen", "Tela 1");
-                PlayerPrefs.SetInt("Right", correctProduct);
-                PlayerPrefs.SetInt("Wrong", incorrectProduct);
-
-                timeGame.StopTimeGame(false);
-
-                isVictory = true;
-
-                ActiveVictory(isVictory);
+                PlayerPrefsScreen();
             }
+
+            if (gameManager.NameGame.Equals("Level 2") && correctProduct.Equals(6))
+            {
+                PlayerPrefsScreen();
+            }
+        }
+
+        private void PlayerPrefsScreen()
+        {
+            PlayerPrefs.SetString("Screen", "Tela 1");
+            PlayerPrefs.SetInt("Right", correctProduct);
+            PlayerPrefs.SetInt("Wrong", incorrectProduct);
+
+            timeGame.StopTimeGame(false);
+
+            isVictory = true;
+
+            ActiveVictory(isVictory);
         }
 
         private void ActiveVictory(bool isVictory)

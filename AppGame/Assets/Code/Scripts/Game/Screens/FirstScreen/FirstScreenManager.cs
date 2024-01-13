@@ -112,6 +112,7 @@ namespace Screens.FirstScreen
 
             foreach (var item in product)
             {
+
                 bool isRight = item.CompareTag(tagRight);
 
                 if (isRight)

@@ -5,13 +5,19 @@ namespace Screens.ThirdScreen
 {
     public class GameObjectDrop : MonoBehaviour, IDropHandler
     {
+
+        [SerializeField] GameObject[] getPosObjects;
         private ThirdScreenManager thirdScreenManager;
+        private DragAndDropObject dragAndDropObject;
         private string isNameRight;
         private string isNameWrong;
+        private Vector3 getPos;
+        private bool isWrong;
 
-        private void Start()
+        private void Awake()
         {
             thirdScreenManager = FindObjectOfType<ThirdScreenManager>();
+            dragAndDropObject = FindObjectOfType<DragAndDropObject>();
         }
 
         private void OnTriggerEnter2D(Collider2D other)
@@ -31,13 +37,14 @@ namespace Screens.ThirdScreen
             }
         }
 
+        //TODO adicionar condicao para retornar ao lugar quando errar.
+
         public void OnDrop(PointerEventData eventData)
         {
             if (eventData.pointerDrag != null)
             {
-                eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition = GetComponent<RectTransform>().anchoredPosition;
+                eventData.pointerDrag.GetComponent<RectTransform>().position = GetComponent<RectTransform>().position;
             }
         }
-
     }
 }

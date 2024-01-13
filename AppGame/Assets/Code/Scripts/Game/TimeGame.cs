@@ -30,7 +30,7 @@ namespace Scripts.Game
             float newTimeScore = timeExecute;
             PlayerPrefs.SetFloat("Time", newTimeScore);
 
-            Debug.Log(PlayerPrefs.GetFloat("Time"));
+            Debug.Log($"Time Game {GameManager.Instance.NameGame} : {PlayerPrefs.GetFloat("Time")}");
         }
     }
 }
