@@ -1,0 +1,855 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Assembly-CSharp-Editor.csproj": {}
+  },
+  "projects": {
+    "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Assembly-CSharp-Editor.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Assembly-CSharp-Editor.csproj",
+        "projectName": "Assembly-CSharp-Editor",
+        "projectPath": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Assembly-CSharp-Editor.csproj",
+        "packagesPath": "C:\\Users\\luann\\.nuget\\packages\\",
+        "outputPath": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\luann\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "targetAlias": "netstandard2.1",
+            "projectReferences": {
+              "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Assembly-CSharp.csproj": {
+                "projectPath": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Assembly-CSharp.csproj"
+              },
+              "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\kcp2k.csproj": {
+                "projectPath": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\kcp2k.csproj"
+              },
+              "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Mirror.Authenticators.csproj": {
+                "projectPath": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Mirror.Authenticators.csproj"
+              },
+              "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Mirror.CompilerSymbols.csproj": {
+                "projectPath": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Mirror.CompilerSymbols.csproj"
+              },
+              "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Mirror.Components.csproj": {
+                "projectPath": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Mirror.Components.csproj"
+              },
+              "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Mirror.csproj": {
+                "projectPath": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Mirror.csproj"
+              },
+              "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Mirror.Editor.csproj": {
+                "projectPath": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Mirror.Editor.csproj"
+              },
+              "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Mirror.Examples.csproj": {
+                "projectPath": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Mirror.Examples.csproj"
+              },
+              "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Mirror.Transports.csproj": {
+                "projectPath": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Mirror.Transports.csproj"
+              },
+              "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\ParrelSync.csproj": {
+                "projectPath": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\ParrelSync.csproj"
+              },
+              "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\SimpleWebTransport.csproj": {
+                "projectPath": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\SimpleWebTransport.csproj"
+              },
+              "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Telepathy.csproj": {
+                "projectPath": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Telepathy.csproj"
+              },
+              "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Unity.Subsystem.Registration.csproj": {
+                "projectPath": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Unity.Subsystem.Registration.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "targetAlias": "netstandard2.1",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Assembly-CSharp.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Assembly-CSharp.csproj",
+        "projectName": "Assembly-CSharp",
+        "projectPath": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Assembly-CSharp.csproj",
+        "packagesPath": "C:\\Users\\luann\\.nuget\\packages\\",
+        "outputPath": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\luann\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "targetAlias": "netstandard2.1",
+            "projectReferences": {
+              "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\kcp2k.csproj": {
+                "projectPath": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\kcp2k.csproj"
+              },
+              "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Mirror.Authenticators.csproj": {
+                "projectPath": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Mirror.Authenticators.csproj"
+              },
+              "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Mirror.CompilerSymbols.csproj": {
+                "projectPath": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Mirror.CompilerSymbols.csproj"
+              },
+              "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Mirror.Components.csproj": {
+                "projectPath": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Mirror.Components.csproj"
+              },
+              "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Mirror.csproj": {
+                "projectPath": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Mirror.csproj"
+              },
+              "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Mirror.Editor.csproj": {
+                "projectPath": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Mirror.Editor.csproj"
+              },
+              "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Mirror.Examples.csproj": {
+                "projectPath": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Mirror.Examples.csproj"
+              },
+              "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Mirror.Transports.csproj": {
+                "projectPath": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Mirror.Transports.csproj"
+              },
+              "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\ParrelSync.csproj": {
+                "projectPath": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\ParrelSync.csproj"
+              },
+              "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\SimpleWebTransport.csproj": {
+                "projectPath": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\SimpleWebTransport.csproj"
+              },
+              "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Telepathy.csproj": {
+                "projectPath": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Telepathy.csproj"
+              },
+              "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Unity.Subsystem.Registration.csproj": {
+                "projectPath": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Unity.Subsystem.Registration.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "targetAlias": "netstandard2.1",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\kcp2k.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\kcp2k.csproj",
+        "projectName": "kcp2k",
+        "projectPath": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\kcp2k.csproj",
+        "packagesPath": "C:\\Users\\luann\\.nuget\\packages\\",
+        "outputPath": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\luann\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "targetAlias": "netstandard2.1",
+            "projectReferences": {
+              "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Mirror.csproj": {
+                "projectPath": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Mirror.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "targetAlias": "netstandard2.1",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Mirror.Authenticators.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Mirror.Authenticators.csproj",
+        "projectName": "Mirror.Authenticators",
+        "projectPath": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Mirror.Authenticators.csproj",
+        "packagesPath": "C:\\Users\\luann\\.nuget\\packages\\",
+        "outputPath": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\luann\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "targetAlias": "netstandard2.1",
+            "projectReferences": {
+              "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Mirror.csproj": {
+                "projectPath": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Mirror.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "targetAlias": "netstandard2.1",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Mirror.CompilerSymbols.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Mirror.CompilerSymbols.csproj",
+        "projectName": "Mirror.CompilerSymbols",
+        "projectPath": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Mirror.CompilerSymbols.csproj",
+        "packagesPath": "C:\\Users\\luann\\.nuget\\packages\\",
+        "outputPath": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\luann\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "targetAlias": "netstandard2.1",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "targetAlias": "netstandard2.1",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Mirror.Components.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Mirror.Components.csproj",
+        "projectName": "Mirror.Components",
+        "projectPath": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Mirror.Components.csproj",
+        "packagesPath": "C:\\Users\\luann\\.nuget\\packages\\",
+        "outputPath": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\luann\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "targetAlias": "netstandard2.1",
+            "projectReferences": {
+              "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Mirror.csproj": {
+                "projectPath": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Mirror.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "targetAlias": "netstandard2.1",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Mirror.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Mirror.csproj",
+        "projectName": "Mirror",
+        "projectPath": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Mirror.csproj",
+        "packagesPath": "C:\\Users\\luann\\.nuget\\packages\\",
+        "outputPath": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\luann\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "targetAlias": "netstandard2.1",
+            "projectReferences": {
+              "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Mirror.CompilerSymbols.csproj": {
+                "projectPath": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Mirror.CompilerSymbols.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "targetAlias": "netstandard2.1",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Mirror.Editor.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Mirror.Editor.csproj",
+        "projectName": "Mirror.Editor",
+        "projectPath": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Mirror.Editor.csproj",
+        "packagesPath": "C:\\Users\\luann\\.nuget\\packages\\",
+        "outputPath": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\luann\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "targetAlias": "netstandard2.1",
+            "projectReferences": {
+              "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Mirror.csproj": {
+                "projectPath": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Mirror.csproj"
+              },
+              "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Unity.Mirror.CodeGen.csproj": {
+                "projectPath": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Unity.Mirror.CodeGen.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "targetAlias": "netstandard2.1",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Mirror.Examples.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Mirror.Examples.csproj",
+        "projectName": "Mirror.Examples",
+        "projectPath": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Mirror.Examples.csproj",
+        "packagesPath": "C:\\Users\\luann\\.nuget\\packages\\",
+        "outputPath": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\luann\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "targetAlias": "netstandard2.1",
+            "projectReferences": {
+              "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Mirror.Components.csproj": {
+                "projectPath": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Mirror.Components.csproj"
+              },
+              "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Mirror.csproj": {
+                "projectPath": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Mirror.csproj"
+              },
+              "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Mirror.Transports.csproj": {
+                "projectPath": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Mirror.Transports.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "targetAlias": "netstandard2.1",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Mirror.Transports.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Mirror.Transports.csproj",
+        "projectName": "Mirror.Transports",
+        "projectPath": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Mirror.Transports.csproj",
+        "packagesPath": "C:\\Users\\luann\\.nuget\\packages\\",
+        "outputPath": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\luann\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "targetAlias": "netstandard2.1",
+            "projectReferences": {
+              "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\kcp2k.csproj": {
+                "projectPath": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\kcp2k.csproj"
+              },
+              "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Mirror.csproj": {
+                "projectPath": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Mirror.csproj"
+              },
+              "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\SimpleWebTransport.csproj": {
+                "projectPath": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\SimpleWebTransport.csproj"
+              },
+              "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Telepathy.csproj": {
+                "projectPath": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Telepathy.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "targetAlias": "netstandard2.1",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\ParrelSync.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\ParrelSync.csproj",
+        "projectName": "ParrelSync",
+        "projectPath": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\ParrelSync.csproj",
+        "packagesPath": "C:\\Users\\luann\\.nuget\\packages\\",
+        "outputPath": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\luann\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "targetAlias": "netstandard2.1",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "targetAlias": "netstandard2.1",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\SimpleWebTransport.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\SimpleWebTransport.csproj",
+        "projectName": "SimpleWebTransport",
+        "projectPath": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\SimpleWebTransport.csproj",
+        "packagesPath": "C:\\Users\\luann\\.nuget\\packages\\",
+        "outputPath": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\luann\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "targetAlias": "netstandard2.1",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "targetAlias": "netstandard2.1",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Telepathy.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Telepathy.csproj",
+        "projectName": "Telepathy",
+        "projectPath": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Telepathy.csproj",
+        "packagesPath": "C:\\Users\\luann\\.nuget\\packages\\",
+        "outputPath": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\luann\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "targetAlias": "netstandard2.1",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "targetAlias": "netstandard2.1",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Unity.Mirror.CodeGen.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Unity.Mirror.CodeGen.csproj",
+        "projectName": "Unity.Mirror.CodeGen",
+        "projectPath": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Unity.Mirror.CodeGen.csproj",
+        "packagesPath": "C:\\Users\\luann\\.nuget\\packages\\",
+        "outputPath": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\luann\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "targetAlias": "netstandard2.1",
+            "projectReferences": {
+              "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Mirror.csproj": {
+                "projectPath": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Mirror.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "targetAlias": "netstandard2.1",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Unity.Subsystem.Registration.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Unity.Subsystem.Registration.csproj",
+        "projectName": "Unity.Subsystem.Registration",
+        "projectPath": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\Unity.Subsystem.Registration.csproj",
+        "packagesPath": "C:\\Users\\luann\\.nuget\\packages\\",
+        "outputPath": "D:\\Documents\\Projetos\\ProjectGame\\AppGame\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\luann\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "targetAlias": "netstandard2.1",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "targetAlias": "netstandard2.1",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
