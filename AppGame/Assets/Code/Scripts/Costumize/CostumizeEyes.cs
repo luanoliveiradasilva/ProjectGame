@@ -13,7 +13,7 @@ public class CostumizeEyes : MonoBehaviour
 
     private void Start()
     {
-        getColors = Color.white;
+        getColors = Color.gray;
 
         for (int i = 0; i < colorsButton.Length; i++)
         {

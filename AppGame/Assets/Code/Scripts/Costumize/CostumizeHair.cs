@@ -14,7 +14,7 @@ public class CostumizeHair : MonoBehaviour
 
     void Start()
     {
-        setColorBegin = Color.white;
+        setColorBegin = Color.gray;
 
         int child = getColors.transform.childCount;
 

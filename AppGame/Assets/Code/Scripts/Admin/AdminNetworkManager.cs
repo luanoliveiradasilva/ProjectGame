@@ -6,7 +6,6 @@ using Mirror.Discovery;
 using Scripts.Admin;
 using Scripts.Player;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 [AddComponentMenu("")]
@@ -15,10 +14,6 @@ public class AdminNetworkManager : NetworkManager
     public static AdminNetworkManager instance { get; private set; }
 
     [SerializeField] private GameObject getComponentInButtonServer;
-
-    [SerializeField] private GameObject login;
-    [SerializeField] private GameObject menu;
-
 
     [Header("Player UI")]
     [SerializeField] public GameObject playerUIPrefab;
@@ -56,7 +51,7 @@ public class AdminNetworkManager : NetworkManager
         instance = this;
     }
 
-    public override void OnServerAddPlayer(NetworkConnectionToClient conn)
+    public override void OnServerAddPlayer(NetworkConnectionToClient conn )
     {
         base.OnServerAddPlayer(conn);
     }
@@ -146,13 +141,4 @@ public class AdminNetworkManager : NetworkManager
         playerDataList.Add(playerData);
     }
     #endregion
-
-
-    public void ReloadScenes()
-    {
-        SceneManager.LoadScene(0);
-
-        login.SetActive(false);
-        menu.SetActive(true);
-    }
 }

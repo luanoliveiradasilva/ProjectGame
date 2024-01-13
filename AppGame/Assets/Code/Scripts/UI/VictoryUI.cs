@@ -30,14 +30,7 @@ public class VictoryUI : MonoBehaviour
 
     private void ExecutartComando()
     {
-        try
-        {
-            player.ExecutarComando();
-        }
-        catch (Exception)
-        {
-            Debug.LogError("404: Server not found");
-        }
+        player.ExecutarComando();
     }
 }
 

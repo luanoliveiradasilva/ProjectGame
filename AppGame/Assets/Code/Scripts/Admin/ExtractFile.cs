@@ -7,8 +7,6 @@ using System.Text;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
-using DG.Tweening.Core;
-using DG.Tweening.Plugins.Options;
 
 namespace Scripts.Admin
 {
@@ -23,21 +21,6 @@ namespace Scripts.Admin
         [Header("Button Extract File")]
         [Tooltip("Button Extract File")]
         [SerializeField] private GameObject getComponentInButtonExtractFile;
-
-        private readonly float waitTime = 1.0f;
-
-
-        private void OnDisable()
-        {
-            int child = getComponentInButtonExtractFile.transform.childCount;
-
-            for (int i = 0; i < child; i++)
-            {
-                var getArrow = getComponentInButtonExtractFile.transform.GetChild(i).gameObject;
-
-                getArrow.transform.DOKill();
-            }
-        }
 
         public void ExportDataToCSV()
         {
@@ -66,25 +49,18 @@ namespace Scripts.Admin
             {
                 var getArrow = getComponentInButtonExtractFile.transform.GetChild(i).gameObject;
 
-                var getScaleX = getArrow.transform.localScale.x;
-                var getScaleY = getArrow.transform.localScale.y;
-                var getPosArrow = getArrow.transform.position;
-
                 yield return new WaitForSeconds(0.5f);
 
-                getArrow.transform.DOMoveY(-50, waitTime).SetEase(Ease.OutCubic);
+                getArrow.transform.DOMoveY(-50, 1).SetEase(Ease.OutCubic);
 
                 yield return new WaitForSeconds(0.5f);
 
                 getArrow.transform.localScale = Vector3.zero;
-                getArrow.transform.DOMoveY(150, waitTime);
+                getArrow.transform.DOMoveY(150, 1);
 
-                yield return new WaitForSeconds(waitTime);
+                yield return new WaitForSeconds(1f);
 
-                getArrow.transform.position = getPosArrow;
-
-                getArrow.transform.DOScaleX(getScaleX, waitTime).SetEase(Ease.OutBounce);
-                getArrow.transform.DOScaleY(getScaleY, waitTime).SetEase(Ease.OutBounce);
+                getArrow.transform.DOScale(1f, 1f).SetEase(Ease.OutBounce);
             }
         }
 

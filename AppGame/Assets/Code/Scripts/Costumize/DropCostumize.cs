@@ -21,11 +21,11 @@ public class DropCostumize : MonoBehaviour, IDropHandler
     private bool isDropShirt;
 
 
-    private void  OnCollisionEnter2D(Collision2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        isTagWith = other.gameObject.CompareTag(gameObject.name);
+        isTagWith = other.CompareTag(gameObject.name);
 
-        switch (other.gameObject.tag)
+        switch (other.tag)
         {
             case nameof(EnumTags.Hair):
                 isHair = true;

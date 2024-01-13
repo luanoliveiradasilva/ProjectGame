@@ -13,7 +13,9 @@ public class CostumizeManager : MonoBehaviour
 
     [SerializeField] private Button nextButton;
     [SerializeField] private Button returnButton;
-    
+
+    /*  private readonly List<GameObject> listOfInPanels = new(); */
+
     private GameObject getObjectInPanel;
     private int indexPanels;
     private Button nextBtn;
@@ -79,12 +81,6 @@ public class CostumizeManager : MonoBehaviour
                     var getLayoutElement = getObject.GetComponent<LayoutElement>();
 
                     getLayoutElement.ignoreLayout = true;
-                }
-
-                if (getTransformObject.name == "Pants" || getTransformObject.name == "Shirt")
-                {
-                    if (getObject.name.Equals("Colors"))
-                        getObject.SetActive(false);
                 }
             }
         }

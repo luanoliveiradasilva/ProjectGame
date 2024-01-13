@@ -1,6 +1,12 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:AppGame/Assets/Art/Material/UI/Background/Prefabs/Background.prefab.meta
 guid: 1ff35e4c476b0a34bb6197a417084f9f
 PrefabImporter:
+========
+guid: ca2415a36353f974caac7e1ae82fb609
+folderAsset: yes
+DefaultImporter:
+>>>>>>>> 88787c2366774679393861afcfe312a5a4c39c0e:AppGame/Assets/Art/Material/Costumize/Clothes.meta
   externalObjects: {}
   userData: 
   assetBundleName: 

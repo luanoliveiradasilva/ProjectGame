@@ -99,15 +99,6 @@ public class Player : NetworkBehaviour
         CmdSetPlayerNames(playerNameLocal);
     }
 
-
-    public override void OnStopClient()
-    {
-        OnPlayerNameChanged = null;
-        OnPlayerScoreGameChanged = null;
-
-        Destroy(playerUIObject);
-    }
-
     public void ExecutarComando()
     {
         try

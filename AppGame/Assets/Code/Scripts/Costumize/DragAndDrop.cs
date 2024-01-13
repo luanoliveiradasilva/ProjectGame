@@ -26,9 +26,6 @@ namespace Scripts.Costumize
         {
            var getRigidbody = GetComponent<Rigidbody2D>();
            getRigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
-
-           var getCollider = GetComponent<BoxCollider2D>();
-           getCollider.size = new Vector3(150.0f, 150.0f, 0f);
         }
 
         public void OnBeginDrag(PointerEventData eventData)
