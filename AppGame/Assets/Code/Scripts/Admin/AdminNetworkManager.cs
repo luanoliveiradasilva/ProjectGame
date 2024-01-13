@@ -1,14 +1,26 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Mirror;
 using Mirror.Discovery;
+using Scripts.Admin;
+using Scripts.Player;
 using UnityEngine;
+using UnityEngine.UI;
 
 [AddComponentMenu("")]
 public class AdminNetworkManager : NetworkManager
 {
     public static AdminNetworkManager instance { get; private set; }
 
+    [SerializeField] private GameObject getComponentInButtonServer;
+
+    [Header("Player UI")]
+    [SerializeField] public GameObject playerUIPrefab;
+    private GameObject playerUIObject;
+    private PlayerUI playerUI;
+
+    private string playerId;
     private string playerName;
     private string playerScore;
     private string nameGame;
@@ -28,11 +40,10 @@ public class AdminNetworkManager : NetworkManager
     }
 
     public List<PlayerData> playerDataList = new();
-
     readonly Dictionary<long, ServerResponse> discoveredServers = new();
-
     public NetworkDiscovery networkDiscovery;
-
+    private bool isServerEnabled;
+    private Image getImage;
 
     public override void Awake()
     {
@@ -40,7 +51,11 @@ public class AdminNetworkManager : NetworkManager
         instance = this;
     }
 
-    public override void OnServerAddPlayer(NetworkConnectionToClient conn) => base.OnServerAddPlayer(conn);
+    public override void OnServerAddPlayer(NetworkConnectionToClient conn )
+    {
+        base.OnServerAddPlayer(conn);
+    }
+
 
     #region Server
     public void SetIpAddress(string ipAddress) => networkAddress = ipAddress;
@@ -62,6 +77,29 @@ public class AdminNetworkManager : NetworkManager
         discoveredServers.Clear();
         StartHost();
         networkDiscovery.AdvertiseServer();
+
+        StartCoroutine(StartServerUi());
+    }
+
+    IEnumerator StartServerUi()
+    {
+        int child = getComponentInButtonServer.transform.childCount;
+
+        isServerEnabled = NetworkServer.active;
+
+        for (int i = 0; i < child; i++)
+        {
+            if (isServerEnabled)
+            {
+                var getButtonServer = getComponentInButtonServer.transform.GetChild(i).gameObject;
+
+                getImage = getButtonServer.GetComponent<Image>();
+
+                yield return new WaitForSeconds(0.5f);
+
+                getImage.color = Color.green;
+            }
+        }
     }
 
     public bool SetServerPlayer()
@@ -72,6 +110,7 @@ public class AdminNetworkManager : NetworkManager
 
         return isActivePlayerInServer;
     }
+
 
     #endregion
 

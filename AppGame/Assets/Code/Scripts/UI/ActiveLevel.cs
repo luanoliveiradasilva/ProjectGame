@@ -1,35 +1,37 @@
-using System.Text.RegularExpressions;
 using UnityEngine;
 
-public class ActiveLevel : MonoBehaviour
+namespace Scripts.UI
 {
-    [Header("Games to select")]
-    [SerializeField] private GameObject[] sceneLevel;
-
-    private GameManager scenes;
-
-    private readonly string nameLevel = "Level";
-
-    private void Awake()
+    public class ActiveLevel : MonoBehaviour
     {
-        scenes = FindObjectOfType<GameManager>();
-    }
+        [Header("Games to select")]
+        [SerializeField] private GameObject[] sceneLevel;
 
-    private void Start()
-    {
-        SelectLevelGame();
-    }
+        private GameManager scenes;
 
-    public void SelectLevelGame()
-    {
-        foreach (var item in sceneLevel)
+        private readonly string nameLevel = "Level";
+
+        private void Awake()
         {
-            bool isLevel = scenes.NameGame == item.name;
+            scenes = FindObjectOfType<GameManager>();
+        }
 
-            if (isLevel)
+        private void Start()
+        {
+            SelectLevelGame();
+        }
+
+        public void SelectLevelGame()
+        {
+            foreach (var item in sceneLevel)
             {
-                PlayerPrefs.SetString(nameLevel, item.name);
-                item.SetActive(true);
+                bool isLevel = scenes.NameGame == item.name;
+
+                if (isLevel)
+                {
+                    PlayerPrefs.SetString(nameLevel, item.name);
+                    item.SetActive(true);
+                }
             }
         }
     }

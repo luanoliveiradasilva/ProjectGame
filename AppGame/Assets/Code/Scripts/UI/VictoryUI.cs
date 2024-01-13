@@ -1,11 +1,13 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
+
 
 public class VictoryUI : MonoBehaviour
 {
     [SerializeField] private Button button;
 
-    private Player playerTeste;
+    private Player player;
 
     private void Awake()
     {
@@ -15,19 +17,20 @@ public class VictoryUI : MonoBehaviour
 
             if (isExistPlayer)
             {
-                playerTeste = FindObjectOfType<Player>();
+                player = FindObjectOfType<Player>();
                 button.onClick.AddListener(ExecutartComando);
                 Debug.Log($"Victory!");
             }
         }
-        catch (System.Exception ex)
+        catch (Exception ex)
         {
-            Debug.Log($"Defeat! {ex.Message}");
+            throw new ArgumentException("It lost! " + ex.Message);
         }
     }
 
     private void ExecutartComando()
     {
-        playerTeste.ExecutartComando();
+        player.ExecutarComando();
     }
 }
+
