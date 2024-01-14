@@ -74,13 +74,13 @@
     <Compile Include="Assets\Src\TextMesh Pro\Examples &amp; Extras\Scripts\WarpTextExample.cs" />
     <Compile Include="Assets\Src\Plugins\Demigiant\DOTween\Modules\DOTweenModuleUI.cs" />
     <Compile Include="Assets\Src\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark04.cs" />
+    <Compile Include="Assets\Code\Scripts\Admin\DontDestroyServer.cs" />
     <Compile Include="Assets\Src\Plugins\Demigiant\DOTween\Modules\DOTweenModuleUnityVersion.cs" />
     <Compile Include="Assets\Src\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_DigitValidator.cs" />
     <Compile Include="Assets\Code\Scripts\Game\Screens\SecondScreen\AnimationScreenMath.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\Src\TextMesh Pro\Examples &amp; Extras\Scripts\ShaderPropAnimator.cs" />
     <Compile Include="Assets\Src\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark03.cs" />
-    <Compile Include="Assets\Code\Scripts\Game\UEventHandler.cs" />
     <Compile Include="Assets\Src\Plugins\Demigiant\DOTween\Modules\DOTweenModuleSprite.cs" />
     <Compile Include="Assets\Code\Scripts\Admin\AdminUI.cs" />
     <Compile Include="Assets\Code\Scripts\Costumize\DragAndDrop.cs" />
@@ -103,11 +103,11 @@
     <Compile Include="Assets\Code\Scripts\Game\Screens\FirstScreen\AnimationTutorial.cs" />
     <Compile Include="Assets\Code\Scripts\UI\ClickButton.cs" />
     <Compile Include="Assets\Code\Scripts\Game\Screens\ThirdScreen\ThirdScreenManager.cs" />
-    <Compile Include="Assets\Code\Scripts\Game\DialogueWriteTutorial.cs" />
     <Compile Include="Assets\Code\Scripts\Game\Screens\ThirdScreen\AnimationTutorial.cs" />
     <Compile Include="Assets\Code\Scripts\Player\Player.cs" />
     <Compile Include="Assets\Src\TextMesh Pro\Examples &amp; Extras\Scripts\ChatController.cs" />
     <Compile Include="Assets\Code\Scripts\Game\Tutorial\AnimationTutorial.cs" />
+    <Compile Include="Assets\Code\Scripts\Game\Screens\FirstScreen\GetPosObjects.cs" />
     <Compile Include="Assets\Code\Scripts\Game\Screens\SecondScreen\SecondScreenManager.cs" />
     <Compile Include="Assets\Code\Scripts\UI\AnimationLeadboard.cs" />
     <Compile Include="Assets\Code\Scripts\Costumize\EnumTags.cs" />
@@ -138,7 +138,6 @@
     <Compile Include="Assets\Code\Scripts\Player\PlayerUI.cs" />
     <Compile Include="Assets\Code\Scripts\Game\Screens\FirstScreen\AnimationProduct.cs" />
     <Compile Include="Assets\Code\Scripts\Game\Tutorial\ObjectDropTutorial.cs" />
-    <Compile Include="Assets\Code\Scripts\Game\TMPAnimated.cs" />
     <Compile Include="Assets\Src\TextMesh Pro\Examples &amp; Extras\Scripts\DropdownSample.cs" />
     <Compile Include="Assets\Code\Scripts\Game\Screens\ThirdScreen\AnimationScreen.cs" />
     <Compile Include="Assets\Src\TextMesh Pro\Examples &amp; Extras\Scripts\VertexJitter.cs" />
