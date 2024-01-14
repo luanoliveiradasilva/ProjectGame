@@ -100,13 +100,13 @@ public class Player : NetworkBehaviour
     }
 
 
-    public override void OnStopClient()
+/*     public override void OnStopClient()
     {
         OnPlayerNameChanged = null;
         OnPlayerScoreGameChanged = null;
 
         Destroy(playerUIObject);
-    }
+    } */
 
     public void ExecutarComando()
     {

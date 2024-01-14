@@ -48,4 +48,10 @@ public class GameManager : MonoBehaviour
             levelDesative.SetActive(false);
         }
     }
+
+    public void ReloadScenes()
+    {
+        DOTween.KillAll();
+        SceneManager.LoadScene(0);
+    }
 }

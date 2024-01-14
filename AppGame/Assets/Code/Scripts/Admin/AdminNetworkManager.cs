@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using Mirror;
 using Mirror.Discovery;
 using Scripts.Admin;
@@ -55,7 +56,7 @@ public class AdminNetworkManager : NetworkManager
         base.Awake();
         instance = this;
     }
-
+    
     public override void OnServerAddPlayer(NetworkConnectionToClient conn)
     {
         base.OnServerAddPlayer(conn);
@@ -146,13 +147,4 @@ public class AdminNetworkManager : NetworkManager
         playerDataList.Add(playerData);
     }
     #endregion
-
-
-    public void ReloadScenes()
-    {
-        SceneManager.LoadScene(0);
-
-        login.SetActive(false);
-        menu.SetActive(true);
-    }
 }
