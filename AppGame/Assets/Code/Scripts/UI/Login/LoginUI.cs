@@ -43,9 +43,8 @@ public class LoginUI : MonoBehaviour
         {
             bool isActivatedUser = AdminNetworkManager.instance.SetServerPlayer();
 
-            Debug.Log("Debug "+isActivatedUser);
             await Task.Delay(TimeSpan.FromSeconds(1f));
-            
+
             if (isActivatedUser)
             {
                 ReturnScenesGame();

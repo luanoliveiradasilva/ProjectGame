@@ -53,10 +53,17 @@ public class AdminNetworkManager : NetworkManager
 
     public override void Awake()
     {
-        base.Awake();
+        if (instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        // A instância não existe, então esta será a instância única
         instance = this;
+        DontDestroyOnLoad(gameObject);
     }
-    
+
     public override void OnServerAddPlayer(NetworkConnectionToClient conn)
     {
         base.OnServerAddPlayer(conn);
@@ -110,7 +117,14 @@ public class AdminNetworkManager : NetworkManager
 
     public bool SetServerPlayer()
     {
+
         StartClient();
+
+        if (instance == null)
+        {
+            Debug.LogError("A instância de AdminNetworkManager foi destruída.");
+            return false;
+        }
 
         bool isActivePlayerInServer = true;
 
