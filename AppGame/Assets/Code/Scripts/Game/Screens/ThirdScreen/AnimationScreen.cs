@@ -36,7 +36,11 @@ public class AnimationScreen : MonoBehaviour
                 prod.transform.localScale = Vector3.one;
             }
 
-            item.transform.DOMoveY(DoMoveProducts, 2.0f).SetEase(Ease.OutCubic);
+            var screenSize = Screen.width/2;
+            
+            var sizePosProdut = screenSize/4;
+
+            item.transform.DOMoveY(sizePosProdut, 1.0f).SetEase(Ease.OutCubic);
         }
     }
 

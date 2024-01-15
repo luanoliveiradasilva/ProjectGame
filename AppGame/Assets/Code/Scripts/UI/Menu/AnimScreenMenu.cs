@@ -1,30 +1,19 @@
 using System.Collections;
 using DG.Tweening;
+using DG.Tweening.Core;
+using DG.Tweening.Plugins.Options;
 using UnityEngine;
 
-public class AnimtionScreenMenu : MonoBehaviour
+public class AnimScreenMenu : MonoBehaviour
 {
-
     [SerializeField] private GameObject logoMenu;
     [SerializeField] private GameObject buttonExit;
     [SerializeField] private GameObject costumizePlayer;
     [SerializeField] private GameObject beginGame;
     [SerializeField] private Vector3 timeScaleButtons;
     [SerializeField] private Vector3 timeScaleButtonsExit;
-
     [SerializeField] private float moveLogPos;
-
     [SerializeField] private float waitTimeScale;
-
-    private float larguraAnterior;
-    private int alturaAnterior;
-    private RectTransform getPosLog;
-
-
-    private void Awake()
-    {
-        getPosLog = logoMenu.GetComponent<RectTransform>();
-    }
 
     private void Start()
     {

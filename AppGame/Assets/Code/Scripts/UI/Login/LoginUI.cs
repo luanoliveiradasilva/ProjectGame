@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using DG.Tweening;
 using Scripts.Admin;
 using TMPro;
 using UnityEngine;
@@ -11,6 +12,11 @@ public class LoginUI : MonoBehaviour
     [Tooltip("input Name player")]
     [SerializeField] private TMP_InputField playerNameInput;
     private bool isSetPlayerName;
+
+    private void OnDisable()
+    {
+        DOTween.KillAll();
+    }
 
     private void Start()
     {
@@ -58,5 +64,14 @@ public class LoginUI : MonoBehaviour
     void ReturnScenesGame()
     {
         SceneManager.LoadScene(1);
+    }
+
+    public void ExitGame()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+                    Application.Quit();
+#endif
     }
 }

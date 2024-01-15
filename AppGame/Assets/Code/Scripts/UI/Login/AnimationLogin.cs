@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using DG.Tweening.Core;
@@ -16,7 +15,8 @@ public class AnimationLogin : MonoBehaviour
     [SerializeField] private float DoMoveObjects;
     [SerializeField] private float scaleLogo;
 
-    [SerializeField] private float setPosSettings;
+    [SerializeField] private float setPosExit;
+    [SerializeField] private Vector3 scaleExit;
 
 
     private TweenerCore<Vector3, Vector3, VectorOptions> logoTween;
@@ -61,9 +61,9 @@ public class AnimationLogin : MonoBehaviour
                 item.transform.DOScale(scaleIcons, fadeTime).SetEase(Ease.OutBounce);
             }
 
-            if (item.name == "Settings")
+            if (item.name == "ExitButton")
             {
-                item.transform.DOScale(scaleIcons, fadeTime).SetEase(Ease.OutBounce);
+                item.transform.DOScale(scaleExit, fadeTime).SetEase(Ease.OutBounce);
             }
 
             yield return new WaitForSeconds(WaitTime);
