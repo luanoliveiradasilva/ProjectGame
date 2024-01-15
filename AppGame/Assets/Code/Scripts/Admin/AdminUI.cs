@@ -11,10 +11,6 @@ namespace Scripts.Admin
 
         [Tooltip("Assign Players Panel for instantiating PlayerUI as child")]
         public RectTransform playersPanel;
-
-        [Header("UI Elements")]
-        [SerializeField] internal TMP_InputField namesPlayer;
-        [SerializeField] internal Button buttonsStartClient;
     
         private static AdminUI instance;
         private void Awake() => instance = this;

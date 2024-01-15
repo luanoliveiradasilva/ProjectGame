@@ -52,6 +52,6 @@ public class GameManager : MonoBehaviour
     public void ReloadScenes()
     {
         DOTween.KillAll();
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
     }
 }
