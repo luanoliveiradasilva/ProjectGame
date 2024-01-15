@@ -53,15 +53,15 @@ public class AdminNetworkManager : NetworkManager
 
     public override void Awake()
     {
-        if (instance != null)
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
         {
             Destroy(gameObject);
-            return;
         }
-
-        // A instância não existe, então esta será a instância única
-        instance = this;
-        DontDestroyOnLoad(gameObject);
     }
 
     public override void OnServerAddPlayer(NetworkConnectionToClient conn)

@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Scripts.Admin;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LoginUI : MonoBehaviour
 {
@@ -10,8 +11,6 @@ public class LoginUI : MonoBehaviour
     [Tooltip("input Name player")]
     [SerializeField] private TMP_InputField playerNameInput;
     private bool isSetPlayerName;
-    [SerializeField] private GameObject loginPanel;
-    [SerializeField] private GameObject MainMenu;
 
     private void Start()
     {
@@ -58,7 +57,6 @@ public class LoginUI : MonoBehaviour
 
     void ReturnScenesGame()
     {
-        loginPanel.SetActive(false);
-        MainMenu.SetActive(true);
+        SceneManager.LoadScene(1);
     }
 }

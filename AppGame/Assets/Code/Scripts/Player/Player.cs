@@ -60,7 +60,10 @@ public class Player : NetworkBehaviour
 
     #endregion
 
-
+    private void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
     private void Start()
     {
         if (netIdentity.netId.Equals(1))
@@ -100,13 +103,13 @@ public class Player : NetworkBehaviour
     }
 
 
-/*     public override void OnStopClient()
-    {
-        OnPlayerNameChanged = null;
-        OnPlayerScoreGameChanged = null;
+    /*     public override void OnStopClient()
+        {
+            OnPlayerNameChanged = null;
+            OnPlayerScoreGameChanged = null;
 
-        Destroy(playerUIObject);
-    } */
+            Destroy(playerUIObject);
+        } */
 
     public void ExecutarComando()
     {
