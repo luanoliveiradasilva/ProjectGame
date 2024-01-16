@@ -122,7 +122,6 @@ public class AdminNetworkManager : NetworkManager
 
         if (instance == null)
         {
-            Debug.LogError("A instância de AdminNetworkManager foi destruída.");
             return false;
         }
 
