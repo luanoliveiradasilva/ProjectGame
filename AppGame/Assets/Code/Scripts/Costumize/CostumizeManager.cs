@@ -13,7 +13,7 @@ public class CostumizeManager : MonoBehaviour
 
     [SerializeField] private Button nextButton;
     [SerializeField] private Button returnButton;
-    
+
     private GameObject getObjectInPanel;
     private int indexPanels;
     private Button nextBtn;
@@ -120,6 +120,10 @@ public class CostumizeManager : MonoBehaviour
         if (returnBtn.interactable == true)
             nextBtn.interactable = true;
 
-        listOfPanels[indexPanels].transform.DOMoveX(-DOMoveXPanel, 1).SetEase(Ease.OutCirc);
+        var screenSize = Screen.height / 2;
+
+        var sizeMovePanel = screenSize * 2;
+
+        listOfPanels[indexPanels].transform.DOMoveX(-sizeMovePanel, 1).SetEase(Ease.OutCirc);
     }
 }

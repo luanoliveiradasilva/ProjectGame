@@ -20,7 +20,7 @@ namespace Screens.ThirdScreen
             dragAndDropObject = FindObjectOfType<DragAndDropObject>();
         }
 
-        private void OnTriggerEnter2D(Collider2D other)
+       /*  private void OnTriggerEnter2D(Collider2D other)
         {
             isNameWrong = "";
 
@@ -35,15 +35,24 @@ namespace Screens.ThirdScreen
             {
                 thirdScreenManager.SetWrong();
             }
-        }
-
-        //TODO adicionar condicao para retornar ao lugar quando errar.
+        } */
 
         public void OnDrop(PointerEventData eventData)
         {
-            if (eventData.pointerDrag != null)
+            isNameWrong = "";
+            
+            if (eventData.pointerDrag != null && eventData.pointerDrag.name.Equals(gameObject.name) && isNameRight != eventData.pointerDrag.name)
             {
                 eventData.pointerDrag.GetComponent<RectTransform>().position = GetComponent<RectTransform>().position;
+
+                thirdScreenManager.SetRight();
+
+                isNameRight = eventData.pointerDrag.name;
+            }
+
+            if (eventData.pointerDrag.name != gameObject.name && isNameWrong != eventData.pointerDrag.name)
+            {
+                thirdScreenManager.SetWrong();
             }
         }
     }

@@ -87,14 +87,21 @@ public class Player : NetworkBehaviour
 
     private void SetPlayer()
     {
+        try
+        {
+            playerUIObject = Instantiate(playerUIPrefab, AdminUI.GetPlayersPanel());
+            playerUI = playerUIObject.GetComponent<PlayerUI>();
+            playerId = netIdentity.netId.ToString();
+            playerUI.name = playerId;
 
-        playerUIObject = Instantiate(playerUIPrefab, AdminUI.GetPlayersPanel());
-        playerUI = playerUIObject.GetComponent<PlayerUI>();
-        playerId = netIdentity.netId.ToString();
-        playerUI.name = playerId;
+            if (netIdentity.netId.Equals(1))
+                playerUIObject.SetActive(false);
+        }
+        catch (Exception ex)
+        {
+            Debug.Log("Set Player "+ex.Message);
+        }
 
-        if (netIdentity.netId.Equals(1))
-            playerUIObject.SetActive(false);
     }
 
     private void SetDataPlayerToLeadboard()
@@ -103,13 +110,13 @@ public class Player : NetworkBehaviour
     }
 
 
-    /*     public override void OnStopClient()
-        {
-            OnPlayerNameChanged = null;
-            OnPlayerScoreGameChanged = null;
+    /* public override void OnStopClient()
+    {
+        OnPlayerNameChanged = null;
+        OnPlayerScoreGameChanged = null;
 
-            Destroy(playerUIObject);
-        } */
+        Destroy(playerUIObject);
+    } */
 
     public void ExecutarComando()
     {
@@ -177,7 +184,7 @@ public class Player : NetworkBehaviour
 
             newTime = string.Format("{0:00}:{1:00}", minutes, seconts);
 
-            CmdBotaoClicado(newTime);
+            CmdBotaoClicado(newTime, playerNameLocal);
         }
         catch (Exception)
         {
@@ -186,7 +193,7 @@ public class Player : NetworkBehaviour
     }
 
     [Command]
-    private void CmdBotaoClicado(string newTime)
+    private void CmdBotaoClicado(string newTime, string playerNameLocal)
     {
         try
         {
@@ -198,6 +205,7 @@ public class Player : NetworkBehaviour
 
                 if (getChildPanel.name.Equals(playerId))
                 {
+                    playerUI.OnPlayerNameChanged(playerNameLocal);
                     playerUI.OnTimeGameChanged(newTime);
                 }
             }
