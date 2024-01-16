@@ -1,5 +1,7 @@
 using System.Collections;
+using DG.Tweening;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace Scripts.UI
@@ -12,62 +14,52 @@ namespace Scripts.UI
         [SerializeField] private float waitAnimation = 1.25f;
 
         [Header("Buttons")]
-        [SerializeField] private Button showServer;
+        [SerializeField] private Button returnLogin;
         [SerializeField] private Button showCena;
 
-
-        [Header("Panels")]
-        [Tooltip("Player login Panel")]
-        [SerializeField] private GameObject LoginPanel;
-
-        [Tooltip("Paineis")]
-        [SerializeField] private GameObject serverPanel;
-
         [SerializeField] private GameObject cenaPanel;
+        [SerializeField] private GameObject mainMenuPanel;
 
         private readonly int HideButton = Animator.StringToHash("Show");
 
-
-        private void Start()
+        private void Awake()
         {
             animator = GetComponent<Animator>();
         }
 
-        void Update()
+        private void Start()
         {
             OnUpPanel();
         }
 
-        public void OnUpPanel()
+        private void OnUpPanel()
         {
-            showServer.onClick.AddListener(ShowServer);
-
+            returnLogin.onClick.AddListener(ReturnLogin);
             showCena.onClick.AddListener(ShowCena);
         }
 
-        private void ShowServer()
+        private void ReturnLogin()
         {
             animator.SetTrigger(HideButton);
-            StartCoroutine("ShowServerPanel");
+            StartCoroutine(nameof(ReturnLoginMenu));
         }
 
         private void ShowCena()
         {
             animator.SetTrigger(HideButton);
-            StartCoroutine("ShowCenaPanel");
+            StartCoroutine(nameof(ShowCenaPanel));
         }
 
-        private IEnumerator ShowServerPanel()
+        private IEnumerator ReturnLoginMenu()
         {
             yield return new WaitForSeconds(waitAnimation);
-            LoginPanel.SetActive(false);
-            serverPanel.SetActive(true);
+            SceneManager.LoadScene(0);
         }
 
         private IEnumerator ShowCenaPanel()
         {
             yield return new WaitForSeconds(waitAnimation);
-            LoginPanel.SetActive(false);
+            mainMenuPanel.SetActive(false);
             cenaPanel.SetActive(true);
         }
 

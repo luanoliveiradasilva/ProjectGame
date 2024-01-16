@@ -37,7 +37,7 @@ namespace Screens.FirstScreen
         {
             if (eventData.pointerDrag != null && isRight)
             {
-                eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition = GetComponent<RectTransform>().anchoredPosition;
+                eventData.pointerDrag.GetComponent<RectTransform>().position = GetComponent<RectTransform>().position;
             }
         }
 

@@ -18,7 +18,7 @@ namespace Tutorial
         [SerializeField] private bool isTutotial;
 
         [SerializeField] private Button enableButton;
-        public  int valueOnTrigger;
+        public int valueOnTrigger;
 
         private void Awake()
         {
@@ -27,6 +27,8 @@ namespace Tutorial
 
         void Start()
         {
+         
+
             if (tutorial.CompareTag("Basket Tutorial") || tutorial.name.Equals("Tutorial Screen 3"))
             {
                 isTutotial = true;

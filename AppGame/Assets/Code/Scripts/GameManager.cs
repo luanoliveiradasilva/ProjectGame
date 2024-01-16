@@ -48,4 +48,28 @@ public class GameManager : MonoBehaviour
             levelDesative.SetActive(false);
         }
     }
+
+    void OnDestroy()
+    {
+       DOTween.KillAll(); 
+    }
+    
+    public void ReloadScenes()
+    {
+        SceneManager.LoadScene(1);
+    }
+
+    public void LadoScene()
+    {
+        SceneManager.LoadScene(0);
+    }
+
+    public void CloseApplication()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+                    Application.Quit();
+#endif
+    }
 }

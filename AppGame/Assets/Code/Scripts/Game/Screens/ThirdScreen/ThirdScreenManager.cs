@@ -104,6 +104,11 @@ namespace Screens.ThirdScreen
             var removeComponentRigid = getObject.GetComponent<Rigidbody2D>();
             var removeComponentCollider = getObject.GetComponent<BoxCollider2D>();
             var removeGroupCanvas = getObject.GetComponent<CanvasGroup>();
+            var transforRect = getObject.GetComponent<RectTransform>();
+
+            transforRect.anchorMin = new Vector2(0.5f, 0.5f);
+            transforRect.anchorMax = new Vector2(0.5f, 0.5f);
+            transforRect.pivot = new Vector2(0.5f, 0.5f);
 
             Destroy(removeComponentDragAndDrop);
             Destroy(removeComponentRigid);

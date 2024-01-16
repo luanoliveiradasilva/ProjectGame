@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using Mirror;
 using Mirror.Discovery;
 using Scripts.Admin;
@@ -52,8 +53,15 @@ public class AdminNetworkManager : NetworkManager
 
     public override void Awake()
     {
-        base.Awake();
-        instance = this;
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     public override void OnServerAddPlayer(NetworkConnectionToClient conn)
@@ -109,7 +117,13 @@ public class AdminNetworkManager : NetworkManager
 
     public bool SetServerPlayer()
     {
+
         StartClient();
+
+        if (instance == null)
+        {
+            return false;
+        }
 
         bool isActivePlayerInServer = true;
 
@@ -146,13 +160,4 @@ public class AdminNetworkManager : NetworkManager
         playerDataList.Add(playerData);
     }
     #endregion
-
-
-    public void ReloadScenes()
-    {
-        SceneManager.LoadScene(0);
-
-        login.SetActive(false);
-        menu.SetActive(true);
-    }
 }

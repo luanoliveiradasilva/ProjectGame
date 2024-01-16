@@ -1,8 +1,10 @@
 using System;
 using System.Threading.Tasks;
+using DG.Tweening;
 using Scripts.Admin;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LoginUI : MonoBehaviour
 {
@@ -10,8 +12,11 @@ public class LoginUI : MonoBehaviour
     [Tooltip("input Name player")]
     [SerializeField] private TMP_InputField playerNameInput;
     private bool isSetPlayerName;
-    [SerializeField] private GameObject loginPanel;
-    [SerializeField] private GameObject MainMenu;
+
+    private void OnDisable()
+    {
+        DOTween.KillAll();
+    }
 
     private void Start()
     {
@@ -44,7 +49,7 @@ public class LoginUI : MonoBehaviour
             bool isActivatedUser = AdminNetworkManager.instance.SetServerPlayer();
 
             await Task.Delay(TimeSpan.FromSeconds(1f));
-            
+
             if (isActivatedUser)
             {
                 ReturnScenesGame();
@@ -58,7 +63,15 @@ public class LoginUI : MonoBehaviour
 
     void ReturnScenesGame()
     {
-        loginPanel.SetActive(false);
-        MainMenu.SetActive(true);
+        SceneManager.LoadScene(1);
+    }
+
+    public void ExitGame()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+                    Application.Quit();
+#endif
     }
 }
