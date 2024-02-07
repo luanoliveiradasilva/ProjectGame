@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace Tutorial
+namespace Screens.FirstScreen
 {
     public class ObjectDropTutorial : MonoBehaviour, IDropHandler
     {

@@ -1,53 +1,63 @@
-using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
-using TMPro;
+using UnityEditor;
 using UnityEngine;
 
 namespace Screens.FirstScreen
 {
     public class AnimationTutorial : MonoBehaviour
     {
+
+        [Header("Animations")]
+
+        [Tooltip("Fade time to animation")]
         [SerializeField] private float fadeTime = 1.0f;
+
+        [Tooltip("Get all gameobjects to transform scale")]
         [SerializeField] private List<GameObject> ObjectsToScale = new();
-        [SerializeField] private GameObject logoMenu;
+
+        /*         [Tooltip("Get gameobject logo of tutorial")]
+                [SerializeField] private GameObject logoMenu; */
+
+        [Tooltip("Get gameobject button continue")]
         [SerializeField] private GameObject buttonIniciar;
-        [SerializeField] private float DoMoveButton = -479.0f;
-        [SerializeField] private float DoMoveLogo;
-
-        [SerializeField] private float scaleBasket;
-        [SerializeField] private float scaleObjects;
-
-        [SerializeField] private float fadeTimeAnimMove;
 
 
         private void Start()
         {
-            StartCoroutine(AnimlogoDescription());
+            buttonIniciar.transform.localScale = Vector3.zero;
 
+            GetAllGameobjects();
+
+            /* AnimationLogo(); */
+        }
+
+        private void GetAllGameobjects()
+        {
             foreach (var item in ObjectsToScale)
             {
                 item.transform.localScale = Vector3.zero;
 
                 if (item.name == "Basket")
                 {
-                    item.transform.DOScale(scaleBasket, fadeTime).SetEase(Ease.OutBounce);
+                    item.transform.DOScale(1.3f, fadeTime).SetEase(Ease.OutBounce);
                 }
 
-                item.transform.DOScale(scaleObjects, fadeTime).SetEase(Ease.OutBounce);
+                item.transform.DOScale(1.0f, fadeTime).SetEase(Ease.OutBounce);
             }
-
-            float alturaDaTela = Screen.height;
-            float novaPosicaoY = alturaDaTela * 0.1f;
-
-            buttonIniciar.transform.DOMoveY(novaPosicaoY, 2.0f).SetEase(Ease.OutCubic);
         }
-
-        IEnumerator AnimlogoDescription()
+        public void AnimationButton()
         {
-            logoMenu.transform.DOMoveX(DoMoveLogo, 2.0f).SetEase(Ease.OutCubic);
 
-            yield return new WaitForSeconds(0.5f);
+            buttonIniciar.transform.DOScale(1.0f, fadeTime).SetEase(Ease.OutSine);
+
         }
+
+        /*  private void AnimationLogo()
+         {
+             var spaceWidthScreen = Screen.width;
+             var widthScreen = spaceWidthScreen / 4;
+             logoMenu.transform.DOLocalMoveX(-widthScreen, 2.0f).SetEase(Ease.OutCubic);
+         } */
     }
 }
