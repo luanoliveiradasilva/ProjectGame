@@ -14,21 +14,12 @@ namespace Screens.SecondScreen
         [SerializeField] private GameObject[] numberCount;
         [SerializeField] private GameObject logoMenu;
         [SerializeField] private GameObject buttonIniciar;
-        /* [SerializeField] private float DoMoveButton = -479.0f;
-        [SerializeField] private readonly float timeScale = 1f;*/
         [SerializeField] private readonly float WaitTime = 0.25f;
-
-        /* [SerializeField] private float moveLogo; */
 
         private void Start()
         {
             StartCoroutine(NumbersValues());
             StartCoroutine(WaitButtons());
-
-
-            /* float alturaDaTela = Screen.height; */
-            /* float novaPosicaoY = alturaDaTela * 0.1f; */
-
         }
 
         public void PlayButtonAnimation()
@@ -52,11 +43,6 @@ namespace Screens.SecondScreen
 
         IEnumerator NumbersValues()
         {
-            /*  float alturaDaTela = Screen.width; */
-            /*  float novaPosicaoX = alturaDaTela * moveLogo; */
-
-            /* logoMenu.transform.DOMoveX(novaPosicaoX, 2.0f).SetEase(Ease.OutCubic); */
-
             foreach (var item in numberCount)
             {
                 item.transform.localScale = Vector3.zero;

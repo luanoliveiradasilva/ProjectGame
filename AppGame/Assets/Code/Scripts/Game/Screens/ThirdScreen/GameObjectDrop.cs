@@ -19,24 +19,6 @@ namespace Screens.ThirdScreen
             thirdScreenManager = FindObjectOfType<ThirdScreenManager>();
             dragAndDropObject = FindObjectOfType<DragAndDropObject>();
         }
-
-       /*  private void OnTriggerEnter2D(Collider2D other)
-        {
-            isNameWrong = "";
-
-            if (other.gameObject.name.Equals(gameObject.name) && isNameRight != other.gameObject.name)
-            {
-                thirdScreenManager.SetRight();
-
-                isNameRight = other.gameObject.name;
-            }
-
-            if (other.gameObject.name != gameObject.name && isNameWrong != other.gameObject.name)
-            {
-                thirdScreenManager.SetWrong();
-            }
-        } */
-
         public void OnDrop(PointerEventData eventData)
         {
             isNameWrong = "";

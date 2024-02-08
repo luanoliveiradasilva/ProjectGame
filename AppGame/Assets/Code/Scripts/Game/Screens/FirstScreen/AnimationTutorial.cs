@@ -16,9 +16,6 @@ namespace Screens.FirstScreen
         [Tooltip("Get all gameobjects to transform scale")]
         [SerializeField] private List<GameObject> ObjectsToScale = new();
 
-        /*         [Tooltip("Get gameobject logo of tutorial")]
-                [SerializeField] private GameObject logoMenu; */
-
         [Tooltip("Get gameobject button continue")]
         [SerializeField] private GameObject buttonIniciar;
 
@@ -28,8 +25,6 @@ namespace Screens.FirstScreen
             buttonIniciar.transform.localScale = Vector3.zero;
 
             GetAllGameobjects();
-
-            /* AnimationLogo(); */
         }
 
         private void GetAllGameobjects()
@@ -52,12 +47,5 @@ namespace Screens.FirstScreen
             buttonIniciar.transform.DOScale(1.0f, fadeTime).SetEase(Ease.OutSine);
 
         }
-
-        /*  private void AnimationLogo()
-         {
-             var spaceWidthScreen = Screen.width;
-             var widthScreen = spaceWidthScreen / 4;
-             logoMenu.transform.DOLocalMoveX(-widthScreen, 2.0f).SetEase(Ease.OutCubic);
-         } */
     }
 }
