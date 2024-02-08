@@ -22,7 +22,7 @@ namespace Screens.ThirdScreen
 
         private void Start()
         {
-            StartCoroutine(AnimlogoDescription());
+            
 
             arrow.transform.localScale = Vector3.zero;
 
@@ -49,12 +49,6 @@ namespace Screens.ThirdScreen
             step.transform.DOScale(timeScale, fadeTime).SetEase(Ease.OutBounce);
         }
 
-        IEnumerator AnimlogoDescription()
-        {
-            logoMenu.transform.DOMoveX(moveLogo, 2.0f).SetEase(Ease.OutCubic);
-
-            yield return new WaitForSeconds(WaitTime);
-
-        }
+        
     }
 }
